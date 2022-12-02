@@ -1,0 +1,26 @@
+.links
+{
+    direction: rtl;
+    text-align: right;
+    background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    margin-top: 2%;
+}
+.links a
+{
+    font-weight: bolder;
+    padding: 10px;
+    width: 200px;
+    font-size: 20px;
+    margin: 6px;
+}
+
+.tbl
+{
+    background: aliceblue;
+    direction: rtl;
+    text-align: center;
+}

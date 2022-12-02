@@ -1,0 +1,229 @@
+<div class="employee">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title">
+                        <h2>صرف مرتبات الموظفين</h2>
+                    </div>
+                </div>
+    
+                <div class="col-md-12">
+                    <div class="top">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary btn-block">حفظ العملية</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+    
+                <div class="col-md-12">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="cartt">
+                                    <fieldset class="the-fieldset">
+                                        <legend class="the-legend">اذن صرف مرتب</legend>
+                                        <div class="frm">
+                                            <div class="form-group row text-right">
+                                                <label class="col-sm-4 col-form-label">رقم إذن الصرف</label>
+                                                <div class="col-sm-8">
+                                                    <input type="number" class="form-control" value="2" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row text-right">
+                                                <label class="col-sm-4 col-form-label">اختر الموظف</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row text-right">
+                                                <label class="col-sm-4 col-form-label">تاريخ اذن الصرف</label>
+                                                <div class="col-sm-8">
+                                                    <input type="date" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row text-right">
+                                                <label class="col-sm-4 col-form-label">تاريخ الاستحقاق</label>
+                                                <div class="col-sm-8">
+                                                    <input type="date" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row text-right">
+                                                <label class="col-sm-4 col-form-label">المرتب كامل</label>
+                                                <div class="col-sm-8">
+                                                    <input type="number" class="form-control" value="1000" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row text-right">
+                                                <label class="col-sm-4 col-form-label">المسحوبات والسلف</label>
+                                                <div class="col-sm-8">
+                                                    <input type="number" class="form-control" value="100" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row text-right">
+                                                <label class="col-sm-4 col-form-label">صافى المرتب</label>
+                                                <div class="col-sm-8">
+                                                    <input type="number" class="form-control" value="900" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row text-right">
+                                                <label class="col-sm-4 col-form-label">ملاحظات</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="cartt">
+                                    <fieldset class="the-fieldset">
+                                        <legend class="the-legend">تقرير الفترة</legend>
+                                        <div class="form-group row text-right">
+                                            <label class="col-sm-1 col-form-label">من</label>
+                                            <div class="col-sm-4">
+                                                <input type="date" class="form-control" value="2" disabled>
+                                            </div>
+                                            <label class="col-sm-1 col-form-label">الى</label>
+                                            <div class="col-sm-4">
+                                                <input type="date" class="form-control" value="2" disabled>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input type="button" class="btn btn-primary" value="بحث">
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div>
+                                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                <li class="nav-item mr-3" role="presentation">
+                                                    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">اجمالى السلفيات</button>
+                                                </li>
+                                                <li class="nav-item mr-3" role="presentation">
+                                                    <button class="nav-link" id="home-tab1" data-toggle="tab" data-target="#home1" type="button" role="tab" aria-controls="home1" aria-selected="true">اجمالى المسحوبات</button>
+                                                </li>
+                                                <li class="nav-item mr-3" role="presentation">
+                                                    <button class="nav-link" id="home-tab2" data-toggle="tab" data-target="#home2" type="button" role="tab" aria-controls="home2" aria-selected="true">الجزاءات والاستقطاعات</button>
+                                                </li>
+                                            </ul>
+                                            <!---->
+                                            <div class="tab-content" id="myTabContent">
+                                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                                    <div class="all">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                <th scope="col">رقم العملية</th>
+                                                                <th scope="col">المسؤول</th>
+                                                                <th scope="col">تاريخ السلف</th>
+                                                                <th scope="col">تاريخ الاستحقاق</th>
+                                                                <th scope="col">المبلغ</th>
+                                                                <th scope="col">الملاحظات</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                <th scope="row">1</th>
+                                                                <td>Mark</td>
+                                                                <td>Otto</td>
+                                                                <td>@mdo</td>
+                                                                <td>@mdo</td>
+                                                                <td>@mdo</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <th scope="row">2</th>
+                                                                <td>Jacob</td>
+                                                                <td>Thornton</td>
+                                                                <td>@mdo</td>
+                                                                <td>@mdo</td>
+                                                                <td>@mdo</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!---->
+                                                <div class="tab-pane fade show" id="home1" role="tabpanel" aria-labelledby="home-tab1">
+                                                    <div class="all">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                <th scope="col">رقم العملية</th>
+                                                                <th scope="col">اسم المنتج</th>
+                                                                <th scope="col">تاريخ السحب</th>
+                                                                <th scope="col">الكمية</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                <th scope="row">1</th>
+                                                                <td>Mark</td>
+                                                                <td>Otto</td>
+                                                                <td>@mdo</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <th scope="row">2</th>
+                                                                <td>Jacob</td>
+                                                                <td>Thornton</td>
+                                                                <td>@mdo</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!---->
+                                                <!---->
+                                                <div class="tab-pane fade show" id="home2" role="tabpanel" aria-labelledby="home-tab2">
+                                                    <div class="all">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                <th scope="col">رقم العملية</th>
+                                                                <th scope="col">المسؤول</th>
+                                                                <th scope="col">الموظف</th>
+                                                                <th scope="col">تاريخ الخصم</th>
+                                                                <th scope="col">تاريخ الاستحقاق</th>
+                                                                <th scope="col">المبلغ</th>
+                                                                <th scope="col">السبب</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                <th scope="row">1</th>
+                                                                <td>Mark</td>
+                                                                <td>Otto</td>
+                                                                <td>@mdo</td>
+                                                                <td>@mdo</td>
+                                                                <td>@mdo</td>
+                                                                <td>@mdo</td>
+                                                                </tr>
+                                                                <tr>
+                                                                <th scope="row">2</th>
+                                                                <td>Jacob</td>
+                                                                <td>Thornton</td>
+                                                                <td>@mdo</td>
+                                                                <td>@mdo</td>
+                                                                <td>@mdo</td>
+                                                                <td>@mdo</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!---->
+                                            </div>
+                                            <!---->
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

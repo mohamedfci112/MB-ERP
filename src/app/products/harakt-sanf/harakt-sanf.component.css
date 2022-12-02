@@ -1,0 +1,50 @@
+.transfers
+{
+    direction: rtl;
+    background-color: aliceblue;
+    min-height: 100vh;
+    text-align: right;
+}
+.transfers .title
+{
+    text-align: center;
+    border-bottom: 1px solid;
+    margin-bottom: 10px;
+}
+
+.cartt
+{
+    padding: 10px;
+}
+
+.the-legend {
+    border-style: none;
+    border-width: 0;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0;
+    width: auto;
+    padding: 0 10px;
+    border: 1px solid #e0e0e0;
+}
+.the-fieldset {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+}
+
+.frm
+{
+    padding: 5px;
+    height: 35vh;
+    overflow-y: auto;
+}
+
+.frm table
+{
+    font-size: 10px;
+}
+.transfers .summary
+{
+    text-align: right;
+    font-size: 12px;
+}

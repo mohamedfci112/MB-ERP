@@ -1,0 +1,38 @@
+.purchase_screen
+{
+    direction: rtl;
+    background-color: aliceblue;
+    min-height: 100vh;
+}
+.purchase_screen .title
+{
+    text-align: center;
+    border-bottom: 1px solid;
+}
+
+.purchase_screen .right
+{
+    border-left: 1px solid;
+    padding: 5px;
+    text-align: right
+}
+.purchase_screen fieldset
+{
+    border: 1px solid;
+    padding: 5px;
+    text-align: center;
+}
+.purchase_screen legend
+{
+    border: 1px solid;
+    text-align: center;
+}
+
+.content
+{
+    padding: 5px;
+}
+.table
+{
+    text-align: center;
+}

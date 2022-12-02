@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="container__forms">
+      <div class="form">
+        <form [formGroup]="angForm" (ngSubmit)="postdata(angForm)">
+          <h2 class="form__title">تسجيل الدخول</h2>
+          <div class="form__input-field form-group">
+            <i class="fas fa-user"></i>
+            <input type="email" name="email" formControlName="email" autocomplete="off" class="form-control" placeholder="رقم التعريفى" />
+          </div>
+          <div class="form__input-field form-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" name="Password" formControlName="password" autocomplete="off" class="form-control" placeholder="كلمة المرور" />
+          </div>
+          <input class="form__submit" type="submit" value="دخول" />
+          <br>
+        </form>
+
+      </div>
+    </div>
+    <div class="container__panels">
+      <div class="panel panel__left">
+        <div class="panel__content">
+          <img class="panel__logo" src="../../../assets/Layer 2.png" alt="">
+          <h3 class="panel__title">MB ERP SYSTEM</h3>
+        </div>
+        <img class="panel__image" src="https://raw.githubusercontent.com/ismailvtl/ismailvtl.github.io/master/images/cloud-storage.png" alt="" />
+      </div>
+    </div>
+  </div>

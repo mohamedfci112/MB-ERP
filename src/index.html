@@ -6,8 +6,244 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .overlay{
+      position:fixed;
+      top:0;
+      left:0;
+      background:rgba(0,0,0,0.7);
+      height:100%;
+      width:100%;
+    }
+    .wrap:before{
+      content: '';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+      margin-right: -0.25em;
+    }
+    .wrap{
+      position:relative;
+      text-align:center;
+      color:white;
+      font-family:Arial;
+      height:100%;
+    }
+    .center{
+      display:inline-block;
+      vertical-align:middle;
+    }
+    .document-loader{
+      display:inline-block;
+      min-width:100px;
+      min-height:141px;
+      position:relative;
+      padding:5px;
+      border-radius:4px;
+      background: #f38730;
+      animation:slideInOut 3s ease infinite;
+    }
+    .document-loader:before{
+      display: block;
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-bottom-left-radius: 2px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #4c4c4c #4c4c4c rgba(255,255,255,.35) rgba(255,255,255,.35);
+      border-bottom-left-radius: 4px;
+      border-width: 16px;
+    }
+    .document-loader .heading{
+      display:block;
+      height:8px;
+      background:#333;
+      width:0px;
+      margin-bottom:5px;
+      margin-top:5px;
+      animation: growHeading 3s linear infinite;
+    }
+    .document-loader .heading.short{
+      animation: growHeadingShort 3s linear infinite;
+    }
+    .document-loader .heading:first-child{
+      margin-top:0px;
+    }
+    .document-loader .line{
+      display:block;
+      margin:3px 0 3px 0;
+      background:#eee;
+      height:4px;
+      width:0px;
+      animation: growLine 3s linear infinite;
+    }
+    .document-loader .line.short{
+      margin-bottom:6px;
+      animation: growLineShort 3s linear infinite;
+    }
+  
+    @keyframes slideInOut{
+      0%{
+        transform:translateX(-100%);
+        opacity:0;
+      }
+      20%{
+        transform:translateX(-5%);
+        opacity:1;
+      }
+      80%{
+        transform:translateX(5%);
+        opacity:1;
+      }
+      100%{
+        transform:translateX(100%);
+        opacity: 0;
+      }
+    }
+  
+    @keyframes growHeading{
+      0%{
+        width:0px;
+      }
+      60%{
+        width:0;
+      }
+      70%{
+        width:85px;
+      }
+      100%{
+        width:90px;
+      }
+    }
+  
+    @keyframes growHeadingShort{
+      0%{
+        width:0px;
+      }
+      30%{
+        width:0;
+      }
+      40%{
+        width:45px;
+      }
+      100%{
+        width:65px;
+      }
+    }
+  
+    @keyframes growLine{
+      0%{
+        width:0px;
+      }
+      60%{
+        width:0px;
+      }
+      80%{
+        width:85px;
+      }
+      100%{
+        width:100px;
+      }
+    }
+  
+    @keyframes growLineShort{
+      0%{
+        width:0;
+      }
+      50%{
+        width:0;
+      }
+      60%{
+        width:70px;
+      }
+      100%{
+        width:75px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <app-root></app-root>
+  <app-root>
+    <div class="overlay">
+      <div class="wrap">
+        <div class="center">
+          <div class="document-loader">
+            <span class="heading short"></span>
+            <span class="line short"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line short"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line short"></span>
+            <span class="heading"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line short"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line short"></span>
+          </div>
+          <p>Loading...</p>
+        </div>
+      </div>
+    </div>
+  </app-root>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+  <script src="./assets/js/all.min.js"></script>
+  <script src="https://kit.fontawesome.com/1788c719dd.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js" integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    $( document ).ready(function() {
+
+        // menue toggle
+        let toggle = document.querySelector('.toggle');
+        let navigation = document.querySelector('.navigation');
+        let main = document.querySelector('.main');
+
+        //auto toggle when load page
+        navigation.classList.toggle('active');
+        main.classList.toggle('active');
+
+        if(window.innerWidth <= 760){
+          navigation.classList.toggle('active');
+          main.classList.toggle('active');
+        }
+
+        toggle.onclick = function(){
+          navigation.classList.toggle('active');
+          main.classList.toggle('active');
+        }
+
+        // add hovered class in selected list item
+        let list = document.querySelectorAll('.navigation li');
+        function activeLink(){
+          list.forEach((item) =>
+          item.classList.remove('hovered'));
+          this.classList.add('hovered');
+        }
+        list.forEach((item) =>
+        item.addEventListener('mouseover', activeLink));
+    });
+
+  </script>
+
 </body>
 </html>

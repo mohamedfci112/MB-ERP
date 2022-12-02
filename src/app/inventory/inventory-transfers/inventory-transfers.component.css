@@ -1,0 +1,12 @@
+.transfers
+{
+    direction: rtl;
+    background-color: aliceblue;
+    min-height: 100vh;
+    text-align: right;
+}
+.transfers .title
+{
+    text-align: center;
+    border-bottom: 1px solid;
+}

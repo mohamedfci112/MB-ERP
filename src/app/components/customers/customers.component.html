@@ -1,0 +1,133 @@
+<div class="container">
+    <div class="links">
+        <div class="row">
+            <div class="col-md-3">
+                <a routerLink="/add_customer" class="btn btn-primary btn-sm">عميل جديد</a>
+            </div>
+            <div class="col-md-3">
+                <a routerLink="/customer_report" class="btn btn-default btn-sm">بيانات العملاء</a>
+            </div>
+            <div class="col-md-3">
+                <a routerLink="/customers_agel_remain" class="btn btn-default btn-sm">حسابات العملاء-أجل</a>
+            </div>
+            <div class="col-md-3">
+                <a routerLink="/customers_mosdad" class="btn btn-default btn-sm">حسابات العملاء-المسدد لهم</a>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="container">
+    <div class="tbl">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item mr-3" role="presentation">
+              <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">الحركات المالية للعملاء</button>
+            </li>
+            <li class="nav-item mr-3" role="presentation">
+              <input type="text" class="form-control" placeholder="العميل">
+            </li>
+            <li class="nav-item mr-3" role="presentation">
+                من  <input type="date" name="" id="" class="">
+           </li>
+            <li class="nav-item mr-3" role="presentation">
+                 الى <input type="date" name="" id="" class=""> 
+            </li>
+            <li class="nav-item" role="presentation">
+              <input type="button" class="nav-link btn btn-warning mr-3" id="" value="عرض كل الحركات">
+            </li>
+        </ul>
+
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="all">
+                    <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">القيمة</th>
+                            <th scope="col">السعر</th>
+                            <th scope="col">الكمية</th>
+                            <th scope="col">الوصف</th>
+                            <th scope="col">التاريخ</th>
+                            <th scope="col">البيان</th>
+                            <th scope="col">مدين</th>
+                            <th scope="col">دائن</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@fat</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">4</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@twitter</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">5</th>
+                            <td>Larry</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>@mdo</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                          <li class="page-item"><a class="page-link" href="#">1</a></li>
+                          <li class="page-item"><a class="page-link" href="#">2</a></li>
+                          <li class="page-item"><a class="page-link" href="#">3</a></li>
+                          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                      </nav>
+                      <div class="summary">
+                          <div class="row">
+                              <div class="col-md-6 border">
+                                  <b>مدين: </b><span>52155</span>
+                              </div>
+                              <div class="col-md-6 border">
+                                  <b>دائن: </b><span>52155</span>
+                              </div>
+                          </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

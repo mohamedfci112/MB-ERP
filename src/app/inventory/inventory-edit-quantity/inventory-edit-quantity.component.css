@@ -1,0 +1,25 @@
+.inv_cost
+{
+    direction: rtl;
+    background-color: aliceblue;
+    min-height: 100vh;
+}
+.inv_cost .title
+{
+    text-align: center;
+    border-bottom: 1px solid;
+}
+.inv_cost .top
+{
+    padding: 5px;
+    text-align: center
+}
+.inv_cost .frm
+{
+    text-align: right;
+    padding: 10px;
+}
+.inv_cost .frm .border
+{
+    padding: 10px;
+}

@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    overflow-x: hidden;
+}
+.shortcut
+{
+    direction: rtl;
+    text-align: right;
+    background-color: #f0f8ffad;
+    min-height: 100vh;
+    padding-top: 0%;
+}
+
+.shortcut h2
+{
+    margin: 10px;
+    text-align: center;
+}
+.shortcut .row div a
+{
+    font-weight: bolder;
+    padding: 10px;
+    border: 2px solid black;
+    width: 200px;
+    font-size: 20px;
+    margin: 10px;
+    background: azure;
+}

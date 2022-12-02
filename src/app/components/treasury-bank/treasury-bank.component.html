@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="shortcut">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>الخزينة والبنك</h2>
+            </div>
+            <div class="col-md-4">
+                <a routerLink="/add_treasury" class="btn btn-default btn-sm">اضافة خزنة</a>
+            </div>
+            <div class="col-md-4">
+                <a routerLink="/add_bank" class="btn btn-default btn-sm">اضافة بنك</a>
+            </div>
+            <div class="col-md-4">
+                <a routerLink="/deposit_treasury" class="btn btn-default btn-sm">ايداع رصيد خزنة</a>
+            </div>
+            <div class="col-md-4">
+                <a routerLink="/deposit_bank" class="btn btn-default btn-sm">ايداع رصيد بنك</a>
+            </div>
+            <div class="col-md-4">
+                <a routerLink="/sahb_treasury" class="btn btn-default btn-sm">سحب رصيد خزنة</a>
+            </div>
+            <div class="col-md-4">
+                <a routerLink="/sahb_bank" class="btn btn-default btn-sm">سحب رصيد بنك</a>
+            </div>
+            <div class="col-md-4">
+                <a routerLink="/treasury_transfers" class="btn btn-default btn-sm">تحويل رصيد بين الخزن</a>
+            </div>
+            <div class="col-md-4">
+                <a routerLink="/treasury_bank_transfers" class="btn btn-default btn-sm">تحويل رصيد من الخزنة للبنك والعكس</a>
+            </div>
+            <div class="col-md-4">
+                <a routerLink="/treasury_bank_credit" class="btn btn-default btn-sm">رصيد الخزنة والبنك الحالى</a>
+            </div>
+            <div class="col-md-4">
+                <div class="dropdown show dropright">
+                    <a class="btn btn-default btn-sm dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        التقارير
+                    </a>
+                    
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" routerLink="/deposit_treasury_report">تقرير ايداع الخزنة</a>
+                        <a class="dropdown-item" routerLink="/deposit_bank_report">تقرير ايداعات البنك</a>
+                        <a class="dropdown-item" routerLink="/sahb_treasury_report">تقرير السحب من الخزن</a>
+                        <a class="dropdown-item" routerLink="/sahb_bank_report">تقرير السحب من البنك</a>
+                        <a class="dropdown-item" routerLink="/treasury_transfers_report">تقرير التحويل بين الخزن</a>
+                        <a class="dropdown-item" routerLink="/treasury_bank_transfers_report">تقرير التحويل بين الخزن والبنوك</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

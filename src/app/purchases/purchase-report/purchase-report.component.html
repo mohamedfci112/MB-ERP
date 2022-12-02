@@ -1,0 +1,238 @@
+<div class="purchase_screen">
+    <div class="row">
+        <!--Title-->
+        <div class="col-md-12">
+            <div class="title">
+                <h2>تقارير المشتريات عن فترة</h2>
+            </div>
+        </div>
+        <!--Top section-->
+        <div class="col-md-12">
+            <div class="top">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="row">
+                            <div class="col-md-6"><input type="checkbox" class="form-check-input" id="exampleCheck1"></div>
+                            <div class="col-md-6"><label class="form-check-label" for="exampleCheck1">رقم الفاتورة</label></div>
+                            <div class="col-md-12"><input type="text" class="form-control"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-6"><input type="radio" class="form-check-input" id="exampleCheck1"></div>
+                            <div class="col-md-6"><label class="form-check-label" for="exampleCheck1">كل الموردين</label></div>
+                            <div class="col-md-6"><input type="radio" class="form-check-input" id="exampleCheck1"></div>
+                            <div class="col-md-6"><label class="form-check-label" for="exampleCheck1">مورد محدد</label></div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row">
+                            <div class="col-md-6"><input type="checkbox" class="form-check-input" id="exampleCheck1"></div>
+                            <div class="col-md-6"><label class="form-check-label" for="exampleCheck1">منتج محدد</label></div>
+                            <div class="col-md-12"><input type="text" class="form-control"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="inputGroupSelect01">من</label>
+                                        <input type="date" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="inputGroupSelect01">الى</label>
+                                        <input type="date" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-secondary btn-block">بحث</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Report Info-->
+        <div class="col-md-12">
+            <div class="container">
+                    <div class="tbl">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">الفواتير مفصلة</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">الفواتير</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link btn btn-secondary btn-sm mr-3" id="contact-tab" type="button">طباعة التقرير</button>
+                            </li>
+                        </ul>
+                
+                
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="all">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                            <th scope="col">الكود</th>
+                                            <th scope="col">المورد</th>
+                                            <th scope="col">المنتج</th>
+                                            <th scope="col">التاريخ</th>
+                                            <th scope="col">الكمية</th>
+                                            <th scope="col">سعر ق.ض</th>
+                                            <th scope="col">الضريبة</th>
+                                            <th scope="col">سعر ب.ض</th>
+                                            <th scope="col">الخصم</th>
+                                            <th scope="col">اجمالى</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                            <td>@mdo</td>
+                                            </tr>
+                                            <tr>
+                                            <th scope="row">2</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            </tr>
+                                            <tr>
+                                            <th scope="row">3</th>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@twitter</td>
+                                            </tr>
+                                            <tr>
+                                            <th scope="row">4</th>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@twitter</td>
+                                            </tr>
+                                            <tr>
+                                            <th scope="row">5</th>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@fat</td>
+                                            <td>@twitter</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="4">اجمالى الضرائب على العمليات: 5115</td>
+                                                <td colspan="4">اجمالى مبالغ المشتريات: 15158</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                        <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                        </ul>
+                                        </nav>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="most">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                <th scope="col">الكود</th>
+                                                <th scope="col">المورد</th>
+                                                <th scope="col">التاريخ</th>
+                                                <th scope="col">اجمالى</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                <th scope="row">1</th>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                <th scope="row">2</th>
+                                                <td>Jacob</td>
+                                                <td>@fat</td>
+                                                <td>@fat</td>
+                                                </tr>
+                                                <tr>
+                                                <th scope="row">3</th>
+                                                <td>Larry</td>
+                                                <td>the Bird</td>
+                                                <td>@fat</td>
+                                                </tr>
+                                                <tr>
+                                                <th scope="row">4</th>
+                                                <td>Larry</td>
+                                                <td>the Bird</td>
+                                                <td>@twitter</td>
+                                                </tr>
+                                                <tr>
+                                                <th scope="row">5</th>
+                                                <td>Larry</td>
+                                                <td>the Bird</td>
+                                                <td>@twitter</td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td>اجمالى الضرائب على العمليات: 5115</td>
+                                                    <td>اجمالى مبالغ المشتريات: 15158</td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                        <nav aria-label="Page navigation example">
+                                        <ul class="pagination">
+                                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                        </ul>
+                                        </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
