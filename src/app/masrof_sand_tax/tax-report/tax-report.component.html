@@ -3,13 +3,33 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="title">
-                        <h2>اجمالى صرف المرتبات فى فترة</h2>
+                        <h2>الاقرار الضريبى فى فترة</h2>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="top">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
+                                <div class="form-group row border-left">
+                                    <label class="col-sm-4 col-form-label">فواتير مبيعات</label>
+                                    <div class="col-sm-2">
+                                        <input type="checkbox" class="form-check-input">
+                                    </div>
+                                    <label class="col-sm-4 col-form-label">مرتجعات مبيعات</label>
+                                    <div class="col-sm-2">
+                                        <input type="checkbox" class="form-check-input">
+                                    </div>
+                                    <label class="col-sm-4 col-form-label">فواتير مشتريات</label>
+                                    <div class="col-sm-2">
+                                        <input type="checkbox" class="form-check-input">
+                                    </div>
+                                    <label class="col-sm-4 col-form-label">مرتجعات مشتريات</label>
+                                    <div class="col-sm-2">
+                                        <input type="checkbox" class="form-check-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">من</label>
                                     <div class="col-sm-10">
@@ -17,7 +37,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">الى</label>
                                     <div class="col-sm-10">
@@ -47,13 +67,15 @@
                                     <thead>
                                         <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">الموظف</th>
-                                        <th scope="col">اجمالى المرتب</th>
-                                        <th scope="col">اجمالى السلف والمسحوبات</th>
-                                        <th scope="col">صافى المرتب</th>
-                                        <th scope="col">تاريخ الصرف</th>
-                                        <th scope="col">تاريخ الاستحقاق</th>
-                                        <th scope="col">ملاحظات</th>
+                                        <th scope="col">الفاتورة</th>
+                                        <th scope="col">نوع العملية</th>
+                                        <th scope="col">نوع الضريبة</th>
+                                        <th scope="col">المورد</th>
+                                        <th scope="col">العميل</th>
+                                        <th scope="col">اجمالى الفاتورة ق.ض</th>
+                                        <th scope="col">اجمالى الضريبة</th>
+                                        <th scope="col">اجمالى الفاتورة ب.ض</th>
+                                        <th scope="col">التاريخ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -64,8 +86,10 @@
                                             <td>المخزن الرئيسى</td>
                                             <td>100</td>
                                             <td>100</td>
-                                            <td>120</td>
-                                            <td>120</td>
+                                            <td>100</td>
+                                            <td>100</td>
+                                            <td>100</td>
+                                            <td>100</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">2</th>
@@ -74,8 +98,10 @@
                                             <td>المخزن الرئيسى</td>
                                             <td>100</td>
                                             <td>100</td>
-                                            <td>120</td>
-                                            <td>120</td>
+                                            <td>100</td>
+                                            <td>100</td>
+                                            <td>100</td>
+                                            <td>100</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">3</th>
@@ -84,8 +110,10 @@
                                             <td>المخزن الرئيسى</td>
                                             <td>100</td>
                                             <td>100</td>
-                                            <td>120</td>
-                                            <td>120</td>
+                                            <td>100</td>
+                                            <td>100</td>
+                                            <td>100</td>
+                                            <td>100</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -101,7 +129,13 @@
                                 <div class="summary">
                                     <div class="row">
                                         <div class="col-md-4 border">
-                                            <b>اجمالى المرتبات: </b><span>52155</span>
+                                            <b>اجمالى الفواتير: </b><span>52155</span>
+                                        </div>
+                                        <div class="col-md-4 border">
+                                            <b>اجمالى الضرائب: </b><span>52155</span>
+                                        </div>
+                                        <div class="col-md-4 border">
+                                            <b>اجمالى بعد الضرائب: </b><span>52155</span>
                                         </div>
                                     </div>
                                 </div>

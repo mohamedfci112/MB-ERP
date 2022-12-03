@@ -77,6 +77,15 @@ import { SalariesReportComponent } from './hr/reports/salaries-report/salaries-r
 import { SolfaReportComponent } from './hr/reports/solfa-report/solfa-report.component';
 import { MonthMashobatReportComponent } from './hr/reports/month-mashobat-report/month-mashobat-report.component';
 import { PenaltiesReportComponent } from './hr/reports/penalties-report/penalties-report.component';
+import { MasrofSandTaxComponent } from './components/masrof-sand-tax/masrof-sand-tax.component';
+import { AddMasrofComponent } from './masrof_sand_tax/add-masrof/add-masrof.component';
+import { ManageMasrofComponent } from './masrof_sand_tax/manage-masrof/manage-masrof.component';
+import { MasrofReportComponent } from './masrof_sand_tax/masrof-report/masrof-report.component';
+import { SandAbdComponent } from './masrof_sand_tax/sand-abd/sand-abd.component';
+import { SandSrfComponent } from './masrof_sand_tax/sand-srf/sand-srf.component';
+import { SandSrfAbdReportComponent } from './masrof_sand_tax/sand-srf-abd-report/sand-srf-abd-report.component';
+import { TaxReportComponent } from './masrof_sand_tax/tax-report/tax-report.component';
+import { GeneralAccountsComponent } from './components/general-accounts/general-accounts.component';
 
 
 const routes: Routes = [
@@ -92,6 +101,8 @@ const routes: Routes = [
   {path: 'suppliers', component: SuppliersComponent},
   {path: 'treasury_bank', component: TreasuryBankComponent},
   {path: 'hr', component: HrComponent},
+  {path: 'masrof_sand_taxt', component: MasrofSandTaxComponent},
+  {path: 'general_accounts', component: GeneralAccountsComponent},
   {path: 'add_purchase_invoice', component: AddFatoraComponent},
   {path: 'purchase_report', component: PurchaseReportComponent},
   {path: 'purchase_return', component: PurchaseReturnComponent},
@@ -148,6 +159,13 @@ const routes: Routes = [
   {path: 'solfa_report', component: SolfaReportComponent},
   {path: 'month_mashobat_report', component: MonthMashobatReportComponent},
   {path: 'penalties_report', component: PenaltiesReportComponent},
+  {path: 'add_masrof', component: AddMasrofComponent},
+  {path: 'manage_masrof', component: ManageMasrofComponent},
+  {path: 'masrof_report', component: MasrofReportComponent},
+  {path: 'sand_abd', component: SandAbdComponent},
+  {path: 'sand_srf', component: SandSrfComponent},
+  {path: 'tax_report', component: TaxReportComponent},
+  {path: 'srf_abd_report', component: SandSrfAbdReportComponent},
 ];
 
 
@@ -223,7 +241,16 @@ const routes: Routes = [
     SalariesReportComponent,
     SolfaReportComponent,
     MonthMashobatReportComponent,
-    PenaltiesReportComponent
+    PenaltiesReportComponent,
+    MasrofSandTaxComponent,
+    AddMasrofComponent,
+    ManageMasrofComponent,
+    MasrofReportComponent,
+    SandAbdComponent,
+    SandSrfComponent,
+    SandSrfAbdReportComponent,
+    TaxReportComponent,
+    GeneralAccountsComponent
   ],
   imports: [
     BrowserModule,
