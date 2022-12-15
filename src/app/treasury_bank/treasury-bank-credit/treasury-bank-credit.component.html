@@ -11,13 +11,13 @@
                     <div class="col-md-6 border">
                         <h3 class="text-center">الخزن</h3>
                         <label for="fname">اختر الخزنة</label>
-                        <select name="" id="" class="form-control">
-                            <option value="">خزنة1</option>
-                            <option value="">خزنة2</option>
+                        <select (change)="myTreasury($event)" name="treasury_id" formControlName="treasury_id" class="form-control">
+                            <option value=""></option>
+                            <option *ngFor="let t of treasuryList" value="{{t.treasury_id}}">{{t.treasury_name}}</option>
                         </select>
                         <hr>
                         <div class="border p-3">
-                            <span>رصيد الخزنة المحددة: </span><b>12000</b>
+                            <span>رصيد الخزنة المحددة: </span><b>{{totalTreasury}}</b>
                         </div>
                         <hr>
                         <div class="p-3">
@@ -27,13 +27,13 @@
                     <div class="col-md-6 border">
                         <h3 class="text-center">البنوك</h3>
                         <label for="fname">اختر البنك</label>
-                        <select name="" id="" class="form-control">
-                            <option value="">بنك1</option>
-                            <option value="">بنك2</option>
+                        <select (change)="myBank($event)" name="bank_id" formControlName="bank_id" class="form-control">
+                            <option value=""></option>
+                            <option *ngFor="let t of bankList" value="{{t.bank_id}}">{{t.bank_name}}</option>
                         </select>
                         <hr>
                         <div class="border p-3">
-                            <span>رصيد البنك المحدد: </span><b>150000</b>
+                            <span>رصيد البنك المحدد: </span><b>{{totalBank}}</b>
                         </div>
                         <hr>
                         <div class="p-3">

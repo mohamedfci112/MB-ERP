@@ -20,23 +20,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>منتج 1</td>
-                                        <td>2</td>
-                                        <td>5</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>منتج 1</td>
-                                        <td>2</td>
-                                        <td>5</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>منتج 1</td>
-                                        <td>2</td>
-                                        <td>5</td>
+                                    <tr *ngFor="let l of productLimitList; let i = index">
+                                        <th scope="row">{{ i + 1 }}</th>
+                                        <td>{{ l.product_name }}</td>
+                                        <td>{{ l.product_quantity }}</td>
+                                        <td>{{ l.product_limit }}</td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -1,4 +1,5 @@
 <div class="add_screen">
+    <form [formGroup] = "formdata" (ngSubmit) = "addBankWithdrawal(formdata.value)" >
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -14,18 +15,18 @@
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">اختر البنك</label>
                                         <div class="col-sm-8">
-                                            <select name="" id="" class="form-control">
-                                                <option value="">بنك1</option>
-                                                <option value="">بنك2</option>
+                                            <select (change)="myBank($event)" name="bank_id" formControlName="bank_id" class="form-control">
+                                                <option value=""></option>
+                                                <option *ngFor="let t of bankList" value="{{t.bank_id}}">{{t.bank_name}}</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <h4>رصيد البنك الحالى: <b>50000</b></h4>
+                                    <h4>رصيد البنك الحالى: <b>{{total}}</b></h4>
                                 </div>
                                 <div class="col-md-4">
-                                    <button type="button" class="btn btn-success ml-3">سحب</button>
+                                    <button type="submit" class="btn btn-success ml-3">سحب</button>
                                 </div>
                             </div>
                         </div>
@@ -39,20 +40,21 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="fname">المبلغ المراد سحبه</label>
-                                    <input type="number" class="form-control" id="fname" name="fname">
+                                    <input type="number" class="form-control" name="withdrawal_amount" formControlName="withdrawal_amount">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="lname">تاريخ السحب</label>
-                                    <input type="date" class="form-control" id="lname" name="lname">
+                                    <input type="date" class="form-control" name="withdrawal_date" formControlName="withdrawal_date">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="lname">اسم الساحب</label>
-                                    <input type="text" class="form-control" id="lname" name="lname">
+                                    <input type="text" class="form-control" name="withdrawer" formControlName="withdrawer">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="lname">سبب السحب</label>
-                                    <input type="text" class="form-control" id="lname" name="lname">
+                                    <input type="text" class="form-control" name="withdrawal_reason" formControlName="withdrawal_reason">
                                 </div>
+                                <input type="hidden" class="form-control" name="withdrawal_type" formControlName="withdrawal_type">
                             </div>
                         </fieldset>
                     </div>
@@ -60,4 +62,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
+</div>

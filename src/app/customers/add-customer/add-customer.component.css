@@ -19,3 +19,17 @@
     padding: 5px;
     text-align: right
 }
+
+.mat-option
+{
+    position: relative!important;
+    text-align: right!important;
+    background: gray;
+    color: white;
+    font-weight: bold;
+    border: 1px groove;
+}
+
+.mat-focused .placeholder {
+    color: transparent;
+}

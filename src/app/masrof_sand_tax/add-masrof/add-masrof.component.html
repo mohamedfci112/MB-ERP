@@ -1,4 +1,5 @@
 <div class="employee">
+    <form [formGroup] = "formdata" (ngSubmit) = "addExpenses(formdata.value)" >
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -17,7 +18,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="col-auto">
-                                    <button type="submit" class="btn btn-danger btn-block">حذف المحدد</button>
+                                    <button type="button" (click)="deleteExpenses()" class="btn btn-danger btn-block">حذف المحدد</button>
                                 </div>
                             </div>
                         </div>
@@ -36,13 +37,13 @@
                                             <div class="form-group row text-right">
                                                 <label class="col-sm-3 col-form-label">رقم المصروف</label>
                                                 <div class="col-sm-7">
-                                                    <input type="number" class="form-control" value="2" disabled>
+                                                    <input type="text" class="form-control" name="expId" formControlName="expId" value="{{ lastId + 1 }}" readonly>
                                                 </div>
                                             </div>
                                             <div class="form-group row text-right">
                                                 <label class="col-sm-3 col-form-label">اسم المصروف</label>
                                                 <div class="col-sm-7">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="expName" formControlName="expName">
                                                 </div>
                                             </div>
                                         </div>
@@ -63,20 +64,13 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td><input type="checkbox" class="form-check-input"></td>
-                                                        <td>منتج 1</td>
-                                                        <td>المخزن الرئيسى</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" class="form-check-input"></td>
-                                                        <td>منتج 1</td>
-                                                        <td>المخزن الرئيسى</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" class="form-check-input"></td>
-                                                        <td>منتج 1</td>
-                                                        <td>المخزن الرئيسى</td>
+                                                    <tr *ngFor="let exp of expensesTypesList">
+                                                        <th scope="row">
+                                                            <input type="checkbox" name="cb" value="{{exp.exp_id}}" class="form-check-input cb">
+                                                            <input type="hidden" name="checkedValue" value="{{exp.exp_id}}">
+                                                        </th>
+                                                        <td>{{exp.exp_id}}</td>
+                                                        <td>{{exp.exp_name}}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -89,4 +83,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
+</div>

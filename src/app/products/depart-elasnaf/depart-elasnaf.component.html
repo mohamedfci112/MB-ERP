@@ -1,0 +1,75 @@
+<div class="transfers">
+        <form [formGroup] = "formdata" (ngSubmit) = "addDepart(formdata.value)" >
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="title">
+                            <h2>اقسام الاصناف</h2>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="top">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group row">
+                                        <label class="col-sm-7 col-form-label">رقم القسم</label>
+                                        <div class="col-sm-5">
+                                            <input type="text" class="form-control" name="departId" formControlName="departId" value="{{ lastId + 1 }}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">اسم القسم</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="departName" formControlName="departName">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="col-auto">
+                                        <button type="submit" class="btn btn-primary btn-block">اضافة</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="col-auto">
+                                        <button type="button" (click)="deleteDepart()" class="btn btn-danger btn-block">حذف المحدد</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-dark">
+                                        <thead>
+                                            <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">م</th>
+                                            <th scope="col">رقم القسم</th>
+                                            <th scope="col">اسم القسم</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let d of departList">
+                                                <th scope="row">
+                                                    <input type="checkbox" name="cb" value="{{d.depart_id}}" class="form-check-input cb">
+                                                    <input type="hidden" name="checkedValue" value="{{d.depart_id}}">
+                                                </th>
+                                                <th scope="row">{{ d.id }}</th>
+                                                <td>{{d.depart_id}}</td>
+                                                <td>{{d.depart_name}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+</div>

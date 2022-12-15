@@ -1,4 +1,5 @@
 <div class="add_screen">
+    <form [formGroup] = "formdata" (ngSubmit) = "addInventory(formdata.value)" >
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -6,56 +7,67 @@
                         <h2>اضافة مخزن</h2>
                     </div>
                 </div>
-    
-                <div class="col-md-12">
-                        <div class="top">
+                
+                    <div class="col-md-12">
+                            <div class="top">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                                <div class="form-row align-items-center">
+                                                    <div class="col-auto">
+                                                        <mat-form-field>
+                                                            <input type="text"
+                                                            matInput 
+                                                            [formControl]="searchTerm" 
+                                                            [matAutocomplete]="auto">
+                                                            <mat-placeholder class="placeholder">ابحث باسم المخزن</mat-placeholder>
+                                                            <mat-autocomplete #auto="matAutocomplete">
+                                                                <mat-option *ngFor="let invents of inventoryList" [value]="invents.invent_id">
+                                                                    {{ invents.invent_name }}
+                                                                </mat-option>
+                                                            </mat-autocomplete>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    
+                                                    <div class="col-auto">
+                                                    <button type="button" (click)="searchInventory(searchTerm.value)" class="btn btn-primary">بحث</button>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <button type="submit" [disabled]="disabledAdd" class="btn btn-success ml-3">اضافة</button>
+                                            <button type="button" [disabled]="disabledNew" (click)="addNew()" class="btn btn-secondary ml-3">جديد</button>
+                                            <button type="button" [disabled]="disabledEdit" (click)="updateInv(formdata.value)" class="btn btn-warning ml-3">حفظ</button>
+                                            <button type="button" [disabled]="disabledDelete" (click)="deleteInv()" class="btn btn-danger ml-3">مسح</button>
+                                        </div>
+                                    </div>
+                            </div>
+                            <hr>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="content">
+                            <fieldset>
+                                <legend>بيانات المخزن</legend>
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <form>
-                                            <div class="form-row align-items-center">
-                                                <div class="col-auto">
-                                                <input type="text" class="form-control" id="inlineFormInput" placeholder="ابحث باسم المخزن">
-                                                </div>
-                                                
-                                                <div class="col-auto">
-                                                <button type="submit" class="btn btn-primary">بحث</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                        <label for="fname">رقم المخزن</label>
+                                        <input type="text" class="form-control" name="inventoryId" formControlName="inventoryId" value="{{ lastId + 1 }}" readonly>
                                     </div>
-                                    <div class="col-md-8">
-                                        <button type="button" class="btn btn-success ml-3">اضافة</button>
-                                        <button type="button" class="btn btn-secondary ml-3">جديد</button>
-                                        <button type="button" class="btn btn-warning ml-3">حفظ</button>
-                                        <button type="button" class="btn btn-danger ml-3">مسح</button>
+                                    <div class="col-md-4">
+                                        <label for="lname">اسم المخزن</label>
+                                        <input type="text" class="form-control" (input)="onInventoryName($event)" name="inventoryName" formControlName="inventoryName" value="{{inventName}}">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="lname">ملاحظات</label>
+                                        <input type="text" class="form-control" (input)="onInventoryNote($event)" name="inventoryNotes" formControlName="inventoryNotes" value="{{inventNote}}">
                                     </div>
                                 </div>
+                            </fieldset>
                         </div>
                         <hr>
-                </div>
-    
-                <div class="col-md-12">
-                    <div class="content">
-                        <fieldset>
-                            <legend>بيانات المخزن</legend>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for="fname">رقم المخزن</label>
-                                    <input type="text" class="form-control" id="fname" name="fname" value="1" disabled>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="lname">اسم المخزن</label>
-                                    <input type="text" class="form-control" id="lname" name="lname">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="lname">ملاحظات</label>
-                                    <input type="text" class="form-control" id="lname" name="lname">
-                                </div>
-                            </div>
-                        </fieldset>
                     </div>
-                    <hr>
-                </div>
+                
             </div>
         </div>
-    </div>
+    </form>
+</div>

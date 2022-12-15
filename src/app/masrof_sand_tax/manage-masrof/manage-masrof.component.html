@@ -1,4 +1,5 @@
 <div class="employee">
+    <form [formGroup] = "formdata" (ngSubmit) = "addExpensesDetails(formdata.value)" >
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -31,29 +32,36 @@
                                             <div class="form-group row text-right border">
                                                 <label class="col-sm-1 col-form-label">رقم العملية</label>
                                                 <div class="col-sm-3">
-                                                    <input type="number" class="form-control" value="2" disabled>
+                                                    <input type="number" class="form-control" value="{{ lastId }}" readonly>
                                                 </div>
                                                 <label class="col-sm-1 col-form-label">المصروف</label>
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control">
+                                                    <select class="form-control" name="exp_id" formControlName="exp_id">
+                                                        <option value=""></option>
+                                                        <option *ngFor="let e of expensesList" value="{{e.exp_id}}">{{e.exp_name}}</option>
+                                                    </select>
                                                 </div>
                                                 <label class="col-sm-1 col-form-label">المبلغ</label>
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="amount" formControlName="amount">
                                                 </div>
                                             </div>
                                             <div class="form-group row text-right border">
                                                 <label class="col-sm-1 col-form-label">الخزنة</label>
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control">
+                                                    <select (change)="myTreasury($event)" class="form-control" name="treasury_id" formControlName="treasury_id">
+                                                        <option value=""></option>
+                                                        <option *ngFor="let t of treasuryList" value="{{t.treasury_id}}">{{t.treasury_name}}</option>
+                                                    </select>
+                                                    <small>رصيد الخزنة: <b>{{total}}</b></small>
                                                 </div>
                                                 <label class="col-sm-1 col-form-label">التاريخ</label>
                                                 <div class="col-sm-3">
-                                                    <input type="date" class="form-control">
+                                                    <input type="date" class="form-control" name="exp_date" formControlName="exp_date">
                                                 </div>
                                                 <label class="col-sm-1 col-form-label">ملاحظات</label>
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="notes" formControlName="notes">
                                                 </div>
                                             </div>
                                         </div>
@@ -65,4 +73,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
+</div>

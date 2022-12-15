@@ -1,4 +1,5 @@
 <div class="add_screen">
+    <form [formGroup] = "formdata" (ngSubmit) = "addTreasuryTransform(formdata.value)" >
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -14,35 +15,38 @@
                             <div class="row border">
                                 <div class="col-md-4 border">
                                     <label for="fname">تحويل من خزنة</label>
-                                    <select name="" id="" class="form-control">
-                                        <option value="">خزنة1</option>
-                                        <option value="">خزنة2</option>
+                                    <select (change)="myTreasuryFrom($event)" name="treasury_from_id" formControlName="treasury_from_id" class="form-control">
+                                        <option value=""></option>
+                                        <option *ngFor="let t of treasuryList" value="{{t.treasury_id}}">{{t.treasury_name}}</option>
                                     </select>
-                                    <small class="alert-danger"><b>الرصيد: </b> 1000</small>
+                                    <small class="alert-danger"><b>الرصيد: </b> {{totalFrom}}</small>
                                 </div>
                                 <div class="col-md-4 border">
                                     <label for="lname">تحويل الى خزنة</label>
-                                    <select name="" id="" class="form-control">
-                                        <option value="">خزنة1</option>
-                                        <option value="">خزنة2</option>
+                                    <select (change)="myTreasuryTo($event)" name="treasury_to_id" formControlName="treasury_to_id" class="form-control">
+                                        <option value=""></option>
+                                        <option *ngFor="let t of treasuryList" value="{{t.treasury_id}}">{{t.treasury_name}}</option>
                                     </select>
-                                    <small class="alert-danger"><b>الرصيد: </b> 1000</small>
+                                    <small class="alert-danger"><b>الرصيد: </b> {{totalTo}}</small>
                                 </div>
                                 <div class="col-md-4 border">
                                     <label for="lname">المبلغ المراد تحويله</label>
-                                    <input type="text" class="form-control" id="lname" name="lname">
+                                    <input type="text" name="amount" formControlName="amount" class="form-control">
                                 </div>
                                 <div class="col-md-4 border">
                                     <label for="lname">المسئول عن التحويل</label>
-                                    <input type="text" class="form-control" id="lname" name="lname">
+                                    <input type="text" name="trans_admin" formControlName="trans_admin" class="form-control">
                                 </div>
                                 <div class="col-md-4 border">
                                     <label for="lname">تاريخ التحويل</label>
-                                    <input type="date" class="form-control" id="lname" name="lname">
+                                    <input type="date" name="trans_date" formControlName="trans_date" class="form-control">
                                 </div>
                                 <div class="col-md-4 border">
                                     <label for="lname">سبب التحويل</label>
-                                    <input type="text" class="form-control" id="lname" name="lname">
+                                    <input type="text" name="reason" formControlName="reason" class="form-control">
+                                </div>
+                                <div class="col-md-12 border">
+                                    <button type="submit" class="btn btn-success btn-block ml-3">اضافة</button>
                                 </div>
                             </div>
                         </fieldset>
@@ -51,4 +55,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
+</div>

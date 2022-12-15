@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-customer-report',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerReportComponent implements OnInit {
 
-  constructor() { }
+  customerList = <any>[];
+
+  constructor(public custService:CustomerService) { }
 
   ngOnInit(): void {
+    this.custService.getCustomerList().subscribe((data : any) => {
+      this.customerList = data;
+    });
   }
 
 }

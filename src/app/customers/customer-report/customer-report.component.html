@@ -33,45 +33,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>@mdo</td>
-                                        <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <td>@fat</td>
-                                        <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@fat</td>
-                                        <td>@fat</td>
-                                        <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">4</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@fat</td>
-                                        <td>@fat</td>
-                                        <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">5</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@fat</td>
-                                        <td>@fat</td>
-                                        <td>@fat</td>
+                                        <tr *ngFor="let cust of customerList">
+                                        <th scope="row">{{cust.cust_no}}</th>
+                                        <td>{{cust.cust_name}}</td>
+                                        <td>{{cust.admin_name}}</td>
+                                        <td>{{cust.cust_address}}</td>
+                                        <td>{{cust.cust_phone}}</td>
+                                        <td>{{cust.notes}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

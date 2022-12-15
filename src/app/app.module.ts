@@ -86,7 +86,22 @@ import { SandSrfComponent } from './masrof_sand_tax/sand-srf/sand-srf.component'
 import { SandSrfAbdReportComponent } from './masrof_sand_tax/sand-srf-abd-report/sand-srf-abd-report.component';
 import { TaxReportComponent } from './masrof_sand_tax/tax-report/tax-report.component';
 import { GeneralAccountsComponent } from './components/general-accounts/general-accounts.component';
-
+import { InventoryService } from './services/inventory.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import { PushNotificationModule } from 'ng-push-notification';
+import { TreasurybankService } from './services/treasurybank.service';
+import { SupplierService } from './services/supplier.service';
+import { CustomerService } from './services/customer.service';
+import { EmployeeService } from './services/employee.service';
+import { UnitsService } from './services/units.service';
+import { ExpensesService } from './services/expenses.service';
+import { DepartsService } from './services/departs.service';
+import { DepartElasnafComponent } from './products/depart-elasnaf/depart-elasnaf.component';
+import { ProductsService } from './services/products.service';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { TableFilterPipe } from '../app/pipes/table-filter.pipe';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -134,6 +149,7 @@ const routes: Routes = [
   {path: 'haraka_sanf', component: HaraktSanfComponent},
   {path: 'wahdat_elasnaf', component: WahdatElasnafComponent},
   {path: 'group_elasnaf', component: GroupsElasnafComponent},
+  {path: 'depart_elasnaf', component: DepartElasnafComponent},
   {path: 'min_products', component: MinProductsComponent},
   {path: 'add_treasury', component: AddTreasuryComponent},
   {path: 'add_bank', component: AddBankComponent},
@@ -172,6 +188,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    TableFilterPipe,
     NavbarComponent,
     SidebarComponent,
     NavigationComponent,
@@ -250,17 +267,32 @@ const routes: Routes = [
     SandSrfComponent,
     SandSrfAbdReportComponent,
     TaxReportComponent,
-    GeneralAccountsComponent
+    GeneralAccountsComponent,
+    DepartElasnafComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    PushNotificationModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [
-    UserService
+    UserService,
+    InventoryService,
+    TreasurybankService,
+    SupplierService,
+    CustomerService,
+    EmployeeService,
+    UnitsService,
+    ExpensesService,
+    DepartsService,
+    ProductsService,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,5 @@
 <div class="transfers">
+    <form [formGroup] = "formdata" (ngSubmit) = "addBank(formdata.value)" >
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -13,7 +14,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-6 col-form-label">رقم البنك</label>
                                     <div class="col-sm-6">
-                                        <input type="text" readonly class="form-control" value="2">
+                                        <input type="text" class="form-control" name="bankId" formControlName="bankId" value="{{ lastId + 1 }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -21,7 +22,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-4 col-form-label">اسم البنك</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" name="bankName" formControlName="bankName" >
                                     </div>
                                 </div>
                             </div>
@@ -32,7 +33,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="col-auto">
-                                    <button type="submit" class="btn btn-danger btn-block">حذف المحدد</button>
+                                    <button type="button" (click)="deleteBank()" class="btn btn-danger btn-block">حذف المحدد</button>
                                 </div>
                             </div>
                         </div>
@@ -53,23 +54,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row"><input type="checkbox" class="form-check-input" id="exampleCheck1"></th>
-                                            <th scope="row">1</th>
-                                            <td>0001</td>
-                                            <td>البنك الاهلى</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><input type="checkbox" class="form-check-input" id="exampleCheck1"></th>
-                                            <th scope="row">2</th>
-                                            <td>0002</td>
-                                            <td>البنك التجارى</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><input type="checkbox" class="form-check-input" id="exampleCheck1"></th>
-                                            <th scope="row">3</th>
-                                            <td>0003</td>
-                                            <td>الاهلى</td>
+                                        <tr *ngFor="let bank of bankList">
+                                            <th scope="row">
+                                                <input type="checkbox" name="cb" value="{{bank.bank_id}}" class="form-check-input cb">
+                                                <input type="hidden" name="checkedValue" value="{{bank.bank_id}}">
+                                            </th>
+                                            <th scope="row">{{ bank.id }}</th>
+                                            <td>{{bank.bank_id}}</td>
+                                            <td>{{bank.bank_name}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -79,4 +71,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
+</div>

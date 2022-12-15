@@ -1,4 +1,5 @@
 <div class="add_screen">
+    <form [formGroup] = "formdata" (ngSubmit) = "addTreasuryDeposit(formdata.value)" >
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -6,7 +7,7 @@
                         <h2>ايداع رصيد خزنة</h2>
                     </div>
                 </div>
-    
+
                 <div class="col-md-12">
                         <div class="top">
                             <div class="row">
@@ -14,24 +15,24 @@
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">اختر خزنة</label>
                                         <div class="col-sm-8">
-                                            <select name="" id="" class="form-control">
-                                                <option value="">خزنة1</option>
-                                                <option value="">خزنة2</option>
+                                            <select (change)="myTreasury($event)" name="treasury_id" formControlName="treasury_id" class="form-control">
+                                                <option value=""></option>
+                                                <option *ngFor="let t of treasuryList" value="{{t.treasury_id}}">{{t.treasury_name}}</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <h4>رصيد الخزنة الحالى: <b>50000</b></h4>
+                                    <h4>رصيد الخزنة الحالى: <b>{{total}}</b></h4>
                                 </div>
                                 <div class="col-md-4">
-                                    <button type="button" class="btn btn-success ml-3">اضافة</button>
+                                    <button type="submit" class="btn btn-success ml-3">اضافة</button>
                                 </div>
                             </div>
                         </div>
                         <hr>
                 </div>
-    
+
                 <div class="col-md-12">
                     <div class="content">
                         <fieldset>
@@ -39,20 +40,21 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="fname">اضافة رصيد جديد</label>
-                                    <input type="number" class="form-control" id="fname" name="fname">
+                                    <input type="number" class="form-control" name="deposit_amount" formControlName="deposit_amount">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="lname">تاريخ الايداع</label>
-                                    <input type="date" class="form-control" id="lname" name="lname">
+                                    <input type="date" class="form-control" name="deposit_date" formControlName="deposit_date">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="lname">اسم المودع</label>
-                                    <input type="text" class="form-control" id="lname" name="lname">
+                                    <input type="text" class="form-control" name="depositor" formControlName="depositor">
                                 </div>
                                 <div class="col-md-3">
                                     <label for="lname">سبب الايداع</label>
-                                    <input type="text" class="form-control" id="lname" name="lname">
+                                    <input type="text" class="form-control" name="deposit_reason" formControlName="deposit_reason">
                                 </div>
+                                <input type="hidden" class="form-control" name="deposit_type" formControlName="deposit_type">
                             </div>
                         </fieldset>
                     </div>
@@ -60,4 +62,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
+</div>
