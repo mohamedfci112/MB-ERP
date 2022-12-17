@@ -1,4 +1,5 @@
 <div class="inv_cost">
+    <form [formGroup] = "formdata" (ngSubmit) = "editQuantity(formdata.value)" >
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -14,9 +15,9 @@
                                 <form>
                                     <div class="form-row align-items-center">
                                         <div class="col-auto">
-                                            <select class="form-control">
-                                                <option value="">المخزن الرئيسى</option>
-                                                <option value="">المخزن الفرعى</option>
+                                            <select (change)="getInventory($event)" class="form-control" name="inventoryId" formControlName="inventoryId">
+                                                <option value=""></option>
+                                                <option *ngFor="let i of inventoryList" value="{{i.invent_id}}">{{i.invent_name}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -26,14 +27,25 @@
                                 <form>
                                     <div class="form-row align-items-center">
                                         <div class="col-auto">
-                                        <input type="text" class="form-control" id="inlineFormInput" placeholder="ابحث باسم المنتج">
+                                            <mat-form-field>
+                                                <input type="text"
+                                                matInput 
+                                                [formControl]="searchTerm" 
+                                                [matAutocomplete]="auto">
+                                                <mat-placeholder class="placeholder">ابحث باسم المنتج</mat-placeholder>
+                                                <mat-autocomplete #auto="matAutocomplete">
+                                                    <mat-option *ngFor="let prod of productList" [value]="prod.product_id">
+                                                        {{ prod.product_name }}
+                                                    </mat-option>
+                                                </mat-autocomplete>
+                                            </mat-form-field>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                             <div class="col-md-4">
                                 <div class="col-auto">
-                                    <button type="submit" class="btn btn-primary btn-block">بحث</button>
+                                    <button type="button" (click)="searchProduct(searchTerm.value)" class="btn btn-primary btn-block">بحث</button>
                                 </div>
                             </div>
                         </div>
@@ -45,30 +57,31 @@
                     <div class="row frm">
                         <div class="col-md-6 border">
                             <h3>الكمية الكلية الموجودة</h3>
-                            <input type="number" class="form-control" value="200" disabled>
+                            <input type="number" class="form-control" name="currQuantity" formControlName="currQuantity" value="{{cur_Quantity}}" readonly>
                         </div>
                         <div class="col-md-6 border">
                             <h3>الكمية المراد اخراجها</h3>
-                            <input type="number" class="form-control">
+                            <input type="number" class="form-control"  (input)="onTalfQuantity($event)" name="talfQuantity" formControlName="talfQuantity">
                         </div>
                         <div class="col-md-6 border">
                             <h3>التاريخ</h3>
-                            <input type="date" class="form-control">
+                            <input type="date" class="form-control" name="talfDate" formControlName="talfDate">
                         </div>
                         <div class="col-md-6 border">
                             <h3>المسئول عن الاخراج</h3>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="talfAdmin" formControlName="talfAdmin">
                         </div>
                         <div class="col-md-12 border">
                             <h3>الاسباب</h3>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="talfReason" formControlName="talfReason">
                         </div>
                         <div class="col-md-12 border container">
-                            <input type="button" class="form-control btn-success" value="اتمام العملية">
+                            <input type="submit" class="form-control btn-success" value="اتمام العملية">
                         </div>
                     </div>
                 </div>
     
             </div>
         </div>
-    </div>
+    </form>
+</div>

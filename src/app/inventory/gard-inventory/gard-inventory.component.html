@@ -1,4 +1,5 @@
 <div class="purchase_screen">
+    <form [formGroup] = "formdata" (ngSubmit) = "gardSearch(formdata.value)" >
         <div class="row">
             <div class="col-md-12">
                 <div class="title">
@@ -9,16 +10,17 @@
                 <div class="right">
                     <fieldset>
                         <legend>حسب المخزن</legend>
-                        <input type="radio">
-                        <label for="fname">كل المخازن</label><br>
-                        <input type="radio">
-                        <label for="email">مخزن محدد</label><br>
-                        <select class="form-control">
-                            <option value="">المخزن الرئيسى</option>
-                            <option value="">المخزن الفرعى</option>
+                        <input type="radio" (change)="onItemChange($event)" checked value="all" class="form-check-input" name="inventory" formControlName="inventory">
+                        <label class=" mr-3">كل المخازن</label><br>
+                        <input type="radio" (change)="onItemChange($event)" value="one" class="form-check-input" name="inventory" formControlName="inventory">
+                        <label class=" mr-3">مخزن محدد</label><br>
+                        <select class="form-control" name="inventoryId" formControlName="inventoryId">
+                            <option value=""></option>
+                            <option *ngFor="let i of invList" value="{{i.invent_id}}">{{i.invent_name}}</option>
                         </select>
                     </fieldset>
                     <hr>
+                    <input type="submit" class="btn btn-primary btn-block" value="بحث">
                     <input type="button" class="btn btn-success btn-block" value="طباعة">
                 </div>
             </div>
@@ -40,39 +42,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>4454</td>
-                                        <td>منتج 1</td>
-                                        <td>المخزن الرئيسى</td>
-                                        <td>100</td>
-                                        <td>100</td>
-                                        <td>120</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>4454</td>
-                                        <td>منتج 1</td>
-                                        <td>المخزن الرئيسى</td>
-                                        <td>100</td>
-                                        <td>100</td>
-                                        <td>120</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>4454</td>
-                                        <td>منتج 1</td>
-                                        <td>المخزن الرئيسى</td>
-                                        <td>100</td>
-                                        <td>100</td>
-                                        <td>120</td>
+                                    <tr *ngFor="let item of gardList | paginate: config; let i=index;">
+                                        <th scope="row">{{i+1}}</th>
+                                        <td>{{item.id}}</td>
+                                        <td>{{item.product_name}}</td>
+                                        <td>{{item.invent_name}}</td>
+                                        <td>{{item.product_quantity}}</td>
+                                        <td>{{item.purchase_price}}</td>
+                                        <td>{{item.sell_price}}</td>
                                     </tr>
                                 </tbody>
                             </table>
+                            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                         </div>
                     </div>
                 </div>
             </div>
     
         </div>
-    </div>
+    </form>
+</div>

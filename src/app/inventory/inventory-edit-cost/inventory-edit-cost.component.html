@@ -1,62 +1,83 @@
 <div class="inv_cost">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="title">
-                    <h2>تعديل تكلفة المخزون</h2>
+    <form [formGroup] = "formdata" (ngSubmit) = "editCost(formdata.value)" >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title">
+                        <h2>تعديل تكلفة المخزون</h2>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-12">
-                <div class="top">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <form>
-                                <div class="form-row align-items-center">
-                                    <div class="col-auto">
-                                        <select class="form-control">
-                                            <option value="">المخزن الرئيسى</option>
-                                            <option value="">المخزن الفرعى</option>
-                                        </select>
+                <div class="col-md-12">
+                    <div class="top">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <form>
+                                    <div class="form-row align-items-center">
+                                        <div class="col-auto">
+                                            <select (change)="getInventory($event)" class="form-control" name="inventoryId" formControlName="inventoryId">
+                                                <option value=""></option>
+                                                <option *ngFor="let i of inventoryList" value="{{i.invent_id}}">{{i.invent_name}}</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-4">
-                            <form>
-                                <div class="form-row align-items-center">
-                                    <div class="col-auto">
-                                    <input type="text" class="form-control" id="inlineFormInput" placeholder="ابحث باسم المنتج">
+                                </form>
+                            </div>
+                            <div class="col-md-4">
+                                <form>
+                                    <div class="form-row align-items-center">
+                                        <div class="col-auto">
+                                            <mat-form-field>
+                                                <input type="text"
+                                                matInput 
+                                                [formControl]="searchTerm" 
+                                                [matAutocomplete]="auto">
+                                                <mat-placeholder class="placeholder">ابحث باسم المنتج</mat-placeholder>
+                                                <mat-autocomplete #auto="matAutocomplete">
+                                                    <mat-option *ngFor="let prod of productList" [value]="prod.product_id">
+                                                        {{ prod.product_name }}
+                                                    </mat-option>
+                                                </mat-autocomplete>
+                                            </mat-form-field>
+                                        </div>
                                     </div>
+                                </form>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="col-auto">
+                                    <button type="button" (click)="searchProduct(searchTerm.value)" class="btn btn-primary btn-block">بحث</button>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-primary btn-block">بحث</button>
                             </div>
                         </div>
                     </div>
+                    <hr>
                 </div>
-                <hr>
-            </div>
 
-            <div class="col-md-12">
-                <div class="row frm">
-                    <div class="col-md-6 border">
-                        <h3>سعر الشراء القديم</h3>
-                        <input type="number" class="form-control" value="200" disabled>
-                    </div>
-                    <div class="col-md-6 border">
-                        <h3>سعر الشراء الجديد</h3>
-                        <input type="number" class="form-control">
-                    </div>
-                    <div class="col-md-12 border container">
-                        <input type="button" class="form-control btn-success" value="حفظ التعديل">
+                <div class="col-md-12">
+                    <div class="row frm">
+                        <div class="col-md-6 border">
+                            <h3>سعر الشراء القديم</h3>
+                            <input type="number" class="form-control" name="oldPurchase" formControlName="oldPurchase" value="{{oldPurchasePrice}}" readonly>
+                        </div>
+                        <div class="col-md-6 border">
+                            <h3>سعر الشراء الجديد</h3>
+                            <input type="text" class="form-control" (input)="onNewPurchase($event)" name="newPurchase" formControlName="newPurchase">
+                        </div>
+                        <div class="col-md-6 border">
+                            <h3>سعر البيع القديم</h3>
+                            <input type="number" class="form-control" name="oldSell" formControlName="oldSell" value="{{oldSellPrice}}" readonly>
+                        </div>
+                        <div class="col-md-6 border">
+                            <h3>سعر البيع الجديد</h3>
+                            <input type="text" class="form-control" (input)="onNewSell($event)" name="newSell" formControlName="newSell">
+                        </div>
+                        <div class="col-md-12 border container">
+                            <input type="submit" class="form-control btn-success" value="حفظ التعديل">
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
+    </form>
 </div>

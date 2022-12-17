@@ -1,84 +1,84 @@
 <div class="transfers">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="title">
-                    <h2>التحويل بين المخازن</h2>
+    <form [formGroup] = "formdata" (ngSubmit) = "addInventoryTransform(formdata.value)" >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title">
+                        <h2>التحويل بين المخازن</h2>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-6 border">
-                <div class="title1">
-                    <h3>المخزن المحول منه</h3>
-                </div>
-                <div class="inv_from container border">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">المنتج</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">اسم المخزن المحول منه</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">الكمية</label>
-                        <input type="number" class="form-control">
-                    </div>
-                    <hr><hr>
+                <div class="col-md-6 border">
                     <div class="title1">
-                        <h3>المخزن المحول له</h3>
+                        <h3>المخزن المحول منه</h3>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">اسم المخزن المحول له</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 border">
-                <div class="title1">
-                    <h3>بيانات العملية</h3>
-                </div>
-                <div class="inv_from container border">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">سعر الشراء</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">سعر البيع</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">التاريخ</label>
-                        <input type="date" class="form-control">
-                    </div>
-                    <hr>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">المسئول عن التحويل</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">الاسباب</label>
-                        <input type="text" class="form-control">
+                    <div class="inv_from container border">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">المنتج</label>
+                            <select (change)="myProduct($event)" class="form-control"  name="product_id" formControlName="product_id">
+                                <option value=""></option>
+                                <option *ngFor="let p of productList" value="{{p.product_id}}">{{p.product_name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">اسم المخزن المحول منه</label>
+                            <select (change)="myInventoryFrom($event)" class="form-control" id="mySelect"  name="invent_from_id" formControlName="invent_from_id">
+                                <option value=""></option>
+                                <option *ngFor="let i of inventoryList" value="{{i.invent_id}}">{{i.invent_name}}</option>
+                            </select>
+                            <small><b>{{totalFrom}}</b></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">الكمية</label>
+                            <input type="number" class="form-control"  name="product_quantity" formControlName="product_quantity">
+                        </div>
+                        <hr><hr>
+                        <div class="title1">
+                            <h3>المخزن المحول له</h3>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">اسم المخزن المحول له</label>
+                            <select (change)="myInventoryTo($event)" class="form-control"  name="invent_to_id" formControlName="invent_to_id">
+                                <option value=""></option>
+                                <option *ngFor="let i of inventoryList" value="{{i.invent_id}}">{{i.invent_name}}</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
-                <input type="button" class="btn btn-success btn-block" value="اتمام العملية">
-            </div>
-            
+                <div class="col-md-6 border">
+                    <div class="title1">
+                        <h3>بيانات العملية</h3>
+                    </div>
+                    <div class="inv_from container border">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">سعر الشراء</label>
+                            <input type="text" class="form-control"  name="purchase_price" formControlName="purchase_price">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">سعر البيع</label>
+                            <input type="text" class="form-control"  name="sell_price" formControlName="sell_price">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">التاريخ</label>
+                            <input type="date" class="form-control"  name="trans_date" formControlName="trans_date">
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">المسئول عن التحويل</label>
+                            <input type="text" class="form-control"  name="trans_admin" formControlName="trans_admin">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">الاسباب</label>
+                            <input type="text" class="form-control"  name="trans_reason" formControlName="trans_reason">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-success btn-block" value="اتمام العملية">
+                </div>
+                
 
+            </div>
         </div>
-    </div>
+    </form>
 </div>

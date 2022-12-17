@@ -1,4 +1,5 @@
 <div class="purchase_screen">
+    <form [formGroup] = "formdata" (ngSubmit) = "Search(formdata.value)" >
         <div class="row">
             <div class="col-md-12">
                 <div class="title">
@@ -7,40 +8,42 @@
             </div>
             <div class="col-md-2">
                 <div class="right">
-                    <fieldset class="border">
+                    <fieldset class="">
+                        <legend><h6>جميع تحويلات المخازن</h6></legend>
+                        <input type="radio" (change)="onItemChange($event)" value="all" class="form-check-input" name="inventory" formControlName="inventory">
+                        <label class="mr-3">كل المخازن</label><br>
+                        <input type="radio" (change)="onItemChange($event)" value="one" class="form-check-input" name="inventory" formControlName="inventory">
+                        <label class="mr-3">مخازن محددة</label><br>
+                    </fieldset>
+                    <hr>
+                    <fieldset class="">
                         <legend><h6>المخازن المحول منها</h6></legend>
-                        <input type="radio">
-                        <label for="fname">كل المخازن</label><br>
-                        <input type="radio">
-                        <label for="email">مخزن محدد</label><br>
-                        <select class="form-control">
-                            <option value="">المخزن الرئيسى</option>
-                            <option value="">المخزن الفرعى</option>
+                        <label class="mr-3">اختر مخزن محدد</label><br>
+                        <select id="mySelect" class="form-control" name="inventoryFromId" formControlName="inventoryFromId">
+                            <option value=""></option>
+                            <option *ngFor="let i of invList" value="{{i.invent_id}}">{{i.invent_name}}</option>
                         </select>
                     </fieldset>
                     <hr>
-                    <fieldset class="border">
+                    <fieldset class="">
                         <legend><h6>المخازن المحول لها</h6></legend>
-                        <input type="radio">
-                        <label for="fname">كل المخازن</label><br>
-                        <input type="radio">
-                        <label for="email">مخزن محدد</label><br>
-                        <select class="form-control">
-                            <option value="">المخزن الرئيسى</option>
-                            <option value="">المخزن الفرعى</option>
+                        <label class="mr-3">اختر مخزن محدد</label><br>
+                        <select id="mySelect1" class="form-control" name="inventoryToId" formControlName="inventoryToId">
+                            <option value=""></option>
+                            <option *ngFor="let i of invList" value="{{i.invent_id}}">{{i.invent_name}}</option>
                         </select>
                     </fieldset>
                     <hr>
-                    <fieldset class="border">
+                    <fieldset class="">
                         <legend><h6>الفترة المحددة</h6></legend>
                         <label for="fname"> من </label>
-                        <input type="date">
+                        <input type="date" class="form-control" name="dateFrom" formControlName="dateFrom">
                         <br>
                         <label for="email"> الى </label>
-                        <input type="date">
+                        <input type="date" class="form-control" name="dateTo" formControlName="dateTo">
                     </fieldset>
                     <hr>
-                    <input type="button" class="btn btn-success btn-block" value="بحث">
+                    <input type="submit" class="btn btn-success btn-block" value="بحث">
                 </div>
             </div>
     
@@ -64,48 +67,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>4454</td>
-                                        <td>منتج 1</td>
-                                        <td>المخزن الرئيسى</td>
-                                        <td>100</td>
-                                        <td>100</td>
-                                        <td>120</td>
-                                        <td>120</td>
-                                        <td>120</td>
-                                        <td>120</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>4454</td>
-                                        <td>منتج 1</td>
-                                        <td>المخزن الرئيسى</td>
-                                        <td>100</td>
-                                        <td>100</td>
-                                        <td>120</td>
-                                        <td>120</td>
-                                        <td>120</td>
-                                        <td>120</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>4454</td>
-                                        <td>منتج 1</td>
-                                        <td>المخزن الرئيسى</td>
-                                        <td>100</td>
-                                        <td>100</td>
-                                        <td>120</td>
-                                        <td>120</td>
-                                        <td>120</td>
-                                        <td>120</td>
+                                    <tr *ngFor="let item of gardList2 | paginate: config;let i=index">
+                                        <th scope="row">{{i+1}}</th>
+                                        <td>{{item.product_name}}</td>
+                                        <td>{{item.Fro}}</td>
+                                        <td>{{item.Too}}</td>
+                                        <td>{{item.product_quantity}}</td>
+                                        <td>{{item.purchase_price}}</td>
+                                        <td>{{item.sell_price}}</td>
+                                        <td>{{item.trans_date | date}}</td>
+                                        <td>{{item.trans_admin}}</td>
+                                        <td>{{item.trans_reason}}</td>
                                     </tr>
                                 </tbody>
                             </table>
+                            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                         </div>
                     </div>
                 </div>
             </div>
     
         </div>
-    </div>
+    </form>
+</div>
