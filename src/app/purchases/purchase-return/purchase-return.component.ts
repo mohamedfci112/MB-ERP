@@ -112,12 +112,59 @@ export class PurchaseReturnComponent implements OnInit {
     {
       for(let i=0;i<this.productSearchResult.length;i++)
       {
+        // insert into returned table
+        if(this.productSearchResult[i].taxable > 0)
+        {
+          var unit_price = this.productSearchResult[i].product_total_cost / this.productSearchResult[i].product_quantity;
+          var discountValue = ((this.productSearchResult[i].product_quantity - this.productSearchResult[i].returned_quantity) * unit_price);
+          var taxs = (discountValue * 0.14);
+          var returned_Mony:any = (taxs + discountValue);
+          var ReturnTable=
+          {
+            inv_no: this.productSearchResult[i].inv_no,
+            product_id: this.productSearchResult[i].product_id,
+            returned_quantity: ((this.productSearchResult[i].product_quantity - this.productSearchResult[i].returned_quantity) + this.productSearchResult[i].returned_quantity),
+            taxable: taxs,
+            product_unit_price: this.productSearchResult[i].product_unit_price,
+            product_total_cost: returned_Mony,
+            supplier_id: this.productSearchResult[i].supplier_id,
+            inventory_id: this.productSearchResult[i].inventory_id,
+            return_date: new Date()
+          }
+          this.purchService.insertReturnedTable(ReturnTable).subscribe((res:any)=>{
+            this.pushNotification.show(res.tostring(), {}, 6000, );
+          });
+        }
+        else
+        {
+          var unit_price = this.productSearchResult[i].product_total_cost / this.productSearchResult[i].product_quantity;
+          var discountValue = ((this.productSearchResult[i].product_quantity - this.productSearchResult[i].returned_quantity) * unit_price);
+          var returned_Mony:any = discountValue;
+
+          var ReturnTable=
+          {
+            inv_no: this.productSearchResult[i].inv_no,
+            product_id: this.productSearchResult[i].product_id,
+            returned_quantity: ((this.productSearchResult[i].product_quantity - this.productSearchResult[i].returned_quantity) + this.productSearchResult[i].returned_quantity),
+            taxable: 0,
+            product_unit_price: this.productSearchResult[i].product_unit_price,
+            product_total_cost: returned_Mony,
+            supplier_id: this.productSearchResult[i].supplier_id,
+            inventory_id: this.productSearchResult[i].inventory_id,
+            return_date: new Date()
+          }
+          this.purchService.insertReturnedTable(ReturnTable).subscribe((res:any)=>{
+            this.pushNotification.show(res.tostring(), {}, 6000, );
+          });
+        }
+        
+        //
         var Returndata=
         {
           inv_no: this.productSearchResult[i].inv_no,
           product_id: this.productSearchResult[i].product_id,
           returned: 1,
-          returned_quantity: this.productSearchResult[i].product_quantity,
+          returned_quantity: ((this.productSearchResult[i].product_quantity - this.productSearchResult[i].returned_quantity) + this.productSearchResult[i].returned_quantity),
           return_date: new Date()
         }
         this.purchService.insertReturnedPurchasesAll(Returndata).subscribe((res:any)=>{
@@ -127,7 +174,7 @@ export class PurchaseReturnComponent implements OnInit {
         var invData = {
           product_id : this.productSearchResult[i].product_id,
           invent_id : this.productSearchResult[i].inventory_id,
-          product_quantity : this.productSearchResult[i].product_quantity
+          product_quantity : ((this.productSearchResult[i].product_quantity - this.productSearchResult[i].returned_quantity) + this.productSearchResult[i].returned_quantity)
         }
         this.inventService.EditInventoryQuantityReturnedPurchase(invData).subscribe((res:any)=>{
           this.pushNotification.show(res.toString(), {}, 6000, );
@@ -135,11 +182,15 @@ export class PurchaseReturnComponent implements OnInit {
 
         if(this.productSearchResult[i].taxable > 0)
         {
-          this.product_cost += ((this.productSearchResult[i].product_total_cost * 0.14) + this.productSearchResult[i].product_total_cost);
+          var unit_price = this.productSearchResult[i].product_total_cost / this.productSearchResult[i].product_quantity;
+          var discountValue = ((this.productSearchResult[i].product_quantity - this.productSearchResult[i].returned_quantity) * unit_price);
+          this.product_cost += ((discountValue * 0.14) + discountValue);
         }
         else
         {
-          this.product_cost += this.productSearchResult[i].product_total_cost;
+          var unit_price = this.productSearchResult[i].product_total_cost / this.productSearchResult[i].product_quantity;
+          var discountValue = ((this.productSearchResult[i].product_quantity - this.productSearchResult[i].returned_quantity) * unit_price);
+          this.product_cost += discountValue;
         }
         
         this.aglSupData = {
@@ -228,13 +279,58 @@ export class PurchaseReturnComponent implements OnInit {
             return object.product_id === idvalue;
           });
   
+          // insert into returned table
+          if(this.productSearchResult[indexx].taxable > 0)
+          {
+            var unit_price = this.productSearchResult[indexx].product_total_cost / this.productSearchResult[indexx].product_quantity;
+            var discountValue = ((this.productSearchResult[indexx].product_quantity - this.productSearchResult[indexx].returned_quantity) * unit_price);
+            var taxs = (discountValue * 0.14);
+            var returned_Mony:any = (taxs + discountValue);
+            var ReturnTable=
+            {
+              inv_no: this.productSearchResult[indexx].inv_no,
+              product_id: this.productSearchResult[indexx].product_id,
+              returned_quantity: ((this.productSearchResult[indexx].product_quantity - this.productSearchResult[indexx].returned_quantity) + this.productSearchResult[indexx].returned_quantity),
+              taxable: taxs,
+              product_unit_price: this.productSearchResult[indexx].product_unit_price,
+              product_total_cost: returned_Mony,
+              supplier_id: this.productSearchResult[indexx].supplier_id,
+              inventory_id: this.productSearchResult[indexx].inventory_id,
+              return_date: new Date()
+            }
+            this.purchService.insertReturnedTable(ReturnTable).subscribe((res:any)=>{
+              this.pushNotification.show(res.tostring(), {}, 6000, );
+            });
+          }
+          else
+          {
+            var unit_price = this.productSearchResult[indexx].product_total_cost / this.productSearchResult[indexx].product_quantity;
+            var discountValue = ((this.productSearchResult[indexx].product_quantity - this.productSearchResult[indexx].returned_quantity) * unit_price);
+            var returned_Mony:any = discountValue;
+
+            var ReturnTable=
+            {
+              inv_no: this.productSearchResult[indexx].inv_no,
+              product_id: this.productSearchResult[indexx].product_id,
+              returned_quantity: ((this.productSearchResult[indexx].product_quantity - this.productSearchResult[indexx].returned_quantity) + this.productSearchResult[indexx].returned_quantity),
+              taxable: 0,
+              product_unit_price: this.productSearchResult[indexx].product_unit_price,
+              product_total_cost: returned_Mony,
+              supplier_id: this.productSearchResult[indexx].supplier_id,
+              inventory_id: this.productSearchResult[indexx].inventory_id,
+              return_date: new Date()
+            }
+            this.purchService.insertReturnedTable(ReturnTable).subscribe((res:any)=>{
+              this.pushNotification.show(res.tostring(), {}, 6000, );
+            });
+          }
           //here return all selected products
           var Returndata=
           {
             inv_no: this.productSearchResult[indexx].inv_no,
             product_id: this.productSearchResult[indexx].product_id,
             returned: 1,
-            returned_quantity: this.productSearchResult[indexx].product_quantity,
+            returned_quantity: ((this.productSearchResult[indexx].product_quantity - this.productSearchResult[indexx].returned_quantity) + this.productSearchResult[indexx].returned_quantity),
             return_date: new Date()
           }
           this.purchService.insertReturnedPurchasesAll(Returndata).subscribe((res:any)=>{
@@ -244,7 +340,7 @@ export class PurchaseReturnComponent implements OnInit {
           var invData = {
             product_id : this.productSearchResult[indexx].product_id,
             invent_id : this.productSearchResult[indexx].inventory_id,
-            product_quantity : this.productSearchResult[indexx].product_quantity
+            product_quantity : ((this.productSearchResult[indexx].product_quantity - this.productSearchResult[indexx].returned_quantity) + this.productSearchResult[indexx].returned_quantity)
           }
           this.inventService.EditInventoryQuantityReturnedPurchase(invData).subscribe((res:any)=>{
             this.pushNotification.show(res.toString(), {}, 6000, );
@@ -253,11 +349,15 @@ export class PurchaseReturnComponent implements OnInit {
           var discount_amount;
           if(this.productSearchResult[indexx].taxable > 0)
           {
-            discount_amount = (this.productSearchResult[indexx].product_total_cost * 0.14) + (this.productSearchResult[indexx].product_total_cost);
+            var unit_price = this.productSearchResult[indexx].product_total_cost / this.productSearchResult[indexx].product_quantity;
+            var discountValue = ((this.productSearchResult[indexx].product_quantity - this.productSearchResult[indexx].returned_quantity) * unit_price);
+            discount_amount = (discountValue * 0.14) + (discountValue);
           }
           else
           {
-            discount_amount = this.productSearchResult[indexx].product_total_cost;
+            var unit_price = this.productSearchResult[indexx].product_total_cost / this.productSearchResult[indexx].product_quantity;
+            var discountValue = ((this.productSearchResult[indexx].product_quantity - this.productSearchResult[indexx].returned_quantity) * unit_price);
+            discount_amount = discountValue;
           }
          
           this.aglSupData = {
@@ -299,20 +399,67 @@ export class PurchaseReturnComponent implements OnInit {
               return object.product_id === idvalue;
             });
 
-            if(data.part > this.productSearchResult[indexx].product_quantity)
+            var currentQuantity = (this.productSearchResult[indexx].product_quantity - this.productSearchResult[indexx].returned_quantity);
+            console.log(currentQuantity);
+            if(data.part > currentQuantity)
             {
               this.pushNotification.show("الجزء المحدد اكبر من الكمية الفعلية للمنتج", {}, 6000, );
               this.router.navigated = false;
             }
             else
             {
+              // insert into returned table
+              if(this.productSearchResult[indexx].taxable > 0)
+              {
+                var unit_price = this.productSearchResult[indexx].product_total_cost / this.productSearchResult[indexx].product_quantity;
+                var cost_returned = unit_price * data.part;
+                var taxs = (cost_returned * 0.14);
+                var returned_Mony:any = (taxs + cost_returned);
+                var ReturnTable=
+                {
+                  inv_no: this.productSearchResult[indexx].inv_no,
+                  product_id: this.productSearchResult[indexx].product_id,
+                  returned_quantity: (data.part + this.productSearchResult[indexx].returned_quantity),
+                  taxable: taxs,
+                  product_unit_price: this.productSearchResult[indexx].product_unit_price,
+                  product_total_cost: returned_Mony,
+                  supplier_id: this.productSearchResult[indexx].supplier_id,
+                  inventory_id: this.productSearchResult[indexx].inventory_id,
+                  return_date: new Date()
+                }
+                this.purchService.insertReturnedTable(ReturnTable).subscribe((res:any)=>{
+                  this.pushNotification.show(res.tostring(), {}, 6000, );
+                });
+              }
+              else
+              {
+                var unit_price = this.productSearchResult[indexx].product_total_cost / this.productSearchResult[indexx].product_quantity;
+                var cost_returned = unit_price * data.part;
+                var returned_Mony:any = cost_returned;
+
+                var ReturnTable=
+                {
+                  inv_no: this.productSearchResult[indexx].inv_no,
+                  product_id: this.productSearchResult[indexx].product_id,
+                  returned_quantity: (data.part + this.productSearchResult[indexx].returned_quantity),
+                  taxable: 0,
+                  product_unit_price: this.productSearchResult[indexx].product_unit_price,
+                  product_total_cost: returned_Mony,
+                  supplier_id: this.productSearchResult[indexx].supplier_id,
+                  inventory_id: this.productSearchResult[indexx].inventory_id,
+                  return_date: new Date()
+                }
+                this.purchService.insertReturnedTable(ReturnTable).subscribe((res:any)=>{
+                  this.pushNotification.show(res.tostring(), {}, 6000, );
+                });
+              }
               //here return all selected products
               var Returndata=
               {
                 inv_no: this.productSearchResult[indexx].inv_no,
                 product_id: this.productSearchResult[indexx].product_id,
                 returned: 1,
-                returned_quantity: data.part,
+                returned_quantity: (data.part + this.productSearchResult[indexx].returned_quantity),
                 return_date: new Date()
               }
               this.purchService.insertReturnedPurchasesAll(Returndata).subscribe((res:any)=>{

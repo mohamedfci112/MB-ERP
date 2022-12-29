@@ -52,4 +52,14 @@ export class PurchasesService {
     return this.http.put(this.APIUrl+'/Purchases/insertReturnedPurchasesAll',val);
   }
 
+  //insert returned all invoice
+  insertReturnedTable(val: any){
+    return this.http.post(this.APIUrl+'/Purchases/insertReturnedTable',val);
+  }
+
+  //get purchasing report
+  getPurchasingReturnedReport(val:any){
+    return this.http.post(this.APIUrl+'/Purchases/getPurchasingReturnedReport', val);
+  }
+
 }
