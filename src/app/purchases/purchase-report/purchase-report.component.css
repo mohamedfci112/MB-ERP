@@ -16,3 +16,8 @@
     text-align: center;
     border: 1px solid;
 }
+.purchase_screen .top .row{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}

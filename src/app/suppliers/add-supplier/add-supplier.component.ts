@@ -24,6 +24,7 @@ export class AddSupplierComponent implements OnInit {
 
   suppName:any = "";
   suppAdmin:any = "";
+  suppTax:any = "";
   suppPhone:any = "";
   suppAddress:any = "";
   suppNotes:any = "";
@@ -52,6 +53,7 @@ export class AddSupplierComponent implements OnInit {
       supplierName: new FormControl(""),
       supplierAdmin: new FormControl(""),
       supplierPhone: new FormControl(""),
+      supplierTax: new FormControl(""),
       supplierAddress: new FormControl(""),
       supplierNotes: new FormControl("")
     });
@@ -79,6 +81,7 @@ export class AddSupplierComponent implements OnInit {
       sup_name : data.supplierName,
       admin_name : data.supplierAdmin,
       sup_phone : data.supplierPhone,
+      sup_tax : data.supplierTax,
       sup_address : data.supplierAddress,
       notes : data.supplierNotes
     };
@@ -117,6 +120,7 @@ export class AddSupplierComponent implements OnInit {
         this.suppName = data[0].sup_name;
         this.suppAdmin = data[0].admin_name;
         this.suppPhone = data[0].sup_phone;
+        this.suppTax = data[0].sup_tax;
         this.suppAddress = data[0].sup_address;
         this.suppNotes = data[0].notes;
 
@@ -135,6 +139,7 @@ export class AddSupplierComponent implements OnInit {
     this.suppName = "";
     this.suppAdmin = "";
     this.suppPhone = "";
+    this.suppTax = "";
     this.suppAddress = "";
     this.suppNotes = "";
 
@@ -144,6 +149,8 @@ export class AddSupplierComponent implements OnInit {
     this.disabledEdit = true;
     this.disabledDelete = true;
     this.disabledAdd = false;
+
+    this.ngOnInit();
   }
 
   //
@@ -158,6 +165,10 @@ export class AddSupplierComponent implements OnInit {
   onSupplierPhone(searchValue: any){
     const element = searchValue.currentTarget as HTMLInputElement;
     this.suppPhone = element.value;
+  }
+  onSupplierTax(searchValue: any){
+    const element = searchValue.currentTarget as HTMLInputElement;
+    this.suppTax = element.value;
   }
   onSupplierAddress(searchValue: any){
     const element = searchValue.currentTarget as HTMLInputElement;
@@ -176,6 +187,7 @@ export class AddSupplierComponent implements OnInit {
       sup_name : this.suppName,
       admin_name : this.suppAdmin,
       sup_phone : this.suppPhone,
+      sup_tax : this.suppTax,
       sup_address : this.suppAddress,
       notes : this.suppNotes,
     };

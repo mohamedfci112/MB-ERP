@@ -1,4 +1,5 @@
 <div class="employee">
+    <form [formGroup] = "formdata" (ngSubmit) = "addSalary(formdata.value)" >
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -10,6 +11,20 @@
                 <div class="col-md-12">
                     <div class="top">
                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row text-right">
+                                    <label class="col-sm-2 col-form-label">الخزنة</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" (change)="Balance($event)" name="treasury_id" formControlName="treasury_id">
+                                            <option value=""></option>
+                                            <option *ngFor="let t of treasuryList" value="{{t.treasury_id}}">{{t.treasury_name}}</option>
+                                        </select>
+                                        <small><b>{{treasuryBalance}}</b></small>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
                             <div class="col-md-6">
                                 <div class="col-auto">
                                     <button type="submit" class="btn btn-primary btn-block">حفظ العملية</button>
@@ -31,49 +46,52 @@
                                             <div class="form-group row text-right">
                                                 <label class="col-sm-4 col-form-label">رقم إذن الصرف</label>
                                                 <div class="col-sm-8">
-                                                    <input type="number" class="form-control" value="2" disabled>
+                                                    <input type="number" class="form-control" name="ezn_no" formControlName="ezn_no" value="{{ lastId + 1 }}" readonly>
                                                 </div>
                                             </div>
                                             <div class="form-group row text-right">
                                                 <label class="col-sm-4 col-form-label">اختر الموظف</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control">
+                                                    <select class="form-control" (change)="Employee($event)" name="emp_id" formControlName="emp_id">
+                                                        <option value=""></option>
+                                                        <option *ngFor="let e of employeeList" value="{{e.emp_id}}">{{e.emp_name}}</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="form-group row text-right">
                                                 <label class="col-sm-4 col-form-label">تاريخ اذن الصرف</label>
                                                 <div class="col-sm-8">
-                                                    <input type="date" class="form-control">
+                                                    <input type="date" class="form-control" name="ezn_date" formControlName="ezn_date">
                                                 </div>
                                             </div>
                                             <div class="form-group row text-right">
                                                 <label class="col-sm-4 col-form-label">تاريخ الاستحقاق</label>
                                                 <div class="col-sm-8">
-                                                    <input type="date" class="form-control">
+                                                    <input type="date" class="form-control" name="due_date" formControlName="due_date">
                                                 </div>
                                             </div>
                                             <div class="form-group row text-right">
                                                 <label class="col-sm-4 col-form-label">المرتب كامل</label>
                                                 <div class="col-sm-8">
-                                                    <input type="number" class="form-control" value="1000" disabled>
+                                                    <input type="number" class="form-control" name="salary" formControlName="salary" value="{{ empSalary }}" readonly>
                                                 </div>
                                             </div>
                                             <div class="form-group row text-right">
                                                 <label class="col-sm-4 col-form-label">المسحوبات والسلف</label>
                                                 <div class="col-sm-8">
-                                                    <input type="number" class="form-control" value="100" disabled>
+                                                    <input type="number" class="form-control" name="advances" formControlName="advances" value="{{ totalAdvPen }}" readonly>
                                                 </div>
                                             </div>
                                             <div class="form-group row text-right">
                                                 <label class="col-sm-4 col-form-label">صافى المرتب</label>
                                                 <div class="col-sm-8">
-                                                    <input type="number" class="form-control" value="900" disabled>
+                                                    <input type="number" class="form-control" name="salary_after" formControlName="salary_after" value="{{ empSalaryAfter }}" readonly>
                                                 </div>
                                             </div>
                                             <div class="form-group row text-right">
                                                 <label class="col-sm-4 col-form-label">ملاحظات</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control"  name="notes" formControlName="notes">
                                                 </div>
                                             </div>
                                         </div>
@@ -87,14 +105,14 @@
                                         <div class="form-group row text-right">
                                             <label class="col-sm-1 col-form-label">من</label>
                                             <div class="col-sm-4">
-                                                <input type="date" class="form-control" value="2" disabled>
+                                                <input type="date" (change)="getDateFrom($event)" id="dateFrom" class="form-control" name="date_from" formControlName="date_from">
                                             </div>
                                             <label class="col-sm-1 col-form-label">الى</label>
                                             <div class="col-sm-4">
-                                                <input type="date" class="form-control" value="2" disabled>
+                                                <input type="date" (change)="getDateTo($event)" id="dateTo" class="form-control" name="date_to" formControlName="date_to">
                                             </div>
                                             <div class="col-sm-2">
-                                                <input type="button" class="btn btn-primary" value="بحث">
+                                                <input type="button" id="searchBtn" (click)="search()" class="btn btn-primary" value="بحث">
                                             </div>
                                         </div>
                                         <hr>
@@ -102,9 +120,6 @@
                                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                                 <li class="nav-item mr-3" role="presentation">
                                                     <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">اجمالى السلفيات</button>
-                                                </li>
-                                                <li class="nav-item mr-3" role="presentation">
-                                                    <button class="nav-link" id="home-tab1" data-toggle="tab" data-target="#home1" type="button" role="tab" aria-controls="home1" aria-selected="true">اجمالى المسحوبات</button>
                                                 </li>
                                                 <li class="nav-item mr-3" role="presentation">
                                                     <button class="nav-link" id="home-tab2" data-toggle="tab" data-target="#home2" type="button" role="tab" aria-controls="home2" aria-selected="true">الجزاءات والاستقطاعات</button>
@@ -120,56 +135,17 @@
                                                                 <th scope="col">رقم العملية</th>
                                                                 <th scope="col">المسؤول</th>
                                                                 <th scope="col">تاريخ السلف</th>
-                                                                <th scope="col">تاريخ الاستحقاق</th>
                                                                 <th scope="col">المبلغ</th>
                                                                 <th scope="col">الملاحظات</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                <th scope="row">1</th>
-                                                                <td>Mark</td>
-                                                                <td>Otto</td>
-                                                                <td>@mdo</td>
-                                                                <td>@mdo</td>
-                                                                <td>@mdo</td>
-                                                                </tr>
-                                                                <tr>
-                                                                <th scope="row">2</th>
-                                                                <td>Jacob</td>
-                                                                <td>Thornton</td>
-                                                                <td>@mdo</td>
-                                                                <td>@mdo</td>
-                                                                <td>@mdo</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                <!---->
-                                                <div class="tab-pane fade show" id="home1" role="tabpanel" aria-labelledby="home-tab1">
-                                                    <div class="all">
-                                                        <table class="table table-striped">
-                                                            <thead>
-                                                                <tr>
-                                                                <th scope="col">رقم العملية</th>
-                                                                <th scope="col">اسم المنتج</th>
-                                                                <th scope="col">تاريخ السحب</th>
-                                                                <th scope="col">الكمية</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                <th scope="row">1</th>
-                                                                <td>Mark</td>
-                                                                <td>Otto</td>
-                                                                <td>@mdo</td>
-                                                                </tr>
-                                                                <tr>
-                                                                <th scope="row">2</th>
-                                                                <td>Jacob</td>
-                                                                <td>Thornton</td>
-                                                                <td>@mdo</td>
+                                                                <tr *ngFor="let a of advancesList; let i=index;">
+                                                                <th scope="row">{{i+1}}</th>
+                                                                <td>{{a.creditor}}</td>
+                                                                <td>{{a.due_date | date}}</td>
+                                                                <td>{{a.adv_amount}}</td>
+                                                                <td>{{a.notes}}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -184,7 +160,6 @@
                                                                 <tr>
                                                                 <th scope="col">رقم العملية</th>
                                                                 <th scope="col">المسؤول</th>
-                                                                <th scope="col">الموظف</th>
                                                                 <th scope="col">تاريخ الخصم</th>
                                                                 <th scope="col">تاريخ الاستحقاق</th>
                                                                 <th scope="col">المبلغ</th>
@@ -192,23 +167,13 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                <th scope="row">1</th>
-                                                                <td>Mark</td>
-                                                                <td>Otto</td>
-                                                                <td>@mdo</td>
-                                                                <td>@mdo</td>
-                                                                <td>@mdo</td>
-                                                                <td>@mdo</td>
-                                                                </tr>
-                                                                <tr>
-                                                                <th scope="row">2</th>
-                                                                <td>Jacob</td>
-                                                                <td>Thornton</td>
-                                                                <td>@mdo</td>
-                                                                <td>@mdo</td>
-                                                                <td>@mdo</td>
-                                                                <td>@mdo</td>
+                                                                <tr *ngFor="let p of penaltiesList; let i=index;">
+                                                                <th scope="row">{{i+1}}</th>
+                                                                <td>{{p.admin_person}}</td>
+                                                                <td>{{p.deduct_date | date}}</td>
+                                                                <td>{{p.due_date | date}}</td>
+                                                                <td>{{p.amount}}</td>
+                                                                <td>{{p.reason}}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -226,4 +191,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
+</div>

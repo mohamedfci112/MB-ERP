@@ -61,15 +61,19 @@
                                     <label for="lname">اسم المسئول</label>
                                     <input type="text" class="form-control" (input)="onSupplierAdmin($event)" name="supplierAdmin" formControlName="supplierAdmin" value="{{suppAdmin}}">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <label for="email">رقم الضريبى</label>
+                                    <input type="text" class="form-control" (input)="onSupplierTax($event)" name="supplierTax" formControlName="supplierTax" value="{{suppTax}}">
+                                </div>
+                                <div class="col-md-3">
                                     <label for="email">رقم التليفون</label>
                                     <input type="text" class="form-control" (input)="onSupplierPhone($event)" name="supplierPhone" formControlName="supplierPhone" value="{{suppPhone}}">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label for="email">العنوان</label>
                                     <input type="text" class="form-control" (input)="onSupplierAddress($event)" name="supplierAddress" formControlName="supplierAddress" value="{{suppAddress}}">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label for="email">ملاحظات</label>
                                     <input type="text" class="form-control" (input)="onSupplierNotes($event)" name="supplierNotes" formControlName="supplierNotes" value="{{suppNotes}}">
                                 </div>

@@ -71,7 +71,6 @@ import { TreasuryBankTransformReportComponent } from './treasury_bank/reports/tr
 import { AddEmployeeComponent } from './hr/add-employee/add-employee.component';
 import { EmployeeSalaryComponent } from './hr/employee-salary/employee-salary.component';
 import { AddSolfaComponent } from './hr/add-solfa/add-solfa.component';
-import { MonthMashobatComponent } from './hr/month-mashobat/month-mashobat.component';
 import { PenaltiesComponent } from './hr/penalties/penalties.component';
 import { SalariesReportComponent } from './hr/reports/salaries-report/salaries-report.component';
 import { SolfaReportComponent } from './hr/reports/solfa-report/solfa-report.component';
@@ -100,6 +99,10 @@ import { ExpensesService } from './services/expenses.service';
 import { DepartsService } from './services/departs.service';
 import { DepartElasnafComponent } from './products/depart-elasnaf/depart-elasnaf.component';
 import { ProductsService } from './services/products.service';
+import { AdvancesService } from './services/advances.service';
+import { SalariesService } from './services/salaries.service';
+import { PurchasesService } from './services/purchases.service';
+import { AgelSuppliersService } from './services/agel-suppliers.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TableFilterPipe } from '../app/pipes/table-filter.pipe';
 
@@ -169,7 +172,6 @@ const routes: Routes = [
   {path: 'add_employee', component: AddEmployeeComponent},
   {path: 'employee_salary', component: EmployeeSalaryComponent},
   {path: 'add_solfa', component: AddSolfaComponent},
-  {path: 'month_mashobat_employee', component: MonthMashobatComponent},
   {path: 'penalties', component: PenaltiesComponent},
   {path: 'salaries_report', component: SalariesReportComponent},
   {path: 'solfa_report', component: SolfaReportComponent},
@@ -253,7 +255,6 @@ const routes: Routes = [
     AddEmployeeComponent,
     EmployeeSalaryComponent,
     AddSolfaComponent,
-    MonthMashobatComponent,
     PenaltiesComponent,
     SalariesReportComponent,
     SolfaReportComponent,
@@ -293,6 +294,10 @@ const routes: Routes = [
     ExpensesService,
     DepartsService,
     ProductsService,
+    AdvancesService,
+    SalariesService,
+    PurchasesService,
+    AgelSuppliersService
   ],
   bootstrap: [AppComponent]
 })

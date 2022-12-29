@@ -17,6 +17,8 @@ export class InventoryEditCostComponent implements OnInit {
 
   productSearchResult = <any>[];
 
+  lastEdits = <any>[];
+
   oldPurchasePrice:any = "";
   oldSellPrice:any = "";
 
@@ -40,6 +42,10 @@ export class InventoryEditCostComponent implements OnInit {
   ngOnInit(): void {
     this.invent.getInvList().subscribe((data:any)=>{
       this.inventoryList = data;
+    });
+
+    this.invent.GetLastCostEdits().subscribe((data:any)=>{
+      this.lastEdits = data;
     });
 
     this.searchTerm.valueChanges.subscribe(
@@ -118,6 +124,16 @@ export class InventoryEditCostComponent implements OnInit {
       sell_price : this.newSellPrice,
     };
 
+    var changeData = {
+      invent_id : this.invent_id,
+      product_id : this.product_id,
+      old_purchase_price : this.oldPurchasePrice,
+      new_purchase_price : this.newPurchasePrice,
+      old_sell_price : this.oldSellPrice,
+      new_sell_price : this.newSellPrice,
+      change_date : new Date()
+    };
+
     if(this.invent_id != '')
     {
       if(this.product_id == "")
@@ -135,6 +151,9 @@ export class InventoryEditCostComponent implements OnInit {
       else
       {
         this.invent.updateCostInventory(upData).subscribe((res:any)=>{
+          this.invent.changeCostInventory(changeData).subscribe((res:any)=>{
+            this.pushNotification.show(res.toString(), {}, 2000);
+          });
           this.pushNotification.show(res.toString(), {}, 6000, );
           this.ngOnInit();
           window.location.reload;

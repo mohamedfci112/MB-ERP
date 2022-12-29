@@ -1,4 +1,5 @@
 <div class="employee">
+    <form [formGroup] = "formdata" (ngSubmit) = "addAdvance(formdata.value)" >
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -10,6 +11,20 @@
                 <div class="col-md-12">
                     <div class="top">
                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row text-right">
+                                    <label class="col-sm-2 col-form-label">الخزنة</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" (change)="Balance($event)" name="treasury_id" formControlName="treasury_id">
+                                            <option value=""></option>
+                                            <option *ngFor="let t of treasuryList" value="{{t.treasury_id}}">{{t.treasury_name}}</option>
+                                        </select>
+                                        <small><b>{{treasuryBalance}}</b></small>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
                             <div class="col-md-6">
                                 <div class="col-auto">
                                     <button type="submit" class="btn btn-primary btn-block">حفظ العملية</button>
@@ -31,47 +46,46 @@
                                             <div class="form-group row text-right border">
                                                 <label class="col-sm-1 col-form-label">رقم العملية</label>
                                                 <div class="col-sm-3">
-                                                    <input type="number" class="form-control" value="2" disabled>
+                                                    <input type="number" class="form-control" name="adv_id" formControlName="adv_id" value="{{ lastId +1 }}" readonly>
                                                 </div>
                                                 <label class="col-sm-1 col-form-label">المبلغ</label>
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="adv_amount" formControlName="adv_amount">
                                                 </div>
                                                 <label class="col-sm-1 col-form-label">شخص</label>
                                                 <div class="col-sm-1">
-                                                    <input type="checkbox" class="form-check-input">
+                                                    <input type="radio" (change)="onItemChange($event)" value="person" class="form-check-input" name="type" formControlName="type">
                                                 </div>
                                                 <label class="col-sm-1 col-form-label">موظف</label>
                                                 <div class="col-sm-1">
-                                                    <input type="checkbox" class="form-check-input">
+                                                    <input type="radio" (change)="onItemChange($event)" value="employee" class="form-check-input" name="type" formControlName="type">
                                                 </div>
                                             </div>
                                             <div class="form-group row text-right border">
                                                 <label class="col-sm-1 col-form-label">الشخص</label>
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" id="mySelect" class="form-control" name="person_name" formControlName="person_name">
                                                 </div>
                                                 <label class="col-sm-1 col-form-label">الموظف</label>
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control">
+                                                    <select class="form-control" id="mySelect1" name="emp_id" formControlName="emp_id">
+                                                        <option value=""></option>
+                                                        <option *ngFor="let e of employeeList" value="{{e.emp_id}}">{{e.emp_name}}</option>
+                                                    </select>
                                                 </div>
                                                 <label class="col-sm-1 col-form-label">التاريخ</label>
                                                 <div class="col-sm-3">
-                                                    <input type="date" class="form-control">
+                                                    <input type="date" class="form-control" name="due_date" formControlName="due_date">
                                                 </div>
                                             </div>
                                             <div class="form-group row text-right border">
-                                                <label class="col-sm-1 col-form-label">الاستحقاق</label>
-                                                <div class="col-sm-3">
-                                                    <input type="date" class="form-control">
-                                                </div>
                                                 <label class="col-sm-1 col-form-label">الدائن</label>
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="creditor" formControlName="creditor">
                                                 </div>
                                                 <label class="col-sm-1 col-form-label">ملاحظات</label>
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="notes" formControlName="notes">
                                                 </div>
                                             </div>
                                         </div>
@@ -83,4 +97,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
+</div>

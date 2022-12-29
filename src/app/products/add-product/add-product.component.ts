@@ -19,6 +19,8 @@ export class AddProductComponent implements OnInit {
   taxCheckVal:any = "1";
   originalCheckVal:any = "1";
   copyCheckVal:any = "1";
+  highcopyCheckVal:any = "1";
+  compatableCheckVal:any = "1";
 
   isEditable = true;
 
@@ -74,6 +76,8 @@ export class AddProductComponent implements OnInit {
       taxes: new FormControl(""),
       original: new FormControl(""),
       coppy: new FormControl(""),
+      highcoppy: new FormControl(""),
+      compatable: new FormControl(""),
       invent_id: new FormControl(""),
       invent_quantity: new FormControl("")
     })
@@ -108,6 +112,24 @@ copyCheck(event :any) {
  }
 }
 
+hightcopyCheck(event :any) {
+  if ( event.target.checked ) {
+    this.highcopyCheckVal = "0";
+ }
+ else{
+  this.highcopyCheckVal = "1";
+ }
+}
+
+compatableCheck(event :any) {
+  if ( event.target.checked ) {
+    this.compatableCheckVal = "0";
+ }
+ else{
+  this.compatableCheckVal = "1";
+ }
+}
+
   addProduct(data:any){
     var prodData = {
       product_id : this.lastId + 1,
@@ -125,6 +147,8 @@ copyCheck(event :any) {
       taxes : data.taxes,
       original : this.originalCheckVal,
       coppy : this.copyCheckVal,
+      highcoppy: this.highcopyCheckVal,
+      compatable: this.compatableCheckVal,
       invent_id : data.invent_id
     };
 
@@ -176,7 +200,7 @@ copyCheck(event :any) {
       this.pushNotification.show("يرجى ادخال المخزن", {}, 6000, );
       this.router.navigated = false;
     }
-    else if(this.originalCheckVal == "1" && this.copyCheckVal == "1")
+    else if(this.originalCheckVal == "1" && this.copyCheckVal == "1" && this.highcopyCheckVal == "1" && this.compatableCheckVal == "1")
     {
       this.pushNotification.show("يرجى اختيار اصلى ام كوبى؟", {}, 6000, );
       this.router.navigated = false;

@@ -17,6 +17,8 @@ export class InventoryEditQuantityComponent implements OnInit {
 
   productSearchResult = <any>[];
 
+  lastEdits = <any>[];
+
   old_Quantity:any = "";
 
   new_Quantity:any = "";
@@ -38,6 +40,10 @@ export class InventoryEditQuantityComponent implements OnInit {
   ngOnInit(): void {
     this.invent.getInvList().subscribe((data:any)=>{
       this.inventoryList = data;
+    });
+
+    this.invent.GetLastQuantityEdits().subscribe((data:any)=>{
+      this.lastEdits = data;
     });
 
     this.searchTerm.valueChanges.subscribe(
@@ -103,6 +109,14 @@ export class InventoryEditQuantityComponent implements OnInit {
       product_quantity : this.new_Quantity
     };
 
+    var changeData = {
+      invent_id : this.invent_id,
+      product_id : this.product_id,
+      old_product_quantity : this.old_Quantity,
+      new_product_quantity : this.new_Quantity,
+      change_date : new Date()
+    };
+
     if(this.invent_id != '')
     {
       if(this.product_id == "")
@@ -120,6 +134,9 @@ export class InventoryEditQuantityComponent implements OnInit {
       else
       {
         this.invent.updateQuantityInventory(upData).subscribe((res:any)=>{
+          this.invent.changeQuantityInventory(changeData).subscribe((res:any)=>{
+            this.pushNotification.show(res.toString(), {}, 2000);
+          });
           this.pushNotification.show(res.toString(), {}, 6000, );
           this.ngOnInit();
           window.location.reload;

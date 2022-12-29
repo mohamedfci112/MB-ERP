@@ -119,6 +119,14 @@ export class InventoryService {
     return this.http.put(this.APIUrl+'/inventory/updateQuantityInventory',val);
   }
 
+  changeQuantityInventory(val: any){
+    return this.http.post(this.APIUrl+'/inventory/changeQuantityInventory',val);
+  }
+
+  changeCostInventory(val: any){
+    return this.http.post(this.APIUrl+'/inventory/changeCostInventory',val);
+  }
+
   // insert talf
   addInventoryTalf(val: any){
     return this.http.post(this.APIUrl+'/inventory/addInventoryTalf',val);
@@ -127,6 +135,30 @@ export class InventoryService {
   GetTalfReport(val:any){
     var listOfInventory = this.http.post(this.APIUrl+'/inventory/GetTalfReport', val);
     return listOfInventory;
+  }
+
+
+  // update after make purchase invoice
+  EditInventoryQuantityPurchase(val: any){
+    return this.http.put(this.APIUrl+'/inventory/EditInventoryQuantityPurchase',val);
+  }
+
+  // get GetLastQuantityEdits
+  GetLastQuantityEdits(){
+    var listOfInventory = this.http.get(this.APIUrl+'/inventory/GetLastQuantityEdits');
+    return listOfInventory;
+  }
+
+  // get GetLastCostEdits
+  GetLastCostEdits(){
+    var listOfInventory = this.http.get(this.APIUrl+'/inventory/GetLastCostEdits');
+    return listOfInventory;
+  }
+
+
+  // update after make purchase invoice
+  EditInventoryQuantityReturnedPurchase(val: any){
+    return this.http.put(this.APIUrl+'/inventory/EditInventoryQuantityReturnedPurchase',val);
   }
 
 }

@@ -82,13 +82,21 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="fname">اصلى</label><br>
                                                 <input type="checkbox" class="form-check-input" (change)="originalCheck($event)" name="original" formControlName="original">
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 <label for="fname">كوبى</label><br>
                                                 <input type="checkbox" class="form-check-input" (change)="copyCheck($event)" name="coppy" formControlName="coppy">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="fname">هاى كوبى</label><br>
+                                                <input type="checkbox" class="form-check-input" (change)="hightcopyCheck($event)" name="highcoppy" formControlName="highcoppy">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="fname">متوافق</label><br>
+                                                <input type="checkbox" class="form-check-input" (change)="compatableCheck($event)" name="compatable" formControlName="compatable">
                                             </div>
                                         </div>
                                     </div>

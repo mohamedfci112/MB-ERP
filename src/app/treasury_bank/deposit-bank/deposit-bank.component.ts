@@ -14,6 +14,7 @@ export class DepositBankComponent implements OnInit {
   total:any;
 
   bankList = <any>[];
+  lastDeposits = <any>[];
 
   formdata:any;
   constructor(public treasuryService:TreasurybankService, private pushNotification: PushNotificationService,private route: ActivatedRoute, private router: Router) { 
@@ -44,6 +45,10 @@ export class DepositBankComponent implements OnInit {
       this.total = data[0].total;
     });
 
+    this.treasuryService.getLastDepositsBank(val).subscribe((data:any)=>{
+      this.lastDeposits = data;
+    });
+
   }
 
   addBankDeposit(data:any){
@@ -59,6 +64,7 @@ export class DepositBankComponent implements OnInit {
     if(data.deposit_amount != "" && data.bank_id !=""){
       this.treasuryService.addBankDeposit(depositData).subscribe((res:any)=>{
         this.pushNotification.show(res.toString(), {}, 6000, );
+        this.lastDeposits=[];
         this.ngOnInit();
       });
     }
