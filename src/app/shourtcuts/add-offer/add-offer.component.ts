@@ -10,11 +10,14 @@ import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router
 import { DatePipe } from '../../../../node_modules/@angular/common';
 
 @Component({
-  selector: 'app-ezn-sarf',
-  templateUrl: './ezn-sarf.component.html',
-  styleUrls: ['./ezn-sarf.component.css']
+  selector: 'app-add-offer',
+  templateUrl: './add-offer.component.html',
+  styleUrls: ['./add-offer.component.css']
 })
-export class EznSarfComponent implements OnInit {
+export class AddOfferComponent implements OnInit {
+
+  public disabledAdd = false;
+  public disabledDelete = true;
 
   lastId:number=0;
 
@@ -41,7 +44,7 @@ export class EznSarfComponent implements OnInit {
   matValue1:any="";
 
   myDate = new Date();
-
+  
   constructor(public purchService: PurchasesService, public offerService:OffersService, public custService:CustomerService, public inventService:InventoryService, public prodService:ProductsService, private pushNotification: PushNotificationService,private route: ActivatedRoute, private router: Router) { 
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -100,6 +103,8 @@ export class EznSarfComponent implements OnInit {
     ///
   }
 
+
+
   //
   addNew(){
     this.searchTerm.setValue("");
@@ -141,7 +146,8 @@ export class EznSarfComponent implements OnInit {
           
         }
       );
-      this.searchTerm.setValue("");
+      this.addNew();
+      this.ngOnInit();
     }
     
   }
@@ -168,6 +174,63 @@ export class EznSarfComponent implements OnInit {
         this.pushNotification.show("اختر الذى تريده", {}, 6000, );
         this.router.navigated = false;
       }
+    }
+    
+  }
+
+
+  // add fatora
+  addOffer(data:any)
+  {
+
+    if(this.tableList.length == 0)
+    {
+      this.pushNotification.show("الفاتورة فارغة", {}, 6000, );
+      this.router.navigated = false;
+    }
+    else if(this.searchTermCustomer.value == "")
+    {
+      this.pushNotification.show("اختر العميل", {}, 6000, );
+      this.router.navigated = false;
+    }
+
+    else if(data.total_cost == "")
+    {
+      this.pushNotification.show("اجمالى الفاتورة فارغ", {}, 6000, );
+      this.router.navigated = false;
+    }
+
+    else
+    {
+      var product_quantity = document.querySelectorAll('input[name=product_quantity]');
+      var product_unit_price = document.querySelectorAll('input[name=product_unit_price]');
+      var product_total_cost = document.querySelectorAll('input[name=product_total_cost]');
+
+      var fatoraData;
+
+      for(let i=0; i < this.tableList.length; i++)
+      {
+        fatoraData = 
+          {
+            offer_no: this.lastId ,
+            customer_id: this.searchTermCustomer.value,
+            quantity: data.quantity,
+            total_amount: data.total_amount,
+            product_id: this.tableList[i].product_id,
+            product_quantity: (product_quantity[i] as HTMLInputElement).value,
+            product_unit_price: (product_unit_price[i] as HTMLInputElement).value,
+            product_total_cost: (product_total_cost[i] as HTMLInputElement).value,
+            offer_date: new Date()
+          };
+
+          this.offerService.addOffer(fatoraData).subscribe((res:any)=>{
+            this.pushNotification.show(res.toString(), {}, 6000, );
+          });
+          
+      }
+      
+      this.tableList=[];
+      this.ngOnInit();
     }
     
   }

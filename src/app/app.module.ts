@@ -103,8 +103,12 @@ import { AdvancesService } from './services/advances.service';
 import { SalariesService } from './services/salaries.service';
 import { PurchasesService } from './services/purchases.service';
 import { AgelSuppliersService } from './services/agel-suppliers.service';
+import { OffersService } from './services/offers.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TableFilterPipe } from '../app/pipes/table-filter.pipe';
+import { AddOfferComponent } from './shourtcuts/add-offer/add-offer.component';
+import { OffersComponent } from './shourtcuts/offers/offers.component';
+import { OfferDetailsComponent } from './shourtcuts/offer-details/offer-details.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -184,6 +188,9 @@ const routes: Routes = [
   {path: 'sand_srf', component: SandSrfComponent},
   {path: 'tax_report', component: TaxReportComponent},
   {path: 'srf_abd_report', component: SandSrfAbdReportComponent},
+  {path: 'add_offer', component: AddOfferComponent},
+  {path: 'offers', component: OffersComponent},
+  {path: 'offer_details', component: OfferDetailsComponent},
 ];
 
 
@@ -269,7 +276,10 @@ const routes: Routes = [
     SandSrfAbdReportComponent,
     TaxReportComponent,
     GeneralAccountsComponent,
-    DepartElasnafComponent
+    DepartElasnafComponent,
+    AddOfferComponent,
+    OffersComponent,
+    OfferDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -297,7 +307,8 @@ const routes: Routes = [
     AdvancesService,
     SalariesService,
     PurchasesService,
-    AgelSuppliersService
+    AgelSuppliersService,
+    OffersService
   ],
   bootstrap: [AppComponent]
 })

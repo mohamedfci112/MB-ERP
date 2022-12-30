@@ -1,0 +1,59 @@
+<div class="purchase_screen">
+    <div class="row">
+        <!--Title-->
+        <div class="col-md-12">
+            <div class="title">
+                <h2>تفاصيل العرض</h2>
+            </div>
+        </div>
+        
+        <!--Report Info-->
+        <div class="col-md-12">
+            <div class="container">
+                <div class="tbl">
+                    <div class="all">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">اسم المنتج</th>
+                                    <th scope="col">الكمية</th>
+                                    <th scope="col">سعر الوحدة</th>
+                                    <th scope="col">تكلفة الكلية للمنتج</th>
+                                    <th scope="col">التاريخ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of reportList;let i=index;">
+                                    <th scope="row">{{i+1}}</th>
+                                    <td>{{item.product_name}}</td>
+                                    <td>{{item.product_quantity}}</td>
+                                    <td>{{item.product_unit_price}}</td>
+                                    <td>{{item.product_total_cost}}</td>
+                                    <td>{{item.offer_date | date}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr>
+                            <div class="container">
+                                <div class="row text-right">
+                                    <div class="col-md-3">
+                                        <span><b>الاجمالى: {{total}}</b></span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span><b>عدد الاصناف: {{qauantity}}</b></span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span><b>عرض سعر رقم: {{offer_no}}</b></span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span><b>اسم العميل: {{customer}}</b></span>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

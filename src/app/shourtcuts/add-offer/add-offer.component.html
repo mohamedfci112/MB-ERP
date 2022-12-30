@@ -1,21 +1,25 @@
 <div class="purchase_screen">
+    <form [formGroup] = "formdata" (ngSubmit) = "addOffer(formdata.value)" >
         <div class="row">
             <div class="col-md-12">
                 <div class="title">
-                    <h2>اذن صرف - مبيعات</h2>
+                    <h2>عرض سعر جديد</h2>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="right">
                     <fieldset>
-                        <legend>بيانات الفاتورة</legend>
-                        <label>فاتورة رقم</label>
-                        <input type="text" class="form-control" name="inv_no" value="{{this.lastId}}" readonly>
+                        <legend>بيانات العرض</legend>
+                        <label>عرض رقم</label>
+                        <input type="text" class="form-control" name="offer_no" value="{{this.lastId}}" readonly>
                         <label>عدد الاصناف</label>
                         <input type="text" class="form-control" name="quantity" formControlName="quantity">
                         <label>اجمالى المطلوب</label>
                         <input type="text" class="form-control" name="total_amount" formControlName="total_amount">
-                        <label>العميل</label>
+                    </fieldset>
+                    <hr>
+                    <fieldset>
+                        <label>اختر العميل</label>
                         <mat-form-field>
                             <input type="text" [(ngModel)]="matValue1" style="background-color: cadetblue;"
                             matInput 
@@ -28,33 +32,19 @@
                                 </mat-option>
                             </mat-autocomplete>
                         </mat-form-field>
-                    </fieldset>
-                    <hr>
-                    <fieldset>
-                        <legend>بيانات الدفع</legend>
-                        <select name="" id="" class="form-control">
-                            <option value="cash">دفع كاش</option>
-                            <option value="check">دفع شيك</option>
-                        </select>
-                        <hr>
-                        <select name="" id="" class="form-control">
-                            <option value="cash">عميل اجل</option>
-                            <option value="check">عميل نقدى</option>
-                        </select>
-                        <label for="birthday">تاريخ الاستحقاق</label>
-                        <input type="date" class="form-control" name="due_date"><br>
+                        <br>
                         <input type="submit" class="form-control btn btn-danger" value="حفظ الفاتورة">
                     </fieldset>
                 </div>
             </div>
-    
+
             <div class="col-md-10">
                 <div class="content">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="top">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-9">
                                         <form>
                                             <div class="form-row align-items-center">
                                                 <div class="col-auto">
@@ -87,11 +77,6 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="col-auto">
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" class="btn btn-warning mb-2">استيراد عرض سعر</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="col-auto">
                                             <button type="button" (click)="deleteUnit()" class="btn btn-danger mb-2">حذف المحدد</button>
                                         </div>
                                     </div>
@@ -113,6 +98,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     <tr *ngFor="let t of tableList;">
                                         <th scope="row">
                                             <input type="checkbox" name="cb" value="{{t.product_id}}" class="form-check-input cb">
@@ -123,34 +109,14 @@
                                         <td><input type="text" class="form-control" name="product_unit_price" formControlName="product_unit_price"></td>
                                         <td><input type="text" class="form-control" name="product_total_cost" formControlName="product_total_cost"></td>
                                     </tr>
+                                
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-    
+
         </div>
-    </div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        ...
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-    </div>
-    </div>
-</div>
+    </form>
 </div>
