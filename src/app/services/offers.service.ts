@@ -10,9 +10,14 @@ export class OffersService {
   readonly APIUrl = "http://localhost:1195/api";
   constructor(private http:HttpClient) { }
 
-  // add new treasury
+  // add new offer
   addOffer(val: any){
     return this.http.post(this.APIUrl+'/Offers',val);
+  }
+
+  // get all offers
+  GetAll(){
+    return this.http.get(this.APIUrl+'/Offers');
   }
 
   //get last treasury id

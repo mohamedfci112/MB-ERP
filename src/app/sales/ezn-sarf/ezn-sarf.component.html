@@ -1,4 +1,5 @@
 <div class="purchase_screen">
+    <form [formGroup] = "formdata" (ngSubmit) = "addFatora(formdata.value)" >
         <div class="row">
             <div class="col-md-12">
                 <div class="title">
@@ -14,7 +15,7 @@
                         <label>عدد الاصناف</label>
                         <input type="text" class="form-control" name="quantity" formControlName="quantity">
                         <label>اجمالى المطلوب</label>
-                        <input type="text" class="form-control" name="total_amount" formControlName="total_amount">
+                        <input type="text" class="form-control" name="total_cost" formControlName="total_cost">
                         <label>العميل</label>
                         <mat-form-field>
                             <input type="text" [(ngModel)]="matValue1" style="background-color: cadetblue;"
@@ -32,17 +33,17 @@
                     <hr>
                     <fieldset>
                         <legend>بيانات الدفع</legend>
-                        <select name="" id="" class="form-control">
-                            <option value="cash">دفع كاش</option>
-                            <option value="check">دفع شيك</option>
+                        <select name="" id="" class="form-control" name="payment_type" formControlName="payment_type">
+                            <option value="pay_cash">دفع كاش</option>
+                            <option value="pay_check">دفع شيك</option>
                         </select>
                         <hr>
-                        <select name="" id="" class="form-control">
-                            <option value="cash">عميل اجل</option>
-                            <option value="check">عميل نقدى</option>
+                        <select name="" id="" class="form-control" name="customer_type" formControlName="customer_type">
+                            <option value="cus_agel">عميل اجل</option>
+                            <option value="cus_cash">عميل نقدى</option>
                         </select>
-                        <label for="birthday">تاريخ الاستحقاق</label>
-                        <input type="date" class="form-control" name="due_date"><br>
+                        <label>تاريخ الاستحقاق</label>
+                        <input type="date" class="form-control" name="due_date" formControlName="due_date"><br>
                         <input type="submit" class="form-control btn btn-danger" value="حفظ الفاتورة">
                     </fieldset>
                 </div>
@@ -131,7 +132,8 @@
             </div>
     
         </div>
-    </div>
+    </form>
+</div>
 
 
 <!-- Modal -->
@@ -139,17 +141,51 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        ...
+        <!--Start body-->
+        <div class="align-items-center">
+            <div class="col-auto">
+            <input type="text" class="form-control" name="offer_no" [(ngModel)]="offer_no" placeholder="ابحث باسم المنتج">
+            </div>
+        </div>
+        <hr>
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">رقم العرض</th>
+                            <th scope="col">العميل</th>
+                            <th scope="col">التاريخ</th>
+                            <th scope="col">عمليات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of offersDetailsList | paginate: config | offerFilter: offer_no;let i=index">
+                                <th scope="row">{{i+1}}</th>
+                                <td>{{item.offer_no}}</td>
+                                <td>{{item.cust_name}}</td>
+                                <td>{{item.offer_date | date}}</td>
+                                <td>
+                                    <button (click)="exportOffer(item.offer_no)" data-dismiss="modal" class="btn btn-primary btn-sm">استيراد</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                </div>
+            </div>
+        </div>
+        <!--End body-->
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
     </div>
     </div>
 </div>

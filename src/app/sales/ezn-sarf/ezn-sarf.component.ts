@@ -4,6 +4,8 @@ import { ProductsService } from '../../services/products.service';
 import { CustomerService } from '../../services/customer.service';
 import { OffersService } from '../../services/offers.service';
 import { PurchasesService } from '../../services/purchases.service';
+import { SalesService } from '../../services/sales.service';
+import { AgelCustomersService } from '../../services/agel-customers.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PushNotificationService } from 'ng-push-notification';
 import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
@@ -41,17 +43,48 @@ export class EznSarfComponent implements OnInit {
   matValue1:any="";
 
   myDate = new Date();
+  
+  offersDetailsList = <any>[];
 
-  constructor(public purchService: PurchasesService, public offerService:OffersService, public custService:CustomerService, public inventService:InventoryService, public prodService:ProductsService, private pushNotification: PushNotificationService,private route: ActivatedRoute, private router: Router) { 
+  offer_no: any;
+
+  config: any;
+
+  constructor(public cusAglService:AgelCustomersService, public salesService:SalesService, public purchService: PurchasesService, public offerService:OffersService, public custService:CustomerService, public inventService:InventoryService, public prodService:ProductsService, private pushNotification: PushNotificationService,private route: ActivatedRoute, private router: Router) { 
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     }
+
+    this.config = {
+      itemsPerPage: 5,
+      currentPage: 1,
+      totalItems: this.offersDetailsList.count
+    };
   }
 
+  pageChanged(event:any){
+    this.config.currentPage = event;
+  }
+
+
+
   ngOnInit(): void {
+    this.offerService.GetAll().subscribe((data : any) => {
+      this.offersDetailsList = data;
+      console.log(this.offersDetailsList);
+    });
     //
-    this.offerService.getOfferLastId().subscribe((data:any)=>{
-      this.lastId = data[0].Column1;
+    this.salesService.getLastEznSarfId().subscribe((data:any)=>{
+      
+      if(data[0].lastId == null)
+      {
+        this.lastId = 10000001;
+      }
+      else
+      {
+        this.lastId = data[0].lastId;
+      }
+      console.log(data);
     });
 
 
@@ -88,18 +121,38 @@ export class EznSarfComponent implements OnInit {
 
     ///////
     this.formdata = new FormGroup({
-      offer_no: new FormControl(""),
-      customer_id: new FormControl(""),
+      inv_no: new FormControl(""),
       quantity: new FormControl(""),
-      total_amount: new FormControl(""),
+      total_cost: new FormControl(""),
+      customer_id: new FormControl(""),
+      payment_type: new FormControl(""),
+      customer_type: new FormControl(""),
+      due_date: new FormControl(""),
       product_id: new FormControl(""),
       product_quantity: new FormControl(""),
       product_unit_price: new FormControl(""),
       product_total_cost: new FormControl(""),
+      taxable: new FormControl(0),
+      taxes: new FormControl(0),
+      inv_type: new FormControl(0),
+      paid_up: new FormControl(0),
+      remainder: new FormControl(0),
+      invoice_date: new FormControl(new Date()),
     });
     ///
   }
 
+
+  exportOffer(offerNo:any)
+  {
+    this.tableList = [];
+    var x = {offer_no: offerNo}
+    this.offerService.getOfferDetails(x).subscribe((data:any)=>{
+      this.tableList = data;
+      //console.log(this.tableList);
+      this.matValue1 = this.tableList[0].customer_id;
+    });
+  }
   //
   addNew(){
     this.searchTerm.setValue("");
@@ -170,6 +223,109 @@ export class EznSarfComponent implements OnInit {
       }
     }
     
+  }
+
+
+  // add fatora
+  addFatora(data:any)
+  {
+    if(this.tableList.length == 0)
+    {
+      this.pushNotification.show("الفاتورة فارغة", {}, 6000, );
+      this.router.navigated = false;
+    }
+    else if(this.searchTermCustomer.value == "")
+    {
+      this.pushNotification.show("اختر العميل", {}, 6000, );
+      this.router.navigated = false;
+    }
+    else if(data.total_cost == "")
+    {
+      this.pushNotification.show("اجمالى الفاتورة فارغ", {}, 6000, );
+      this.router.navigated = false;
+    }
+    else if(data.payment_type == "")
+    {
+      this.pushNotification.show("اختر نوع الدفع", {}, 6000, );
+      this.router.navigated = false;
+    }
+    else if(data.customer_type == "")
+    {
+      this.pushNotification.show("اختر نوع العميل اجل ام نقدى؟", {}, 6000, );
+      this.router.navigated = false;
+    }
+    else if(data.due_date == "")
+    {
+      this.pushNotification.show("ادخل تاريخ الاستحقاق", {}, 6000, );
+      this.router.navigated = false;
+    }
+    else
+    {
+      var product_quantity = document.querySelectorAll('input[name=product_quantity]');
+      var product_unit_price = document.querySelectorAll('input[name=product_unit_price]');
+      var product_total_cost = document.querySelectorAll('input[name=product_total_cost]');
+
+      var fatoraData;
+
+      for(let i=0; i < this.tableList.length; i++)
+      {
+        fatoraData = 
+        {
+          inv_no: this.lastId ,
+          customer_id: this.searchTermCustomer.value,
+          quantity: data.quantity,
+          total_cost: data.total_cost,
+          payment_type: data.payment_type,
+          customer_type: data.customer_type,
+          due_date: data.due_date,
+          product_id: this.tableList[i].product_id,
+          product_quantity: (product_quantity[i] as HTMLInputElement).value,
+          product_unit_price: (product_unit_price[i] as HTMLInputElement).value,
+          product_total_cost: (product_total_cost[i] as HTMLInputElement).value,
+          taxable: data.taxable,
+          taxes: data.taxes,
+          inv_type: data.inv_type,
+          paid_up: data.paid_up,
+          remainder: data.remainder,
+          invoice_date: data.invoice_date
+        };
+        
+        var invData = 
+        {
+          product_id : this.tableList[i].product_id,
+          invent_id : this.tableList[i].invent_id,
+          product_quantity : (product_quantity[i] as HTMLInputElement).value
+        }
+
+        this.salesService.insertEznSrf(fatoraData).subscribe((res:any)=>{
+          this.pushNotification.show(res.toString(), {}, 6000, );
+        });
+
+        this.salesService.EditInventoryQuantitySales(invData).subscribe((res:any)=>{
+          this.pushNotification.show(res.toString(), {}, 6000, );
+        });
+
+      }
+
+      var aglCusData = {
+        cust_no : this.searchTermCustomer.value,
+        inv_no : this.lastId,
+        remainder : data.total_cost,
+        inv_date : data.invoice_date,
+        due_date: data.due_date,
+        inv_type: data.inv_type
+      }
+
+      //if agel customer add to agel customers account
+      if(data.customer_type == "cus_agel")
+      {
+        this.cusAglService.addAgelCustomerAcc(aglCusData).subscribe((res:any)=>{
+          this.pushNotification.show(res.toString(), {}, 6000, );
+        });
+      }
+      this.tableList=[];
+      this.ngOnInit();
+    }
   }
 
 }

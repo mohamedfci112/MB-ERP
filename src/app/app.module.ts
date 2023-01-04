@@ -104,8 +104,12 @@ import { SalariesService } from './services/salaries.service';
 import { PurchasesService } from './services/purchases.service';
 import { AgelSuppliersService } from './services/agel-suppliers.service';
 import { OffersService } from './services/offers.service';
+import { SalesService } from './services/sales.service';
+import { AgelCustomersService } from './services/agel-customers.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TableFilterPipe } from '../app/pipes/table-filter.pipe';
+import { OfferFilterPipe } from '../app/pipes/offer-filter.pipe';
+import { EznSrfFilterPipe } from '../app/pipes/eznsrf-filter.pipe';
 import { AddOfferComponent } from './shourtcuts/add-offer/add-offer.component';
 import { OffersComponent } from './shourtcuts/offers/offers.component';
 import { OfferDetailsComponent } from './shourtcuts/offer-details/offer-details.component';
@@ -198,6 +202,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     TableFilterPipe,
+    OfferFilterPipe,
+    EznSrfFilterPipe,
     NavbarComponent,
     SidebarComponent,
     NavigationComponent,
@@ -308,7 +314,9 @@ const routes: Routes = [
     SalariesService,
     PurchasesService,
     AgelSuppliersService,
-    OffersService
+    OffersService,
+    SalesService,
+    AgelCustomersService
   ],
   bootstrap: [AppComponent]
 })

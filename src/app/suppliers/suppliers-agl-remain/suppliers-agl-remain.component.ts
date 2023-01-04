@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PushNotificationService } from 'ng-push-notification';
+import { AgelSuppliersService } from 'src/app/services/agel-suppliers.service';
+import { SupplierService } from 'src/app/services/supplier.service';
 
 @Component({
   selector: 'app-suppliers-agl-remain',
@@ -7,9 +12,78 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SuppliersAglRemainComponent implements OnInit {
 
-  constructor() { }
+  searchTerm : FormControl = new FormControl();
+  supplierList = <any>[];
+
+  productSearchResult = <any>[];
+
+  matValue:any="";
+
+  remainTotal:any= 0;
+
+  config: any;
+
+  constructor(private pushNotification: PushNotificationService,public aglService:AgelSuppliersService, public suppService:SupplierService, private route: ActivatedRoute, private router: Router) {
+    this.config = {
+      itemsPerPage: 50,
+      currentPage: 1,
+      totalItems: this.productSearchResult.count
+    };
+   }
 
   ngOnInit(): void {
+    this.searchTerm.valueChanges.subscribe(
+      (term:any) => {
+        term = {sup_name : this.searchTerm.value};
+          
+        if(term != ''){
+          this.suppService.getSearchResult(term).subscribe(
+            (data:any) => {
+              this.supplierList = data as any[];
+            }
+          );
+        }
+      }
+    );
   }
+
+  pageChanged(event:any){
+    this.config.currentPage = event;
+  }
+
+
+  addNew(){
+    this.searchTerm.setValue("");
+    this.ngOnInit();
+  }
+
+  //search method
+  searchSupplier(supNo:any){
+    
+    var supData = {
+      sup_no : supNo
+    };
+
+    if(supNo == "" || this.matValue=="")
+    {
+      this.pushNotification.show("ادخل اسم المورد", {}, 6000, );
+      this.router.navigated = false;
+    }
+    else
+    {
+      this.suppService.GetSupplierSearch(supData).subscribe(
+        (data:any) => {
+          this.productSearchResult = data as any[];
+          for(let i=0;i<data.length;i++)
+          {
+            this.remainTotal += (data[i].amount * -1);
+          }
+        }
+      );
+      this.addNew();
+    }
+    
+  }
+
 
 }

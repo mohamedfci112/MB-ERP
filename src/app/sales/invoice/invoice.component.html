@@ -1,124 +1,254 @@
 <div class="purchase_screen">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="title">
-                    <h2>فاتورة مبيعات</h2>
+        <form [formGroup] = "formdata" (ngSubmit) = "addFatora(formdata.value)" >
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title">
+                        <h2>فاتورة مبيعات</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="right">
-                    <fieldset>
-                        <legend>بيانات الفاتورة</legend>
-                        <label for="fname">فاتورة رقم</label>
-                        <input type="text" class="form-control" id="fname" name="fname" value="1" disabled>
-                        <label for="email">عدد الاصناف</label>
-                        <input type="email" class="form-control" id="email" name="email">
-                        <label for="email">اجمالى المطلوب</label>
-                        <input type="email" class="form-control" id="email" name="email">
-                    </fieldset>
-                    <hr>
-                    <fieldset>
-                        <legend>بيانات الدفع</legend>
-                        <select name="" id="" class="form-control">
-                            <option value="cash">دفع كاش</option>
-                            <option value="check">دفع شيك</option>
-                        </select>
+                <div class="col-md-2">
+                    <div class="right">
+                        <fieldset>
+                            <legend>بيانات الفاتورة</legend>
+                            <label>فاتورة رقم</label>
+                            <input type="text" class="form-control" name="inv_no" value="{{this.lastId}}" readonly>
+                            <label>عدد الاصناف</label>
+                            <input type="text" class="form-control" name="quantity" formControlName="quantity">
+                            <label>اجمالى المطلوب</label>
+                            <input type="text" class="form-control" name="total_cost" formControlName="total_cost">
+                            <label>العميل</label>
+                            <mat-form-field>
+                                <input type="text" [(ngModel)]="matValue1" style="background-color: cadetblue;"
+                                matInput 
+                                [formControl]="searchTermCustomer" 
+                                [matAutocomplete]="auto1">
+                                <mat-placeholder class="placeholder">ابحث باسم العميل</mat-placeholder>
+                                <mat-autocomplete #auto1="matAutocomplete">
+                                    <mat-option *ngFor="let cust of customerList" [value]="cust.cust_no">
+                                        {{ cust.cust_name }}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </fieldset>
                         <hr>
-                        <select name="" id="" class="form-control">
-                            <option value="cash">عميل اجل</option>
-                            <option value="check">عميل نقدى</option>
-                        </select>
-                        <label for="birthday">تاريخ الاستحقاق</label>
-                        <input type="date" class="form-control" id="birthday" name="birthday"><br>
-                        <input type="submit" class="form-control btn btn-danger" value="حفظ الفاتورة">
-                    </fieldset>
+                        <fieldset>
+                            <legend>بيانات الدفع</legend>
+                            <select name="" id="" class="form-control" name="payment_type" formControlName="payment_type">
+                                <option value="pay_cash">دفع كاش</option>
+                                <option value="pay_check">دفع شيك</option>
+                            </select>
+                            <hr>
+                            <select name="" id="" class="form-control" name="customer_type" formControlName="customer_type">
+                                <option value="cus_agel">عميل اجل</option>
+                                <option value="cus_cash">عميل نقدى</option>
+                            </select>
+                            <label>تاريخ الاستحقاق</label>
+                            <input type="date" class="form-control" name="due_date" formControlName="due_date"><br>
+                            <input type="submit" class="form-control btn btn-danger" value="حفظ الفاتورة">
+                        </fieldset>
+                    </div>
                 </div>
-            </div>
-    
-            <div class="col-md-10">
-                <div class="content">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="top">
-                                <div class="row">
-                                    <div class="col-md-9">
-                                        <form>
-                                            <div class="form-row align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="form-check mb-2">
-                                                        <label class="form-check-label" for="autoSizingCheck">
-                                                        بحث عن المنتج
-                                                        </label>
+        
+                <div class="col-md-10">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="top">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <form>
+                                                <div class="form-row align-items-center">
+                                                    <div class="col-auto">
+                                                        <div class="form-check mb-2">
+                                                            <label class="form-check-label" for="autoSizingCheck">
+                                                            بحث عن المنتج
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <mat-form-field>
+                                                            <input type="text" [(ngModel)]="matValue" style="background-color: cadetblue;"
+                                                            matInput 
+                                                            [formControl]="searchTerm" 
+                                                            [matAutocomplete]="auto">
+                                                            <mat-placeholder class="placeholder">ابحث باسم المنتج</mat-placeholder>
+                                                            <mat-autocomplete #auto="matAutocomplete">
+                                                                <mat-option *ngFor="let prod of productList" [value]="prod.product_id">
+                                                                    {{ prod.product_name }}
+                                                                </mat-option>
+                                                            </mat-autocomplete>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    
+                                                    <div class="col-auto">
+                                                    <button type="button" (click)="searchProduct(searchTerm.value)" class="btn btn-primary mb-2">اضافة</button>
                                                     </div>
                                                 </div>
-                                                <div class="col-auto">
-                                                <label class="sr-only" for="inlineFormInput">Name</label>
-                                                <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="ابحث عن منتج">
-                                                </div>
-                                                
-                                                <div class="col-auto">
-                                                <button type="submit" class="btn btn-primary mb-2">اضافة</button>
-                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="col-auto">
+                                                <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-warning mb-2">عرض سعر</button>
                                             </div>
-                                        </form>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="col-auto">
-                                            <button type="submit" class="btn btn-danger mb-2">حذف المحدد</button>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="col-auto">
+                                                <button type="button" data-toggle="modal" data-target="#exampleModal1" class="btn btn-secondary mb-2">اذن صرف</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="col-auto">
+                                                <button type="button" (click)="deleteUnit()" class="btn btn-danger mb-2">حذف المحدد</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
                             </div>
-                            <hr>
+                            
+                            <div class="col-md-12">
+                                <table class="table table-dark">
+                                    <thead>
+                                        <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">الكود</th>
+                                        <th scope="col">المنتج</th>
+                                        <th scope="col">الكمية</th>
+                                        <th scope="col">سعر الوحدة</th>
+                                        <th scope="col">الاجمالى</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let t of tableList;">
+                                            <th scope="row">
+                                                <input type="checkbox" name="cb" value="{{t.product_id}}" class="form-check-input cb">
+                                            </th>
+                                            <td><input type="text" class="form-control" name="product_id" value="{{t.product_id}}" readonly></td>
+                                            <td><input type="text" class="form-control" value="{{t.product_name}}" disabled></td>
+                                            <td><input type="text" class="form-control" name="product_quantity" formControlName="product_quantity"></td>
+                                            <td><input type="text" class="form-control" name="product_unit_price" formControlName="product_unit_price"></td>
+                                            <td><input type="text" class="form-control" name="product_total_cost" formControlName="product_total_cost"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        
+                    </div>
+                </div>
+        
+            </div>
+        </form>
+    </div>
+    
+    
+    <!-- Modal offers -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!--Start body-->
+            <div class="align-items-center">
+                <div class="col-auto">
+                <input type="text" class="form-control" name="offer_no" [(ngModel)]="offer_no" placeholder="ابحث باسم المنتج">
+                </div>
+            </div>
+            <hr>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">رقم العرض</th>
+                                <th scope="col">العميل</th>
+                                <th scope="col">التاريخ</th>
+                                <th scope="col">عمليات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of offersDetailsList | paginate: config | offerFilter: offer_no;let i=index">
+                                    <th scope="row">{{i+1}}</th>
+                                    <td>{{item.offer_no}}</td>
+                                    <td>{{item.cust_name}}</td>
+                                    <td>{{item.offer_date | date}}</td>
+                                    <td>
+                                        <button (click)="exportOffer(item.offer_no)" data-dismiss="modal" class="btn btn-primary btn-sm">استيراد</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+            <!--End body-->
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+
+    <!--Modal2-->
+    <!-- Modal ezn srf -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!--Start body-->
+                <div class="align-items-center">
+                    <div class="col-auto">
+                    <input type="text" class="form-control" name="inv_no" [(ngModel)]="inv_no" placeholder="ابحث باسم المنتج">
+                    </div>
+                </div>
+                <hr>
+                <div class="content">
+                    <div class="row">
                         <div class="col-md-12">
                             <table class="table table-dark">
                                 <thead>
                                     <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">الكود</th>
-                                    <th scope="col">المنتج</th>
-                                    <th scope="col">الكمية</th>
-                                    <th scope="col">ضريبة %</th>
-                                    <th scope="col">خصم</th>
-                                    <th scope="col">الاجمالى</th>
+                                    <th scope="col">رقم الاذن</th>
+                                    <th scope="col">العميل</th>
+                                    <th scope="col">التاريخ</th>
+                                    <th scope="col">عمليات</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row"><input type="checkbox" class="form-check-input"></th>
-                                        <td><input type="text" class="form-control" value="P-00001" disabled></td>
-                                        <td><input type="text" class="form-control" value="SN3665 Black" disabled></td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td><input type="text" class="form-control" value="15000" disabled></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><input type="checkbox" class="form-check-input"></th>
-                                        <td><input type="text" class="form-control" value="P-00001" disabled></td>
-                                        <td><input type="text" class="form-control" value="SN3665 Black" disabled></td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td><input type="text" class="form-control" value="15000" disabled></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><input type="checkbox" class="form-check-input"></th>
-                                        <td><input type="text" class="form-control" value="P-00001" disabled></td>
-                                        <td><input type="text" class="form-control" value="SN3665 Black" disabled></td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td><input type="text" class="form-control" value="15000" disabled></td>
+                                    <tr *ngFor="let item of eznSrfDetailsList | paginate: config | eznFilter: inv_no;let i=index">
+                                        <th scope="row">{{i+1}}</th>
+                                        <td>{{item.inv_no}}</td>
+                                        <td>{{item.cust_name}}</td>
+                                        <td>{{item.invoice_date | date}}</td>
+                                        <td>
+                                            <button (click)="exportEznsrf(item.inv_no)" data-dismiss="modal" class="btn btn-primary btn-sm">استيراد</button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
+                            <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                         </div>
                     </div>
                 </div>
+                <!--End body-->
             </div>
-    
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </div>
         </div>
     </div>
