@@ -10,13 +10,44 @@
     border-bottom: 1px solid;
 }
 
-.purchase_screen .top
+.purchase_screen .right
 {
+    border-left: 1px solid;
+    padding: 5px;
+    text-align: right
+}
+.purchase_screen fieldset
+{
+    border: 1px solid;
     padding: 5px;
     text-align: center;
-    border: 1px solid;
 }
-.purchase_screen .summary
+.purchase_screen legend
 {
-    text-align: right;
+    border: 1px solid;
+    text-align: center;
+    padding: 5px;
+}
+
+.content
+{
+    padding: 5px;
+}
+.table
+{
+    text-align: center;
+}
+
+.mat-option
+{
+    position: relative!important;
+    text-align: right!important;
+    background: gray;
+    color: white;
+    font-weight: bold;
+    border: 1px groove;
+}
+
+.mat-focused .placeholder {
+    color: transparent;
 }

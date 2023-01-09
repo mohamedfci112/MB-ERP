@@ -105,6 +105,7 @@ import { PurchasesService } from './services/purchases.service';
 import { AgelSuppliersService } from './services/agel-suppliers.service';
 import { OffersService } from './services/offers.service';
 import { SalesService } from './services/sales.service';
+import { SnadatService } from './services/snadat.service';
 import { AgelCustomersService } from './services/agel-customers.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TableFilterPipe } from '../app/pipes/table-filter.pipe';
@@ -113,6 +114,8 @@ import { EznSrfFilterPipe } from '../app/pipes/eznsrf-filter.pipe';
 import { AddOfferComponent } from './shourtcuts/add-offer/add-offer.component';
 import { OffersComponent } from './shourtcuts/offers/offers.component';
 import { OfferDetailsComponent } from './shourtcuts/offer-details/offer-details.component';
+import { SandAbdCashComponent } from './masrof_sand_tax/sand-abd-cash/sand-abd-cash.component';
+import { SandSrfCashComponent } from './masrof_sand_tax/sand-srf-cash/sand-srf-cash.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -189,7 +192,9 @@ const routes: Routes = [
   {path: 'manage_masrof', component: ManageMasrofComponent},
   {path: 'masrof_report', component: MasrofReportComponent},
   {path: 'sand_abd', component: SandAbdComponent},
+  {path: 'sand_abd_cash', component: SandAbdCashComponent},
   {path: 'sand_srf', component: SandSrfComponent},
+  {path: 'sand_srf_cash', component: SandSrfCashComponent},
   {path: 'tax_report', component: TaxReportComponent},
   {path: 'srf_abd_report', component: SandSrfAbdReportComponent},
   {path: 'add_offer', component: AddOfferComponent},
@@ -285,7 +290,9 @@ const routes: Routes = [
     DepartElasnafComponent,
     AddOfferComponent,
     OffersComponent,
-    OfferDetailsComponent
+    OfferDetailsComponent,
+    SandAbdCashComponent,
+    SandSrfCashComponent
   ],
   imports: [
     BrowserModule,
@@ -316,7 +323,8 @@ const routes: Routes = [
     AgelSuppliersService,
     OffersService,
     SalesService,
-    AgelCustomersService
+    AgelCustomersService,
+    SnadatService
   ],
   bootstrap: [AppComponent]
 })

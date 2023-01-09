@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomerService } from '../../services/customer.service';
+import { SupplierService } from '../../services/supplier.service';
 import { SnadatService } from '../../services/snadat.service';
-import { AgelCustomersService } from '../../services/agel-customers.service';
+import { AgelSuppliersService } from '../../services/agel-suppliers.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PushNotificationService } from 'ng-push-notification';
 import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
 import { DatePipe } from '../../../../node_modules/@angular/common';
 
 @Component({
-  selector: 'app-sand-abd',
-  templateUrl: './sand-abd.component.html',
-  styleUrls: ['./sand-abd.component.css']
+  selector: 'app-sand-srf-cash',
+  templateUrl: './sand-srf-cash.component.html',
+  styleUrls: ['./sand-srf-cash.component.css']
 })
-export class SandAbdComponent implements OnInit {
+export class SandSrfCashComponent implements OnInit {
 
   lastId:number=0;
 
@@ -21,20 +21,18 @@ export class SandAbdComponent implements OnInit {
 
   formdata:any;
 
-  cust_id:any = "";
-
   matValue:any="";
 
   myDate = new Date();
     
-  constructor(public sndServices:SnadatService, public cusAglService:AgelCustomersService, public custService:CustomerService, private pushNotification: PushNotificationService,private route: ActivatedRoute, private router: Router) { 
+  constructor(public sndServices:SnadatService, public supAglService:AgelSuppliersService, public supService:SupplierService, private pushNotification: PushNotificationService,private route: ActivatedRoute, private router: Router) { 
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     }
   }
 
   ngOnInit(): void {
-    this.sndServices.getLastAbdId().subscribe((data:any)=>{
+    this.sndServices.getLastSrfId().subscribe((data:any)=>{
       
       if(data[0].lastId == null)
       {
@@ -49,10 +47,10 @@ export class SandAbdComponent implements OnInit {
     //search customer real time
     this.searchTermCustomer.valueChanges.subscribe(
       (term1:any) => {
-        term1 = {cust_name : this.searchTermCustomer.value};
+        term1 = {sup_name : this.searchTermCustomer.value};
           
         if(term1 != ''){
-          this.custService.getSearchResult(term1).subscribe(
+          this.supService.getSearchResult(term1).subscribe(
             (data1:any) => {
               this.customerList = data1 as any[];
             }
@@ -63,8 +61,8 @@ export class SandAbdComponent implements OnInit {
 
     ///////
     this.formdata = new FormGroup({
-      abd_id: new FormControl(""),
-      customer_id: new FormControl(""),
+      srf_id: new FormControl(""),
+      supplier_id: new FormControl(""),
       company_name: new FormControl(""),
       check_no: new FormControl(""),
       check_date: new FormControl(""),
@@ -74,7 +72,7 @@ export class SandAbdComponent implements OnInit {
       due_date: new FormControl(""),
       admin: new FormControl(""),
       notes: new FormControl(""),
-      abd_type: new FormControl(0)
+      srf_type: new FormControl(1)
     });
     ///
 
@@ -90,17 +88,7 @@ export class SandAbdComponent implements OnInit {
   {
     if(this.searchTermCustomer.value == "")
     {
-      this.pushNotification.show("اختر العميل", {}, 6000, );
-      this.router.navigated = false;
-    }
-    else if(data.check_no == "")
-    {
-      this.pushNotification.show("ادخل رقم الشيك", {}, 6000, );
-      this.router.navigated = false;
-    }
-    else if(data.check_date == "")
-    {
-      this.pushNotification.show("ادخل تاريخ الشيك", {}, 6000, );
+      this.pushNotification.show("اختر المورد", {}, 6000, );
       this.router.navigated = false;
     }
     else if(data.amount == "")
@@ -108,14 +96,9 @@ export class SandAbdComponent implements OnInit {
       this.pushNotification.show("ادخل المبلغ المدفوع", {}, 6000, );
       this.router.navigated = false;
     }
-    else if(data.bank_name == "")
-    {
-      this.pushNotification.show("ادخل اسم البنك", {}, 6000, );
-      this.router.navigated = false;
-    }
     else if(data.collect_date == "")
     {
-      this.pushNotification.show("ادخل تاريخ التحصيل", {}, 6000, );
+      this.pushNotification.show("ادخل تاريخ الصرف", {}, 6000, );
       this.router.navigated = false;
     }
     else if(data.due_date == "")
@@ -127,8 +110,8 @@ export class SandAbdComponent implements OnInit {
     {
       var sndData =
       {
-        abd_id: this.lastId,
-        customer_id: this.searchTermCustomer.value,
+        srf_id: this.lastId,
+        supplier_id: this.searchTermCustomer.value,
         company_name: data.company_name,
         check_no: data.check_no,
         check_date: data.check_date,
@@ -138,22 +121,22 @@ export class SandAbdComponent implements OnInit {
         due_date: data.due_date,
         admin: data.admin,
         notes: data.notes,
-        abd_type: data.abd_type
+        srf_type: data.srf_type
       }
 
-      this.sndServices.insertSndAbdCheck(sndData).subscribe((res:any)=>{
+      this.sndServices.insertSndSrfCheck(sndData).subscribe((res:any)=>{
         this.pushNotification.show(res.toString(), {}, 6000, );
       });
 
-      var custMosdad =
+      var supMosdad =
       {
-        cust_no: this.searchTermCustomer.value,
+        sup_no: this.searchTermCustomer.value,
         amount: data.amount,
         pay_type: "Check",
         paid_date: data.collect_date
       }
 
-      this.custService.insertMosdadCustomer(custMosdad).subscribe((res:any)=>{
+      this.supService.insertMosdadSupplier(supMosdad).subscribe((res:any)=>{
         this.pushNotification.show(res.toString(), {}, 6000, );
       });
 
@@ -161,5 +144,6 @@ export class SandAbdComponent implements OnInit {
       this.ngOnInit();
     }
   }
+
 
 }

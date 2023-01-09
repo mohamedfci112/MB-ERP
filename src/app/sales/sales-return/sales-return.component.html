@@ -1,199 +1,134 @@
 <div class="purchase_screen">
+    <form [formGroup] = "formdata" (ngSubmit) = "returnSelected(formdata.value)" >
         <div class="row">
-            <!--Title-->
             <div class="col-md-12">
                 <div class="title">
                     <h2>مرتجعات المبيعات</h2>
                 </div>
             </div>
-            <!--Top section-->
-            <div class="col-md-12">
-                <div class="top">
+            <div class="col-md-3">
+                <div class="right">
+                    <fieldset>
+                        <legend>
+                            <div class="row">
+                                <div class="col-md-10"><label class="form-check-label" for="exampleCheck1">الى المخزن</label></div>
+                            </div>
+                        </legend>
+                        <br>
+                        <select class="form-control" (change)="inventoryChange($event)" formControlName="inventory_id" name="inventory_id">
+                            <option value=""></option>
+                            <option *ngFor="let i of inventoryList" value="{{i.invent_id}}">{{i.invent_name}}</option>
+                        </select>
+                    </fieldset>
+                    <hr>
+                    <fieldset>
+                        <legend>
+                            <div class="row">
+                                <div class="col-md-10"><label class="form-check-label" for="exampleCheck1">ارجاع الفاتورة بالكامل</label></div>
+                            </div>
+                        </legend>
+                        <br>
+                        <input type="button" (click)="returnAll()" class="form-control btn btn-danger" value="ارجاع الفاتورة بالكامل">
+                    </fieldset>
+                    <hr>
+                    <fieldset>
+                        <legend>
+                            <div class="row">
+                                <div class="col-md-10"><label class="form-check-label" for="exampleCheck1">ارجاع الكمية المحددة</label></div>
+                            </div>
+                        </legend>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <input type="radio" (change)="onItemChange($event)" value="full_selected" class="form-check-input" name="selected" formControlName="selected">
+                            </div>
+                            <div class="col-md-10"><label class="form-check-label" for="exampleCheck1">ارجاع الكمية المحددة بالكامل</label></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <input type="radio" (change)="onItemChange($event)" value="part_selected" class="form-check-input" name="selected" formControlName="selected">
+                            </div>
+                            <div class="col-md-6"><label class="form-check-label" for="exampleCheck1">جزء من المحدد</label></div>
+                            <div class="col-md-4"><input type="number" id="mySelect" class="form-control" formControlName="part" name="part"></div>
+                        </div>
+                        <br>
+                        <input type="submit" class="form-control btn btn-danger" value="ارجاع الصنف المحدد">
+                    </fieldset>
+                </div>
+            </div>
+    
+            <div class="col-md-9">
+                <div class="content">
                     <div class="row">
-                        <div class="col-md-3">
-                            <div class="row border-left">
-                                <div class="col-md-6"><input type="checkbox" class="form-check-input" id="exampleCheck1"></div>
-                                <div class="col-md-6"><label class="form-check-label" for="exampleCheck1">رقم الفاتورة</label></div>
-                                <div class="col-md-12"><input type="text" class="form-control"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="row border-left">
-                                <div class="col-md-6"><input type="checkbox" class="form-check-input" id="exampleCheck1"></div>
-                                <div class="col-md-6"><label class="form-check-label" for="exampleCheck1">تاريخ الفاتورة</label></div>
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <label class="input-group-text" for="inputGroupSelect01">من</label>
-                                        <input type="date" class="form-control">
+                        <div class="col-md-12">
+                            <div class="top">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form>
+                                            <div class="form-row align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="form-check mb-2">
+                                                        <label class="form-check-label" for="autoSizingCheck">
+                                                        بحث برقم الفاتورة
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <mat-form-field>
+                                                        <input type="text" [(ngModel)]="matValue"
+                                                        matInput 
+                                                        [formControl]="searchTerm" 
+                                                        [matAutocomplete]="auto">
+                                                        <mat-placeholder class="placeholder">ابحث برقم الفاتورة</mat-placeholder>
+                                                        <mat-autocomplete #auto="matAutocomplete">
+                                                            <mat-option *ngFor="let prod of productList" [value]="prod.inv_no">
+                                                                {{ prod.inv_no }}
+                                                            </mat-option>
+                                                        </mat-autocomplete>
+                                                    </mat-form-field>
+                                                </div>
+                                                
+                                                <div class="col-auto">
+                                                <button type="button" (click)="searchProduct(searchTerm.value)" class="btn btn-primary mb-2">بحث</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <label class="input-group-text" for="inputGroupSelect01">الى</label>
-                                        <input type="date" class="form-control">
-                                    </div>
+                                    
                                 </div>
                             </div>
+                            <hr>
                         </div>
-
-                        <div class="col-md-3">
-                            <button type="button" class="btn btn-secondary btn-block">بحث</button>
+                        
+                        <div class="col-md-12">
+                            <table class="table table-dark">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">الكود</th>
+                                    <th scope="col">المنتج</th>
+                                    <th scope="col">سعر الوحدة</th>
+                                    <th scope="col">الكمية</th>
+                                    <th scope="col">الاجمالى</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr  *ngFor="let t of productSearchResult;">
+                                        <th scope="row">
+                                            <input type="checkbox" name="cb" value="{{t.product_id}}" class="form-check-input cb">
+                                        </th>
+                                        <td><input type="text" class="form-control" name="inv_no" value="{{t.inv_no}}" readonly></td>
+                                        <td><input type="text" class="form-control" value="{{t.product_name}}" readonly></td>
+                                        <td><input type="text" class="form-control" name="product_unit_price" value="{{t.product_unit_price}}" readonly></td>
+                                        <td><input type="text" class="form-control" name="product_quantity" value="{{t.product_quantity - t.returned_quantity}}" readonly></td>
+                                        <td><input type="text" class="form-control" name="product_total_cost" value="{{t.product_total_cost}}" readonly></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--Report Info-->
-            <div class="col-md-12">
-                <div class="container">
-                        <div class="tbl">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">الفواتير مفصلة</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link btn btn-primary btn-sm mr-3" id="contact-tab" type="button">طباعة التقرير</button>
-                                </li>
-                            </ul>
-                    
-                    
-                            <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                    <div class="all">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">الكود</th>
-                                                <th scope="col">العميل</th>
-                                                <th scope="col">المنتج</th>
-                                                <th scope="col">الكمية</th>
-                                                <th scope="col">الضريبة</th>
-                                                <th scope="col">س ب.ض</th>
-                                                <th scope="col">الخصم</th>
-                                                <th scope="col">اجمالى</th>
-                                                <th scope="col">المدفوع</th>
-                                                <th scope="col">المتبقى</th>
-                                                <th scope="col">التاريخ</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                <th scope="row"><input type="checkbox"></th>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                </tr>
-                                                <tr>
-                                                <th scope="row"><input type="checkbox"></th>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                </tr>
-                                                <tr>
-                                                <th scope="row"><input type="checkbox"></th>
-                                                <th scope="row">3</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@twitter</td>
-                                                </tr>
-                                                <tr>
-                                                <th scope="row"><input type="checkbox"></th>
-                                                <th scope="row">4</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@twitter</td>
-                                                </tr>
-                                                <tr>
-                                                <th scope="row"><input type="checkbox"></th>
-                                                <th scope="row">5</th>
-                                                <td>Larry</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@twitter</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        
-                                        <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                        </ul>
-                                        </nav>
-                                        <div class="summary">
-                                            <div class="row">
-                                                <div class="col-md-3 border">
-                                                    <b>اجمالى المبيعات: </b><span>52155</span><hr>
-                                                    <b>اجمالى الضرائب: </b><span>52155</span><hr>
-                                                    <b>اجمالى بعد الضرائب: </b><span>52155</span><hr>
-                                                    <b>المبلغ المدفوع: </b><span>52155</span><hr>
-                                                    <b>المبلغ المتبقى: </b><span>52155</span>
-                                                </div>
-                                                <div class="col-md-6 border">
-                                                    <div class="row">
-                                                        <div class="col-md-5"><span><input type="radio"></span><b>ارجاع الكمية المحددة بالكامل</b></div>
-                                                        <div class="col-md-7"><span><input type="radio"></span><b>ارجاع جزء من المحدد: </b> <span><input type="number"></span></div>
-                                                    </div>
-                                                    <hr>
-                                                    <b>اسم العميل: </b><span><input type="text"></span><hr>
-                                                    <b>الى المخزن: </b><span><input type="text"></span><hr>
-                                                    <input type="button" class="btn btn-primary" value="ارجاع الصنف المحدد">
-                                                </div>
-                                                <div class="col-md-3 border">
-                                                        <div class="row">
-                                                            <div class="col-md-12"><span><input type="radio"></span><b>ارجاع الكمية الفاتورة بالكامل</b></div>
-                                                        </div>
-                                                        <hr>
-                                                        <b>اسم العميل: </b><span><input type="text"></span><hr>
-                                                        <b>الى المخزن: </b><span><input type="text"></span><hr>
-                                                        <input type="button" class="btn btn-primary" value="ارجاع الفاتورة بالكامل">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-            </div>
+    
         </div>
-    </div>
+    </form>
+</div>

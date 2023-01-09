@@ -50,4 +50,16 @@ export class CustomerService {
     return listOfCustomers;
   }
 
+
+  // get search details
+  GetAgelCustomersSearch(val:any){
+    var listOfCustomers = this.http.post(this.APIUrl+'/Customer/GetAgelCustomersSearch', val);
+    return listOfCustomers;
+  }
+
+  //insert customer mosdad
+  insertMosdadCustomer(val:any){
+    return this.http.post(this.APIUrl+'/Customer/insertMosdadCustomer', val);
+  }
+
 }

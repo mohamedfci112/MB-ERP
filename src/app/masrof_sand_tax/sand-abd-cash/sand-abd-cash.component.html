@@ -4,7 +4,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="title">
-                            <h2>سند صرف - شيكات</h2>
+                            <h2>سند قبض - نقدى</h2>
                         </div>
                     </div>
     
@@ -34,17 +34,17 @@
                                                     <div class="col-sm-3">
                                                         <input type="text" class="form-control" name="abd_id" value="{{this.lastId}}" readonly>
                                                     </div>
-                                                    <label class="col-sm-1 col-form-label">اسم المستفيد</label>
+                                                    <label class="col-sm-1 col-form-label">اسم العميل</label>
                                                     <div class="col-sm-3">
                                                         <mat-form-field>
                                                             <input type="text" [(ngModel)]="matValue" style="background-color: cadetblue;"
                                                             matInput 
                                                             [formControl]="searchTermCustomer" 
                                                             [matAutocomplete]="auto1">
-                                                            <mat-placeholder class="placeholder">ابحث باسم المورد</mat-placeholder>
+                                                            <mat-placeholder class="placeholder">ابحث باسم العميل</mat-placeholder>
                                                             <mat-autocomplete #auto1="matAutocomplete">
-                                                                <mat-option *ngFor="let cust of customerList" [value]="cust.sup_no">
-                                                                    {{ cust.sup_name }}
+                                                                <mat-option *ngFor="let cust of customerList" [value]="cust.cust_no">
+                                                                    {{ cust.cust_name }}
                                                                 </mat-option>
                                                             </mat-autocomplete>
                                                         </mat-form-field>
@@ -54,26 +54,13 @@
                                                         <input type="text" class="form-control" name="company_name" formControlName="company_name">
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="form-group row text-right border p-2">
-                                                    <label class="col-sm-1 col-form-label">رقم الشيك</label>
-                                                    <div class="col-sm-3">
-                                                        <input type="text" class="form-control" name="check_no" formControlName="check_no">
-                                                    </div>
-                                                    <label class="col-sm-1 col-form-label">تاريخ الشيك</label>
-                                                    <div class="col-sm-3">
-                                                        <input type="date" class="form-control" name="check_date" formControlName="check_date">
-                                                    </div>
                                                     <label class="col-sm-1 col-form-label">المبلغ المدفوع</label>
                                                     <div class="col-sm-3">
                                                         <input type="text" class="form-control" name="amount" formControlName="amount">
                                                     </div>
-                                                </div>
-                                                <div class="form-group row text-right border p-2">
-                                                    <label class="col-sm-1 col-form-label">اسم البنك</label>
-                                                    <div class="col-sm-3">
-                                                        <input type="text" class="form-control" name="bank_name" formControlName="bank_name">
-                                                    </div>
-                                                    <label class="col-sm-1 col-form-label">تاريخ الصرف</label>
+                                                    <label class="col-sm-1 col-form-label">تاريخ التحصيل</label>
                                                     <div class="col-sm-3">
                                                         <input type="date" class="form-control" name="collect_date" formControlName="collect_date">
                                                     </div>
@@ -83,7 +70,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row text-right border p-2">
-                                                    <label class="col-sm-1 col-form-label">المسؤل عن الصرف</label>
+                                                    <label class="col-sm-1 col-form-label">المسؤل عن القبض</label>
                                                     <div class="col-sm-3">
                                                         <input type="text" class="form-control" name="admin" formControlName="admin">
                                                     </div>

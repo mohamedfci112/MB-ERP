@@ -1,4 +1,5 @@
 <div class="purchase_screen">
+    <form [formGroup] = "formdata" (ngSubmit) = "Search(formdata.value)" >
         <div class="row">
             <!--Title-->
             <div class="col-md-12">
@@ -28,19 +29,19 @@
                                     <div class="col-md-12">
                                         <div class="input-group">
                                             <label class="input-group-text" for="inputGroupSelect01">من</label>
-                                            <input type="date" class="form-control">
+                                            <input type="date" class="form-control" name="dateFrom" formControlName="dateFrom">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="input-group">
                                             <label class="input-group-text" for="inputGroupSelect01">الى</label>
-                                            <input type="date" class="form-control">
+                                            <input type="date" class="form-control" name="dateTo" formControlName="dateTo">
                                         </div>
                                     </div>
                                 </div>
                         </div>
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-secondary btn-block">بحث</button>
+                            <button type="submit" class="btn btn-secondary btn-block">بحث</button>
                         </div>
                     </div>
                 </div>
@@ -66,124 +67,43 @@
                                             <thead>
                                                 <tr>
                                                 <th scope="col">الكود</th>
-                                                <th scope="col">نوع الفاتورة</th>
-                                                <th scope="col">العميل</th>
                                                 <th scope="col">المنتج</th>
                                                 <th scope="col">الكمية</th>
                                                 <th scope="col">س.شراء</th>
-                                                <th scope="col">الخصم</th>
                                                 <th scope="col">الضريبة</th>
                                                 <th scope="col">س ب.ض</th>
                                                 <th scope="col">س.بيع</th>
                                                 <th scope="col">الربح</th>
-                                                <th scope="col">المدفوع</th>
-                                                <th scope="col">المتبقى</th>
-                                                <th scope="col">التاريخ</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                </tr>
-                                                <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                </tr>
-                                                <tr>
-                                                <th scope="row">3</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@twitter</td>
-                                                </tr>
-                                                <tr>
-                                                <th scope="row">4</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@twitter</td>
-                                                </tr>
-                                                <tr>
-                                                <th scope="row">5</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@mdo</td>
-                                                <td>@mdo</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@fat</td>
-                                                <td>@twitter</td>
+                                                <tr *ngFor="let item of reportList | paginate: config;let i=index">
+                                                <th scope="row">{{i+1}}</th>
+                                                <td>{{item.product_name}}</td>
+                                                <td>{{item.sales_quantity}}</td>
+                                                <td>{{item.purchase_price}}</td>
+                                                <td>{{item.sales_taxes}}</td>
+                                                <td>{{item.total_sales + item.sales_taxes}}</td>
+                                                <td>{{item.sale_price}}</td>
+                                                <td>{{item.total_sales - (item.purchase_price * item.sales_quantity)}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
+                                        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                                         
-                                        <nav aria-label="Page navigation example">
-                                        <ul class="pagination">
-                                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                        </ul>
-                                        </nav>
                                         <div class="summary">
                                             <div class="row">
-                                                <div class="col-md-4 border">
-                                                    <b>اجمالى اسعار الشراء: </b><span>52155</span>
+                                                <div class="col-md-3 border">
+                                                    <b>اجمالى اسعار الشراء: </b><span>{{totalPurchases}}</span>
                                                 </div>
-                                                <div class="col-md-4 border">
-                                                    <b>اجمالى المبيعات بعد الضرائب: </b><span>52155</span>
+                                                <div class="col-md-3 border">
+                                                    <b>اجمالى المبيعات قبل الضرائب: </b><span>{{totalSales}}</span>
                                                 </div>
-                                                <div class="col-md-4 border">
-                                                    <b>اجمالى الارباح: </b><span>52155</span>
+                                                <div class="col-md-3 border">
+                                                    <b>اجمالى ضرائب المبيعات: </b><span>{{totalTaxs}}</span>
+                                                </div>
+                                                <div class="col-md-3 border">
+                                                    <b>اجمالى الارباح: </b><span>{{totalSales - totalPurchases}}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -194,4 +114,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </form>
+</div>

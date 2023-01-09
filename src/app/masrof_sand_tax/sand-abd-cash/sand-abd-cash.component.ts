@@ -5,14 +5,13 @@ import { AgelCustomersService } from '../../services/agel-customers.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PushNotificationService } from 'ng-push-notification';
 import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
-import { DatePipe } from '../../../../node_modules/@angular/common';
 
 @Component({
-  selector: 'app-sand-abd',
-  templateUrl: './sand-abd.component.html',
-  styleUrls: ['./sand-abd.component.css']
+  selector: 'app-sand-abd-cash',
+  templateUrl: './sand-abd-cash.component.html',
+  styleUrls: ['./sand-abd-cash.component.css']
 })
-export class SandAbdComponent implements OnInit {
+export class SandAbdCashComponent implements OnInit {
 
   lastId:number=0;
 
@@ -74,7 +73,7 @@ export class SandAbdComponent implements OnInit {
       due_date: new FormControl(""),
       admin: new FormControl(""),
       notes: new FormControl(""),
-      abd_type: new FormControl(0)
+      abd_type: new FormControl(1)
     });
     ///
 
@@ -93,24 +92,9 @@ export class SandAbdComponent implements OnInit {
       this.pushNotification.show("اختر العميل", {}, 6000, );
       this.router.navigated = false;
     }
-    else if(data.check_no == "")
-    {
-      this.pushNotification.show("ادخل رقم الشيك", {}, 6000, );
-      this.router.navigated = false;
-    }
-    else if(data.check_date == "")
-    {
-      this.pushNotification.show("ادخل تاريخ الشيك", {}, 6000, );
-      this.router.navigated = false;
-    }
     else if(data.amount == "")
     {
       this.pushNotification.show("ادخل المبلغ المدفوع", {}, 6000, );
-      this.router.navigated = false;
-    }
-    else if(data.bank_name == "")
-    {
-      this.pushNotification.show("ادخل اسم البنك", {}, 6000, );
       this.router.navigated = false;
     }
     else if(data.collect_date == "")
@@ -149,7 +133,7 @@ export class SandAbdComponent implements OnInit {
       {
         cust_no: this.searchTermCustomer.value,
         amount: data.amount,
-        pay_type: "Check",
+        pay_type: "Cash",
         paid_date: data.collect_date
       }
 

@@ -51,4 +51,40 @@ export class SalesService {
     return this.http.post(this.APIUrl+'/Sales/getSalesSummeryReport', val);
   }
 
+  // get sales invoice search
+  GetAllSaleSearch(val:any){
+    var listOfInventory = this.http.post(this.APIUrl+'/Sales/GetAllSaleSearch', val);
+    return listOfInventory;
+  }
+
+  // get sales invoice search
+  GetSalesInvoiceSearch(val:any){
+    var listOfInventory = this.http.post(this.APIUrl+'/Sales/GetSalesInvoiceSearch', val);
+    return listOfInventory;
+  }
+
+  insertReturnedTable(val:any){
+    return this.http.post(this.APIUrl+'/Sales/insertReturnedTable', val);
+  }
+
+  //insert returned all invoice
+  insertReturnedSalesAll(val: any){
+    return this.http.put(this.APIUrl+'/Sales/insertReturnedSalesAll',val);
+  }
+
+  //get purchasing report
+  getSalesReturnedReport(val:any){
+    return this.http.post(this.APIUrl+'/Sales/getSalesReturnedReport', val);
+  }
+
+  //get arbah report
+  getArbahSalesDetails(val:any){
+    return this.http.post(this.APIUrl+'/Sales/getArbahSalesDetails', val);
+  }
+
+  //get arbah report
+  getArbahPurchDetails(val:any){
+    return this.http.post(this.APIUrl+'/Sales/getArbahPurchDetails', val);
+  }
+
 }

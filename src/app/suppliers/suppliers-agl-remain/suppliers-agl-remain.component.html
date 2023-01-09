@@ -12,11 +12,11 @@
                     <div class="row">
                         <div class="col-md-10">
                             <mat-form-field>
-                                <input type="text" [(ngModel)]="matValue"
+                                <input type="text" [(ngModel)]="matValue" style="background-color: cadetblue;"
                                 matInput 
                                 [formControl]="searchTerm" 
                                 [matAutocomplete]="auto">
-                                <mat-placeholder class="placeholder">ابحث باسم المنتج</mat-placeholder>
+                                <mat-placeholder class="placeholder">ابحث باسم المورد</mat-placeholder>
                                 <mat-autocomplete #auto="matAutocomplete">
                                     <mat-option *ngFor="let prod of supplierList" [value]="prod.sup_no">
                                         {{ prod.sup_name }}

@@ -50,4 +50,9 @@ export class SupplierService {
     return listOfSuppliers;
   }
 
+  //insert customer mosdad
+  insertMosdadSupplier(val:any){
+    return this.http.post(this.APIUrl+'/Supplier/insertMosdadSupplier', val);
+  }
+
 }
