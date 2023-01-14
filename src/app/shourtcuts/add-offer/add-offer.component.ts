@@ -54,7 +54,15 @@ export class AddOfferComponent implements OnInit {
   ngOnInit(): void {
     //
     this.offerService.getOfferLastId().subscribe((data:any)=>{
-      this.lastId = data[0].Column1;
+      //this.lastId = data[0].Column1;
+      if(data[0].Column1 == null)
+      {
+        this.lastId = 1;
+      }
+      else
+      {
+        this.lastId = data[0].Column1;
+      }
     });
 
 
@@ -99,6 +107,7 @@ export class AddOfferComponent implements OnInit {
       product_quantity: new FormControl(""),
       product_unit_price: new FormControl(""),
       product_total_cost: new FormControl(""),
+      invent_id: new FormControl(""),
     });
     ///
   }
@@ -117,7 +126,6 @@ export class AddOfferComponent implements OnInit {
     
     this.product_id = prodId;
     var prodData = {
-      invent_id : this.invent_id,
       product_id: prodId
     };
 
@@ -205,6 +213,7 @@ export class AddOfferComponent implements OnInit {
       var product_quantity = document.querySelectorAll('input[name=product_quantity]');
       var product_unit_price = document.querySelectorAll('input[name=product_unit_price]');
       var product_total_cost = document.querySelectorAll('input[name=product_total_cost]');
+      var invent_id = document.querySelectorAll('input[name=invent_id]');
 
       var fatoraData;
 
@@ -220,7 +229,8 @@ export class AddOfferComponent implements OnInit {
             product_quantity: (product_quantity[i] as HTMLInputElement).value,
             product_unit_price: (product_unit_price[i] as HTMLInputElement).value,
             product_total_cost: (product_total_cost[i] as HTMLInputElement).value,
-            offer_date: new Date()
+            offer_date: new Date(),
+            invent_id: (invent_id[i] as HTMLInputElement).value
           };
 
           this.offerService.addOffer(fatoraData).subscribe((res:any)=>{

@@ -11,16 +11,21 @@
                 <div class="top">
                     <div class="row">
                         <div class="col-md-10">
-                            <div class="row">
-                                <div class="col-md-1"><input type="radio" class="form-check-input" id="exampleCheck1"></div>
-                                <div class="col-md-2"><label class="form-check-label" for="exampleCheck1">كل العملاء</label></div>
-                                <div class="col-md-1"><input type="radio" class="form-check-input" id="exampleCheck1"></div>
-                                <div class="col-md-2"><label class="form-check-label" for="exampleCheck1">عميل محدد</label></div>
-                                <div class="col-md-4"><input type="text" class="form-control" id="exampleCheck1"></div>
-                            </div>
+                            <mat-form-field>
+                                <input type="text" [(ngModel)]="matValue" style="background-color: cadetblue;"
+                                matInput 
+                                [formControl]="searchTerm" 
+                                [matAutocomplete]="auto">
+                                <mat-placeholder class="placeholder">ابحث باسم العميل</mat-placeholder>
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let prod of customerList" [value]="prod.cust_no">
+                                        {{ prod.cust_name }}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
                         </div>
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-secondary btn-block">عرض</button>
+                            <button type="button" (click)="searchCustomer(searchTerm.value)" class="btn btn-secondary btn-block">بحث</button>
                         </div>
                     </div>
                 </div>
@@ -37,54 +42,24 @@
                                         <th scope="col">العميل</th>
                                         <th scope="col">المبلغ المدفوع</th>
                                         <th scope="col">تاريخ الدفع</th>
+                                        <th scope="col">نوع الدفع</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">4</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                        <th scope="row">5</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@fat</td>
+                                        <tr *ngFor="let item of productSearchResult | paginate: config;let i=index;">
+                                        <th scope="row">{{i+1}}</th>
+                                        <td>{{item.cust_name}}</td>
+                                        <td>{{item.amount}}</td>
+                                        <td>{{item.paid_date | date}}</td>
+                                        <td>{{item.pay_type}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                    </ul>
-                                </nav>
-                                <div class="summary">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <b>اجمالى المبلغ المسدد: 15158</b>
+                                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                                <div class="container">
+                                    <div class="row text-right">
+                                        <div class="col-md-6">
+                                            <span>اجمالى المبالغ المسددة: {{remainTotal}}</span>
                                         </div>
                                     </div>
                                 </div>

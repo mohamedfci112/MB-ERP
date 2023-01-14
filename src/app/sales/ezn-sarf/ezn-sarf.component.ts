@@ -138,6 +138,7 @@ export class EznSarfComponent implements OnInit {
       paid_up: new FormControl(0),
       remainder: new FormControl(0),
       invoice_date: new FormControl(new Date()),
+      invent_id: new FormControl(),
     });
     ///
   }
@@ -149,7 +150,7 @@ export class EznSarfComponent implements OnInit {
     var x = {offer_no: offerNo}
     this.offerService.getOfferDetails(x).subscribe((data:any)=>{
       this.tableList = data;
-      //console.log(this.tableList);
+      console.log(this.tableList);
       this.matValue1 = this.tableList[0].customer_id;
     });
   }
@@ -264,6 +265,7 @@ export class EznSarfComponent implements OnInit {
       var product_quantity = document.querySelectorAll('input[name=product_quantity]');
       var product_unit_price = document.querySelectorAll('input[name=product_unit_price]');
       var product_total_cost = document.querySelectorAll('input[name=product_total_cost]');
+      var invent_id = document.querySelectorAll('input[name=invent_id]');
 
       var fatoraData;
 
@@ -293,7 +295,7 @@ export class EznSarfComponent implements OnInit {
         var invData = 
         {
           product_id : this.tableList[i].product_id,
-          invent_id : this.tableList[i].invent_id,
+          invent_id : (invent_id[i] as HTMLInputElement).value,
           product_quantity : (product_quantity[i] as HTMLInputElement).value
         }
 

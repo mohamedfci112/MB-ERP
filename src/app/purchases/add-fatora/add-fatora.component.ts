@@ -72,7 +72,15 @@ export class AddFatoraComponent implements OnInit {
     });
 
     this.purchService.getLastId().subscribe((data : any) => {
-      this.lastId = data[0].lastId;
+      //this.lastId = data[0].lastId;
+      if(data[0].lastId == null)
+      {
+        this.lastId = 1;
+      }
+      else
+      {
+        this.lastId = data[0].lastId;
+      }
     });
 
     this.searchTerm.valueChanges.subscribe(

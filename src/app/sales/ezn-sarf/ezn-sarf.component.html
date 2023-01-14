@@ -123,6 +123,7 @@
                                         <td><input type="text" class="form-control" name="product_quantity" formControlName="product_quantity"></td>
                                         <td><input type="text" class="form-control" name="product_unit_price" formControlName="product_unit_price"></td>
                                         <td><input type="text" class="form-control" name="product_total_cost" formControlName="product_total_cost"></td>
+                                        <input type="hidden" class="form-control" name="invent_id" value="{{t.invent_id}}">
                                     </tr>
                                 </tbody>
                             </table>
@@ -149,7 +150,7 @@
         <!--Start body-->
         <div class="align-items-center">
             <div class="col-auto">
-            <input type="text" class="form-control" name="offer_no" [(ngModel)]="offer_no" placeholder="ابحث باسم المنتج">
+            <input type="text" class="form-control" name="offer_no" [(ngModel)]="offer_no" placeholder="ابحث برقم عرض السعر">
             </div>
         </div>
         <hr>

@@ -18,116 +18,84 @@
 </div>
 <hr>
 <div class="container">
-    <div class="tbl">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item mr-3" role="presentation">
-              <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">الحركات المالية للعملاء</button>
+    <form [formGroup] = "formdata" (ngSubmit) = "searchCustomer(formdata.value)" >
+        <div class="tbl">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item mr-3" role="presentation">
+                <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">الحركات المالية للعملاء</button>
+                </li>
+                <li class="nav-item mr-3" role="presentation">
+                    <mat-form-field>
+                        <input type="text" [(ngModel)]="matValue" style="background-color: cadetblue;"
+                        matInput 
+                        [formControl]="searchTerm" 
+                        [matAutocomplete]="auto">
+                        <mat-placeholder class="placeholder">ابحث باسم العميل</mat-placeholder>
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let prod of customerList" [value]="prod.cust_no">
+                                {{ prod.cust_name }}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </li>
+                <li class="nav-item mr-3" role="presentation">
+                    من  <input type="date" name="date1" formControlName="date1" class="form-control">
             </li>
-            <li class="nav-item mr-3" role="presentation">
-              <input type="text" class="form-control" placeholder="العميل">
-            </li>
-            <li class="nav-item mr-3" role="presentation">
-                من  <input type="date" name="" id="" class="">
-           </li>
-            <li class="nav-item mr-3" role="presentation">
-                 الى <input type="date" name="" id="" class=""> 
-            </li>
-            <li class="nav-item" role="presentation">
-              <input type="button" class="nav-link btn btn-warning mr-3" id="" value="عرض كل الحركات">
-            </li>
-        </ul>
+                <li class="nav-item mr-3" role="presentation">
+                    الى <input type="date" name="date2" formControlName="date2" class="form-control"> 
+                </li>
+                <li class="nav-item" role="presentation">
+                <input type="submit" class="nav-link btn btn-warning mr-3" value="عرض كل الحركات">
+                </li>
+            </ul>
 
 
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <div class="all">
-                    <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <th scope="col">القيمة</th>
-                            <th scope="col">السعر</th>
-                            <th scope="col">الكمية</th>
-                            <th scope="col">الوصف</th>
-                            <th scope="col">التاريخ</th>
-                            <th scope="col">البيان</th>
-                            <th scope="col">مدين</th>
-                            <th scope="col">دائن</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@fat</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">4</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@twitter</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">5</th>
-                            <td>Larry</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                          <li class="page-item"><a class="page-link" href="#">1</a></li>
-                          <li class="page-item"><a class="page-link" href="#">2</a></li>
-                          <li class="page-item"><a class="page-link" href="#">3</a></li>
-                          <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                      </nav>
-                      <div class="summary">
-                          <div class="row">
-                              <div class="col-md-6 border">
-                                  <b>مدين: </b><span>52155</span>
-                              </div>
-                              <div class="col-md-6 border">
-                                  <b>دائن: </b><span>52155</span>
-                              </div>
-                          </div>
-                      </div>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="all">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th scope="col">العميل</th>
+                                <th scope="col">التاريخ</th>
+                                <th scope="col">مدين</th>
+                                <th scope="col">دائن</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let item of productSearchResult | paginate: config;let i=index;">
+                                <th scope="row">{{i+1}}</th>
+                                <td>{{item.cust_name}}</td>
+                                <td>{{item.datee | date}}</td>
+                                <td>
+                                    <span *ngIf="item.typee=='1'"></span>
+                                    <span *ngIf="item.typee=='2'">{{item.remainder}}</span>
+                                </td>
+                                <td>
+                                    <span *ngIf="item.typee=='1'">{{item.remainder}}</span>
+                                    <span *ngIf="item.typee=='2'"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                        <div class="summary">
+                            <div class="row">
+                                <div class="col-md-4 border">
+                                    <b>مدين: </b><span>{{paidTotal}}</span>
+                                </div>
+                                <div class="col-md-4 border">
+                                    <b>دائن: </b><span>{{remainTotal}}</span>
+                                </div>
+                                <div class="col-md-4 border">
+                                    <b>الرصيد: </b><span>{{remainTotal - paidTotal}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>

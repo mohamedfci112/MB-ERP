@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PushNotificationService } from 'ng-push-notification';
-import { AgelSuppliersService } from 'src/app/services/agel-suppliers.service';
+import { MosdadSuppliersService } from 'src/app/services/mosdad-suppliers.service';
 import { SupplierService } from 'src/app/services/supplier.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class SuppliersMosdadComponent implements OnInit {
 
   config: any;
 
-  constructor(private pushNotification: PushNotificationService,public aglService:AgelSuppliersService, public suppService:SupplierService, private route: ActivatedRoute, private router: Router) {
+  constructor(private pushNotification: PushNotificationService,public mosService:MosdadSuppliersService, public suppService:SupplierService, private route: ActivatedRoute, private router: Router) {
     this.config = {
       itemsPerPage: 50,
       currentPage: 1,
@@ -71,7 +71,7 @@ export class SuppliersMosdadComponent implements OnInit {
     }
     else
     {
-      this.suppService.GetSupplierSearch(supData).subscribe(
+      this.suppService.GetSuppliersMosdadSearch(supData).subscribe(
         (data:any) => {
           this.productSearchResult = data as any[];
           for(let i=0;i<data.length;i++)

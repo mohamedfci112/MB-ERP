@@ -62,4 +62,16 @@ export class CustomerService {
     return this.http.post(this.APIUrl+'/Customer/insertMosdadCustomer', val);
   }
 
+  // get search details
+  GetAgelCustomersMosdadSearch(val:any){
+    var listOfCustomers = this.http.post(this.APIUrl+'/Customer/GetAgelCustomersMosdadSearch', val);
+    return listOfCustomers;
+  }
+
+  // get search details
+  GetCustomerPaymentsSearch(val:any){
+    var listOfCustomers = this.http.post(this.APIUrl+'/Customer/GetCustomerPaymentsSearch', val);
+    return listOfCustomers;
+  }
+
 }

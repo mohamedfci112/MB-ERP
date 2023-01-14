@@ -59,6 +59,7 @@ export class CustomersAgelRemainComponent implements OnInit {
 
   //search method
   searchCustomer(cusNo:any){
+    this.remainTotal=0;
     
     var cusData = {
       cust_no : cusNo

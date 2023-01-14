@@ -106,6 +106,8 @@ import { AgelSuppliersService } from './services/agel-suppliers.service';
 import { OffersService } from './services/offers.service';
 import { SalesService } from './services/sales.service';
 import { SnadatService } from './services/snadat.service';
+import { MosdadSuppliersService } from './services/mosdad-suppliers.service';
+import { MosdadCustomersService } from './services/mosdad-customers.service';
 import { AgelCustomersService } from './services/agel-customers.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TableFilterPipe } from '../app/pipes/table-filter.pipe';
@@ -324,7 +326,9 @@ const routes: Routes = [
     OffersService,
     SalesService,
     AgelCustomersService,
-    SnadatService
+    SnadatService,
+    MosdadSuppliersService,
+    MosdadCustomersService
   ],
   bootstrap: [AppComponent]
 })

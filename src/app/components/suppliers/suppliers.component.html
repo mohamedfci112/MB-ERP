@@ -1,21 +1,101 @@
 <div class="container">
-    <div class="shortcut">
+    <div class="links">
         <div class="row">
-            <div class="col-md-12">
-                <h2>الموردين</h2>
+            <div class="col-md-3">
+                <a routerLink="/add_supplier" class="btn btn-default btn-sm">مورد جديد</a>
             </div>
-            <div class="col-md-4">
-                <a routerLink="/add_supplier" class="btn btn-default btn-sm">اضافة مورد جديد</a>
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <a routerLink="/suppliers_report" class="btn btn-default btn-sm">بيانات الموردين</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <a routerLink="/suppliers_agel_remain" class="btn btn-default btn-sm">حسابات الموردين-أجل</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <a routerLink="/suppliers_mosdad" class="btn btn-default btn-sm">تقرير الموردين-المسدد لهم</a>
             </div>
         </div>
     </div>
+</div>
+<hr>
+<div class="container">
+    <form [formGroup] = "formdata" (ngSubmit) = "searchCustomer(formdata.value)" >
+        <div class="tbl">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item mr-3" role="presentation">
+                <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">الحركات المالية للموردين</button>
+                </li>
+                <li class="nav-item mr-3" role="presentation">
+                    <mat-form-field>
+                        <input type="text" [(ngModel)]="matValue" style="background-color: cadetblue;"
+                        matInput 
+                        [formControl]="searchTerm" 
+                        [matAutocomplete]="auto">
+                        <mat-placeholder class="placeholder">ابحث باسم المورد</mat-placeholder>
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let prod of customerList" [value]="prod.sup_no">
+                                {{ prod.sup_name }}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </li>
+                <li class="nav-item mr-3" role="presentation">
+                    من  <input type="date" name="date1" formControlName="date1" class="form-control">
+            </li>
+                <li class="nav-item mr-3" role="presentation">
+                    الى <input type="date" name="date2" formControlName="date2" class="form-control"> 
+                </li>
+                <li class="nav-item" role="presentation">
+                <input type="submit" class="nav-link btn btn-warning mr-3" value="عرض كل الحركات">
+                </li>
+            </ul>
+
+
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="all">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th scope="col">المورد</th>
+                                <th scope="col">التاريخ</th>
+                                <th scope="col">مدين</th>
+                                <th scope="col">دائن</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let item of productSearchResult | paginate: config;let i=index;">
+                                <th scope="row">{{i+1}}</th>
+                                <td>{{item.sup_name}}</td>
+                                <td>{{item.datee | date}}</td>
+                                <td>
+                                    <span *ngIf="item.typee=='1'"></span>
+                                    <span *ngIf="item.typee=='2'">{{item.amount}}</span>
+                                </td>
+                                <td>
+                                    <span *ngIf="item.typee=='1'">{{item.amount}}</span>
+                                    <span *ngIf="item.typee=='2'"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+                        <div class="summary">
+                            <div class="row">
+                                <div class="col-md-4 border">
+                                    <b>مدين: </b><span>{{paidTotal}}</span>
+                                </div>
+                                <div class="col-md-4 border">
+                                    <b>دائن: </b><span>{{remainTotal}}</span>
+                                </div>
+                                <div class="col-md-4 border">
+                                    <b>الرصيد: </b><span>{{remainTotal - paidTotal}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
