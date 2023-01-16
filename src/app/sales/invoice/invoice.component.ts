@@ -42,6 +42,8 @@ export class InvoiceComponent implements OnInit {
   matValue:any="";
   matValue1:any="";
 
+  ezn_no:any="";
+
   myDate = new Date();
   
   offersDetailsList = <any>[];
@@ -53,6 +55,12 @@ export class InvoiceComponent implements OnInit {
   config: any;
 
   taxesCal:any=0;
+
+  public disabledAdd = false;
+
+  isOffer:any=false;
+  isEznSrf:any=false;
+  isInvoice:any=false;
 
   constructor(public cusAglService:AgelCustomersService, public salesService:SalesService, public purchService: PurchasesService, public offerService:OffersService, public custService:CustomerService, public inventService:InventoryService, public prodService:ProductsService, private pushNotification: PushNotificationService,private route: ActivatedRoute, private router: Router) { 
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
@@ -73,6 +81,11 @@ export class InvoiceComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.isOffer=false;
+    this.isEznSrf=false;
+    this.isInvoice=true;
+
     this.offerService.GetAll().subscribe((data : any) => {
       this.offersDetailsList = data;
       console.log(this.offersDetailsList);
@@ -147,6 +160,7 @@ export class InvoiceComponent implements OnInit {
       paid_up: new FormControl(0),
       remainder: new FormControl(0),
       invoice_date: new FormControl(new Date()),
+      invent_id: new FormControl(""),
     });
     ///
   }
@@ -158,8 +172,14 @@ export class InvoiceComponent implements OnInit {
     var x = {offer_no: offerNo}
     this.offerService.getOfferDetails(x).subscribe((data:any)=>{
       this.tableList = data;
-      //console.log(this.tableList);
+      console.log(this.tableList);
       this.matValue1 = this.tableList[0].customer_id;
+      this.offer_no = this.tableList[0].offer_no;
+      //
+      this.disabledAdd = true;
+      this.isOffer = true;
+      this.isEznSrf = false;
+      this.isInvoice = false;
     });
   }
   //
@@ -171,6 +191,13 @@ export class InvoiceComponent implements OnInit {
       this.tableList = data;
       //console.log(this.tableList);
       this.matValue1 = this.tableList[0].customer_id;
+
+      this.ezn_no = this.tableList[0].inv_no;
+      //
+      this.disabledAdd = true;
+      this.isOffer = false;
+      this.isEznSrf = true;
+      this.isInvoice = false;
     });
   }
   //
@@ -235,7 +262,13 @@ export class InvoiceComponent implements OnInit {
 
           const x = this.tableList.splice(indexx, 1);
         }
-        
+        if(this.tableList.length == 0)
+        {
+          this.disabledAdd = false;
+          this.isOffer=false;
+          this.isEznSrf=false;
+          this.isInvoice=true;
+        }
       }
       else{
         this.pushNotification.show("اختر الذى تريده", {}, 6000, );
@@ -284,6 +317,7 @@ export class InvoiceComponent implements OnInit {
       var product_quantity = document.querySelectorAll('input[name=product_quantity]');
       var product_unit_price = document.querySelectorAll('input[name=product_unit_price]');
       var product_total_cost = document.querySelectorAll('input[name=product_total_cost]');
+      var invent_id = document.querySelectorAll('input[name=invent_id]');
 
       var fatoraData;
 
@@ -313,20 +347,44 @@ export class InvoiceComponent implements OnInit {
           invoice_date: data.invoice_date
         };
         
-        var invData = 
-        {
-          product_id : this.tableList[i].product_id,
-          invent_id : this.tableList[i].invent_id,
-          product_quantity : (product_quantity[i] as HTMLInputElement).value
-        }
+        
 
         this.salesService.insertEznSrf(fatoraData).subscribe((res:any)=>{
           this.pushNotification.show(res.toString(), {}, 6000, );
         });
 
-        this.salesService.EditInventoryQuantitySales(invData).subscribe((res:any)=>{
-          this.pushNotification.show(res.toString(), {}, 6000, );
-        });
+        if(this.isInvoice == true || this.isOffer == true)
+        {
+          var invData = 
+          {
+            product_id : this.tableList[i].product_id,
+            invent_id : this.tableList[i].invent_id,
+            product_quantity : (product_quantity[i] as HTMLInputElement).value
+          }
+          this.salesService.EditInventoryQuantitySales(invData).subscribe((res:any)=>{
+            this.pushNotification.show(res.toString(), {}, 6000, );
+          });
+        }
+        if(this.isEznSrf == true)
+        {
+          var eznData = 
+          {
+            inv_no : this.ezn_no
+          }
+          this.salesService.CancelEznSrfInv(eznData).subscribe((res:any)=>{
+            this.pushNotification.show(res.toString(), {}, 6000, );
+          });
+        }
+        if(this.isOffer == true)
+        {
+          var offerData = 
+          {
+            inv_no : this.offer_no
+          }
+          this.offerService.CancelOfferRequest(offerData).subscribe((res:any)=>{
+            this.pushNotification.show(res.toString(), {}, 6000, );
+          });
+        }
 
       }
 
@@ -348,6 +406,7 @@ export class InvoiceComponent implements OnInit {
       }
       this.tableList=[];
       this.addNew();
+      this.disabledAdd=false;
       this.ngOnInit();
     }
   }

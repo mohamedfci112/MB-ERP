@@ -31,4 +31,29 @@ export class ProductsService {
     return this.http.get<any>(this.APIUrl+'/Products/getAllProductsDetails');
   }
 
+  // 
+  salesOperations(val: any){
+    return this.http.post(this.APIUrl+'/Products/salesOperations',val);
+  }
+
+  // 
+  purchasesOperations(val: any){
+    return this.http.post(this.APIUrl+'/Products/purchasesOperations',val);
+  }
+
+  // 
+  salesReturnOperations(val: any){
+    return this.http.post(this.APIUrl+'/Products/salesReturnOperations',val);
+  }
+
+  // 
+  purchasesReturnOperations(val: any){
+    return this.http.post(this.APIUrl+'/Products/purchasesReturnOperations',val);
+  }
+
+  // 
+  inventoryBalance(val: any){
+    return this.http.post(this.APIUrl+'/Products/inventoryBalance',val);
+  }
+
 }

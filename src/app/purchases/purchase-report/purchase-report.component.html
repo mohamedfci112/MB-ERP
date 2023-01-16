@@ -50,7 +50,10 @@
                                     <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">الفواتير</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link btn btn-secondary btn-sm mr-3" id="contact-tab" type="button">طباعة التقرير</button>
+                                    <button (click)="openPDFDetails()" class="nav-link btn btn-secondary btn-sm mr-3" id="contact-tab" type="button">طباعة تقرير مفصل</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button (click)="openPDFSummery()" class="nav-link btn btn-secondary btn-sm mr-3" id="contact-tab" type="button">طباعة تقرير ملخص</button>
                                 </li>
                             </ul>
                     

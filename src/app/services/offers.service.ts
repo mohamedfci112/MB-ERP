@@ -35,4 +35,8 @@ export class OffersService {
     return this.http.post(this.APIUrl+'/Offers/getOfferDetails',val);
   }
 
+  CancelOfferRequest(val:any){
+    return this.http.put(this.APIUrl+'/Offers/CancelOfferRequest', val);
+  }
+
 }

@@ -87,4 +87,8 @@ export class SalesService {
     return this.http.post(this.APIUrl+'/Sales/getArbahPurchDetails', val);
   }
 
+  CancelEznSrfInv(val:any){
+    return this.http.put(this.APIUrl+'/Sales/CancelEznSrfInv', val);
+  }
+
 }

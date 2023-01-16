@@ -10,7 +10,7 @@
             <div class="col-md-12">
                 <div class="top">
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             <mat-form-field>
                                 <input type="text" [(ngModel)]="matValue" style="background-color: cadetblue;"
                                 matInput 
@@ -26,6 +26,9 @@
                         </div>
                         <div class="col-md-2">
                             <button type="button" (click)="searchCustomer(searchTerm.value)" class="btn btn-secondary btn-block">بحث</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" (click)="openPDF()" class="btn btn-secondary btn-block">طباعة</button>
                         </div>
                     </div>
                 </div>

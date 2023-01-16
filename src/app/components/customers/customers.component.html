@@ -45,7 +45,10 @@
                     الى <input type="date" name="date2" formControlName="date2" class="form-control"> 
                 </li>
                 <li class="nav-item" role="presentation">
-                <input type="submit" class="nav-link btn btn-warning mr-3" value="عرض كل الحركات">
+                    <input type="submit" class="nav-link btn btn-warning mr-3" value="عرض كل الحركات">
+                </li>
+                <li class="nav-item" role="presentation">
+                    <input type="button" (click)="openPDF()" class="nav-link btn btn-secondary mr-3" value="طباعة">
                 </li>
             </ul>
 
@@ -83,13 +86,13 @@
                         <div class="summary">
                             <div class="row">
                                 <div class="col-md-4 border">
-                                    <b>مدين: </b><span>{{paidTotal}}</span>
+                                    <b>مدين: </b><span class="alert-success">{{paidTotal}}</span>
                                 </div>
                                 <div class="col-md-4 border">
-                                    <b>دائن: </b><span>{{remainTotal}}</span>
+                                    <b>دائن: </b><span class="alert-warning">{{remainTotal}}</span>
                                 </div>
                                 <div class="col-md-4 border">
-                                    <b>الرصيد: </b><span>{{remainTotal - paidTotal}}</span>
+                                    <b>الرصيد: </b><span class="alert-danger"><b>{{paidTotal - remainTotal}}</b></span>
                                 </div>
                             </div>
                         </div>

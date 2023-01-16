@@ -1,409 +1,344 @@
 <div class="transfers">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="title">
-                    <h2>كرت حركة الصنف</h2>
+    <form [formGroup] = "formdata" (ngSubmit) = "findData(formdata.value)" >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title">
+                        <h2>كرت حركة الصنف</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-12">
-                <div class="top">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <form>
+                <div class="col-md-12">
+                    <div class="top">
+                        <div class="row">
+                            <div class="col-md-4">
                                 <div class="form-row align-items-center">
                                     <div class="col-auto">
-                                    <input type="text" class="form-control" id="inlineFormInput" placeholder="ابحث باسم المنتج">
+                                        <div class="form-check mb-2">
+                                            <label class="form-check-label" for="autoSizingCheck">
+                                            بحث عن المنتج
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <mat-form-field>
+                                            <input type="text" [(ngModel)]="matValue" style="background-color: cadetblue;"
+                                            matInput 
+                                            [formControl]="searchTerm" 
+                                            [matAutocomplete]="auto">
+                                            <mat-placeholder class="placeholder">ابحث باسم المنتج</mat-placeholder>
+                                            <mat-autocomplete #auto="matAutocomplete">
+                                                <mat-option *ngFor="let prod of productList" [value]="prod.product_id">
+                                                    {{ prod.product_name }}
+                                                </mat-option>
+                                            </mat-autocomplete>
+                                        </mat-form-field>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="col-md-2">
-                            <form>
-                                <div class="form-group row">
+                            </div>
+                            <div class="col-md-2">
+                                <div class="row">
                                     <label for="staticEmail" class="col-sm-2 col-form-label">من</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control">
+                                        <input type="date" class="form-control" name="date_from" formControlName="date_from">
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
 
-                        <div class="col-md-2">
-                            <form>
-                                <div class="form-group row">
+                            <div class="col-md-2">
+                                <div class="row">
                                     <label for="staticEmail" class="col-sm-2 col-form-label">الى</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control">
+                                        <input type="date" class="form-control" name="date_to" formControlName="date_to">
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-primary btn-block">بحث</button>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-success btn-block">طباعة</button>
+
+                            <div class="col-md-2">
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary btn-block">بحث</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <hr>
                 </div>
-                <hr>
-            </div>
 
-            <div class="col-md-12">
-                <div class="content">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="cartt">
-                                <fieldset class="the-fieldset">
-                                    <legend class="the-legend">مبيعات</legend>
-                                    <div class="frm">
-                                        <table class="table table-dark">
-                                            <thead>
-                                                <tr>
-                                                <th scope="col">الكود</th>
-                                                <th scope="col">العميل</th>
-                                                <th scope="col">الكمية</th>
-                                                <th scope="col">الوحدة</th>
-                                                <th scope="col">س.ق.ض</th>
-                                                <th scope="col">ض</th>
-                                                <th scope="col">س.ب.ض</th>
-                                                <th scope="col">اجمالى</th>
-                                                <th scope="col">التاريخ</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>4454</td>
-                                                    <td>منتج 1</td>
-                                                    <td>المخزن الرئيسى</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4454</td>
-                                                    <td>منتج 1</td>
-                                                    <td>المخزن الرئيسى</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4454</td>
-                                                    <td>منتج 1</td>
-                                                    <td>المخزن الرئيسى</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <hr>
-                                    <div class="summary">
-                                        <div class="row">
-                                            <div class="col-md-2 border-left">
-                                                <b>الكمية: </b> <br> <span>52155</span>
-                                            </div>
-                                            <div class="col-md-2 border-left">
-                                                <b>مبيعات.ق.ض: </b><br><span>52155</span>
-                                            </div>
-                                            <div class="col-md-2 border-left">
-                                                <b>مبيعات ب.ض: </b><br><span>52155</span>
-                                            </div>
-                                            <div class="col-md-2 border-left">
-                                                <b>ضريبة: </b><br><span>52155</span>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <b>صافى مبيعات: </b><br><span>52155</span>
+                <div class="col-md-12">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="cartt">
+                                    <fieldset class="the-fieldset">
+                                        <legend class="the-legend">مبيعات</legend>
+                                        <div class="frm">
+                                            <table class="table table-dark">
+                                                <thead>
+                                                    <tr>
+                                                    <th scope="col">الكود</th>
+                                                    <th scope="col">العميل</th>
+                                                    <th scope="col">الكمية</th>
+                                                    <th scope="col">الوحدة</th>
+                                                    <th scope="col">س.ق.ض</th>
+                                                    <th scope="col">ض</th>
+                                                    <th scope="col">س.ب.ض</th>
+                                                    <th scope="col">التاريخ</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of sales;">
+                                                        <td>{{item.inv_no}}</td>
+                                                        <td>{{item.cust_name}}</td>
+                                                        <td>{{item.product_quantity}}</td>
+                                                        <td>{{item.product_unit_price}}</td>
+                                                        <td>{{item.product_total_cost}}</td>
+                                                        <td>
+                                                            <span *ngIf="item.taxes==0">0</span>
+                                                            <span *ngIf="item.taxes!=0">{{item.product_total_cost * 0.14 | number : '1.2-2'}}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span *ngIf="item.taxes==0">{{item.product_total_cost}}</span>
+                                                            <span *ngIf="item.taxes!=0">{{item.product_total_cost * 0.14 + item.product_total_cost}}</span>
+                                                        </td>
+                                                        <td>{{item.invoice_date | date}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <hr>
+                                        <div class="summary">
+                                            <div class="row">
+                                                <div class="col-md-2 border-left">
+                                                    <b>الكمية: </b> <br> <span>{{sales_quantity}}</span>
+                                                </div>
+                                                <div class="col-md-2 border-left">
+                                                    <b>مبيعات.ق.ض: </b><br><span>{{sales_before_tax}}</span>
+                                                </div>
+                                                <div class="col-md-2 border-left">
+                                                    <b>مبيعات ب.ض: </b><br><span>{{sales_after_tax}}</span>
+                                                </div>
+                                                <div class="col-md-2 border-left">
+                                                    <b>ضريبة: </b><br><span>{{sales_taxes | number : '1.2-2'}}</span>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <b>صافى مبيعات: </b><br><span>{{sales_net}}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </fieldset>
+                                    </fieldset>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="cartt">
-                                <fieldset class="the-fieldset">
-                                    <legend class="the-legend">مشتريات</legend>
-                                    <div class="frm">
-                                        <table class="table table-dark">
-                                            <thead>
-                                                <tr>
-                                                <th scope="col">الكود</th>
-                                                <th scope="col">المورد</th>
-                                                <th scope="col">الكمية</th>
-                                                <th scope="col">الوحدة</th>
-                                                <th scope="col">س.ق.ض</th>
-                                                <th scope="col">ض</th>
-                                                <th scope="col">س.ب.ض</th>
-                                                <th scope="col">اجمالى</th>
-                                                <th scope="col">التاريخ</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>4454</td>
-                                                    <td>منتج 1</td>
-                                                    <td>المخزن الرئيسى</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4454</td>
-                                                    <td>منتج 1</td>
-                                                    <td>المخزن الرئيسى</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4454</td>
-                                                    <td>منتج 1</td>
-                                                    <td>المخزن الرئيسى</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <hr>
-                                    <div class="summary">
-                                        <div class="row">
-                                            <div class="col-md-2 border-left">
-                                                <b>الكمية</b> <br> <span>52155</span>
-                                            </div>
-                                            <div class="col-md-2 border-left">
-                                                <b>مشتريات.ق.ض</b><br><span>52155</span>
-                                            </div>
-                                            <div class="col-md-3 border-left">
-                                                <b>مشتريات ب.ض</b><br><span>52155</span>
-                                            </div>
-                                            <div class="col-md-2 border-left">
-                                                <b>ضريبة</b><br><span>52155</span>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <b>صافى مشتريات</b><br><span>52155</span>
+                            <div class="col-md-6">
+                                <div class="cartt">
+                                    <fieldset class="the-fieldset">
+                                        <legend class="the-legend">مشتريات</legend>
+                                        <div class="frm">
+                                            <table class="table table-dark">
+                                                <thead>
+                                                    <tr>
+                                                    <th scope="col">الكود</th>
+                                                    <th scope="col">المورد</th>
+                                                    <th scope="col">الكمية</th>
+                                                    <th scope="col">الوحدة</th>
+                                                    <th scope="col">س.ق.ض</th>
+                                                    <th scope="col">ض</th>
+                                                    <th scope="col">س.ب.ض</th>
+                                                    <th scope="col">التاريخ</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of puchases;">
+                                                        <td>{{item.inv_no}}</td>
+                                                        <td>{{item.sup_name}}</td>
+                                                        <td>{{item.product_quantity}}</td>
+                                                        <td>{{item.product_unit_price}}</td>
+                                                        <td>{{item.product_total_cost}}</td>
+                                                        <td>
+                                                            <span *ngIf="item.taxable==0">0</span>
+                                                            <span *ngIf="item.taxable!=0">{{(item.product_total_cost * 0.14) | number : '1.2-2'}}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span *ngIf="item.taxable==0">{{item.product_total_cost}}</span>
+                                                            <span *ngIf="item.taxable!=0">{{item.product_total_cost * 0.14 + item.product_total_cost}}</span>
+                                                        </td>
+                                                        <td>{{item.invoice_date | date}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <hr>
+                                        <div class="summary">
+                                            <div class="row">
+                                                <div class="col-md-2 border-left">
+                                                    <b>الكمية</b> <br> <span>{{purchases_quantity}}</span>
+                                                </div>
+                                                <div class="col-md-2 border-left">
+                                                    <b>مشتريات.ق.ض</b><br><span>{{purchases_before_tax}}</span>
+                                                </div>
+                                                <div class="col-md-3 border-left">
+                                                    <b>مشتريات ب.ض</b><br><span>{{purchases_after_tax}}</span>
+                                                </div>
+                                                <div class="col-md-2 border-left">
+                                                    <b>ضريبة</b><br><span>{{purchases_taxes | number : '1.2-2'}}</span>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <b>صافى مشتريات</b><br><span>{{purchases_net}}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </fieldset>
+                                    </fieldset>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="cartt">
-                                <fieldset class="the-fieldset">
-                                    <legend class="the-legend">مرتجعات المبيعات</legend>
-                                    <div class="frm">
-                                        <table class="table table-dark">
-                                            <thead>
-                                                <tr>
-                                                <th scope="col">الكود</th>
-                                                <th scope="col">العميل</th>
-                                                <th scope="col">الكمية</th>
-                                                <th scope="col">الوحدة</th>
-                                                <th scope="col">س.ق.ض</th>
-                                                <th scope="col">ض</th>
-                                                <th scope="col">س.ب.ض</th>
-                                                <th scope="col">اجمالى</th>
-                                                <th scope="col">التاريخ</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>4454</td>
-                                                    <td>منتج 1</td>
-                                                    <td>المخزن الرئيسى</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4454</td>
-                                                    <td>منتج 1</td>
-                                                    <td>المخزن الرئيسى</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4454</td>
-                                                    <td>منتج 1</td>
-                                                    <td>المخزن الرئيسى</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <hr>
-                                    <div class="summary">
-                                        <div class="row">
-                                            <div class="col-md-4 border-left">
-                                                <b>الكمية: </b> <span>52155</span>
-                                            </div>
-                                            <div class="col-md-4 border-left">
-                                                <b>ضريبة: </b><span>52155</span>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <b>صافى مرتجعات: </b><span>52155</span>
+                            <div class="col-md-6">
+                                <div class="cartt">
+                                    <fieldset class="the-fieldset">
+                                        <legend class="the-legend">مرتجعات المبيعات</legend>
+                                        <div class="frm">
+                                            <table class="table table-dark">
+                                                <thead>
+                                                    <tr>
+                                                    <th scope="col">الكود</th>
+                                                    <th scope="col">العميل</th>
+                                                    <th scope="col">الكمية</th>
+                                                    <th scope="col">الوحدة</th>
+                                                    <th scope="col">س.ق.ض</th>
+                                                    <th scope="col">ض</th>
+                                                    <th scope="col">س.ب.ض</th>
+                                                    <th scope="col">التاريخ</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of salesReturn;">
+                                                        <td>{{item.inv_no}}</td>
+                                                        <td>{{item.cust_name}}</td>
+                                                        <td>{{item.product_quantity}}</td>
+                                                        <td>{{item.product_unit_price}}</td>
+                                                        <td>
+                                                            <span *ngIf="item.taxable==0">0</span>
+                                                            <span *ngIf="item.taxable!=0">{{(item.product_total_cost * 0.14) | number : '1.2-2'}}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span *ngIf="item.taxable==0">{{item.product_total_cost}}</span>
+                                                            <span *ngIf="item.taxable!=0">{{item.product_total_cost * 0.14 + item.product_total_cost}}</span>
+                                                        </td>
+                                                        <td>{{item.return_date | date}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <hr>
+                                        <div class="summary">
+                                            <div class="row">
+                                                <div class="col-md-2 border-left">
+                                                    <b>الكمية</b> <br> <span>{{sales_return_quantity}}</span>
+                                                </div>
+                                                <div class="col-md-2 border-left">
+                                                    <b>مرتجعات.ق.ض</b><br><span>{{sales_return_before_tax}}</span>
+                                                </div>
+                                                <div class="col-md-3 border-left">
+                                                    <b>مرتجعات ب.ض</b><br><span>{{sales_return_after_tax}}</span>
+                                                </div>
+                                                <div class="col-md-2 border-left">
+                                                    <b>ضريبة</b><br><span>{{sales_return_taxes | number : '1.2-2'}}</span>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <b>صافى المرتجعات</b><br><span>{{sales_return_net}}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </fieldset>
+                                    </fieldset>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="cartt">
-                                <fieldset class="the-fieldset">
-                                    <legend class="the-legend">مرتجعات المشتريات</legend>
-                                    <div class="frm">
-                                        <table class="table table-dark">
-                                            <thead>
-                                                <tr>
-                                                <th scope="col">الكود</th>
-                                                <th scope="col">المورد</th>
-                                                <th scope="col">الكمية</th>
-                                                <th scope="col">الوحدة</th>
-                                                <th scope="col">س.ق.ض</th>
-                                                <th scope="col">ض</th>
-                                                <th scope="col">س.ب.ض</th>
-                                                <th scope="col">اجمالى</th>
-                                                <th scope="col">التاريخ</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>4454</td>
-                                                    <td>منتج 1</td>
-                                                    <td>المخزن الرئيسى</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4454</td>
-                                                    <td>منتج 1</td>
-                                                    <td>المخزن الرئيسى</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4454</td>
-                                                    <td>منتج 1</td>
-                                                    <td>المخزن الرئيسى</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                    <td>120</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <hr>
-                                    <div class="summary">
-                                        <div class="row">
-                                            <div class="col-md-4 border-left">
-                                                <b>الكمية: </b> <span>52155</span>
-                                            </div>
-                                            <div class="col-md-4 border-left">
-                                                <b>ضريبة: </b><span>52155</span>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <b>صافى مرتجعات: </b><span>52155</span>
+                            <div class="col-md-6">
+                                <div class="cartt">
+                                    <fieldset class="the-fieldset">
+                                        <legend class="the-legend">مرتجعات المشتريات</legend>
+                                        <div class="frm">
+                                            <table class="table table-dark">
+                                                <thead>
+                                                    <tr>
+                                                    <th scope="col">الكود</th>
+                                                    <th scope="col">المورد</th>
+                                                    <th scope="col">الكمية</th>
+                                                    <th scope="col">الوحدة</th>
+                                                    <th scope="col">س.ق.ض</th>
+                                                    <th scope="col">ض</th>
+                                                    <th scope="col">س.ب.ض</th>
+                                                    <th scope="col">التاريخ</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of purchasesReturn;">
+                                                        <td>{{item.inv_no}}</td>
+                                                        <td>{{item.sup_name}}</td>
+                                                        <td>{{item.quantity}}</td>
+                                                        <td>{{item.product_unit_price}}</td>
+                                                        <td>
+                                                            <span *ngIf="item.taxable==0">0</span>
+                                                            <span *ngIf="item.taxable!=0">{{(item.product_total_cost * 0.14) | number : '1.2-2'}}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span *ngIf="item.taxable==0">{{item.product_total_cost}}</span>
+                                                            <span *ngIf="item.taxable!=0">{{item.product_total_cost * 0.14 + item.product_total_cost}}</span>
+                                                        </td>
+                                                        <td>{{item.return_date | date}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <hr>
+                                        <div class="summary">
+                                            <div class="row">
+                                                <div class="col-md-2 border-left">
+                                                    <b>الكمية</b> <br> <span>{{purchases_return_quantity}}</span>
+                                                </div>
+                                                <div class="col-md-2 border-left">
+                                                    <b>مرتجعات.ق.ض</b><br><span>{{purchases_return_before_tax}}</span>
+                                                </div>
+                                                <div class="col-md-3 border-left">
+                                                    <b>مرتجعات ب.ض</b><br><span>{{purchases_return_after_tax}}</span>
+                                                </div>
+                                                <div class="col-md-2 border-left">
+                                                    <b>ضريبة</b><br><span>{{purchases_return_taxes | number : '1.2-2'}}</span>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <b>صافى المرتجعات</b><br><span>{{purchases_return_net}}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </fieldset>
+                                    </fieldset>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="cartt">
-                                <fieldset class="the-fieldset">
-                                    <legend class="the-legend">الكمية بالمخازن الان</legend>
-                                    <div class="frm">
-                                        <table class="table table-dark">
-                                            <thead>
-                                                <tr>
-                                                <th scope="col">اسم المخزن</th>
-                                                <th scope="col">الكمية</th>
-                                                <th scope="col">سعر الشراء</th>
-                                                <th scope="col">سعر البيع</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>المخزن الرئيسى</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>المخزن الرئيسى</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>المخزن الرئيسى</td>
-                                                    <td>100</td>
-                                                    <td>100</td>
-                                                    <td>120</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </fieldset>
+                            <div class="col-md-12">
+                                <div class="cartt">
+                                    <fieldset class="the-fieldset">
+                                        <legend class="the-legend">الكمية بالمخازن الان</legend>
+                                        <div class="frm">
+                                            <table class="table table-dark">
+                                                <thead>
+                                                    <tr>
+                                                    <th scope="col">اسم المخزن</th>
+                                                    <th scope="col">الكمية</th>
+                                                    <th scope="col">سعر الشراء</th>
+                                                    <th scope="col">سعر البيع</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of inventoryBalance;">
+                                                        <td>{{item.invent_name}}</td>
+                                                        <td>{{item.product_quantity}}</td>
+                                                        <td>{{item.purchase_price}}</td>
+                                                        <td>{{item.sell_price}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </fieldset>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
