@@ -118,6 +118,7 @@ import { OffersComponent } from './shourtcuts/offers/offers.component';
 import { OfferDetailsComponent } from './shourtcuts/offer-details/offer-details.component';
 import { SandAbdCashComponent } from './masrof_sand_tax/sand-abd-cash/sand-abd-cash.component';
 import { SandSrfCashComponent } from './masrof_sand_tax/sand-srf-cash/sand-srf-cash.component';
+import { BarcodeComponent } from './barcode/barcode.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -202,6 +203,7 @@ const routes: Routes = [
   {path: 'add_offer', component: AddOfferComponent},
   {path: 'offers', component: OffersComponent},
   {path: 'offer_details', component: OfferDetailsComponent},
+  {path: 'generate_baecode', component: BarcodeComponent},
 ];
 
 
@@ -294,7 +296,8 @@ const routes: Routes = [
     OffersComponent,
     OfferDetailsComponent,
     SandAbdCashComponent,
-    SandSrfCashComponent
+    SandSrfCashComponent,
+    BarcodeComponent
   ],
   imports: [
     BrowserModule,
@@ -306,7 +309,7 @@ const routes: Routes = [
     MatAutocompleteModule,
     MatInputModule,
     PushNotificationModule.forRoot(),
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [
     UserService,
