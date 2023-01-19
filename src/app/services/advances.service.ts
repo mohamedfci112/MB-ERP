@@ -7,6 +7,7 @@ import { Observable } from '../../../node_modules/rxjs/dist/types/internal/Obser
 })
 export class AdvancesService {
 
+  //readonly APIUrl = "http://localhost:90/api";
   readonly APIUrl = "http://localhost:1195/api";
 
   constructor(private http:HttpClient) { }

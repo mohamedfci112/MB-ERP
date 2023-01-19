@@ -8,6 +8,7 @@ import { Observable } from '../../../node_modules/rxjs/dist/types/internal/Obser
 export class CustomerService {
 
   readonly APIUrl = "http://localhost:1195/api";
+  //readonly APIUrl = "http://localhost:90/api";
 
   constructor(private http:HttpClient) { }
 
