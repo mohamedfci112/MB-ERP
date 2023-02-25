@@ -47,4 +47,9 @@ export class SalariesService {
     return this.http.post(this.APIUrl+'/Salary/GetTotalEmpAdvances', val);
   }
 
+  //GetSalariesReport
+  GetSalariesReport(val:any){
+    return this.http.post(this.APIUrl+'/Salary/GetSalariesReport', val);
+  }
+
 }

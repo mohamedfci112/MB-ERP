@@ -23,5 +23,10 @@ export class AdvancesService {
     return this.http.get(this.APIUrl+'/Advance/GetLastID');
   }
 
+  //GetAdvancesReport
+  GetAdvancesReport(val:any){
+    return this.http.post(this.APIUrl+'/Advance/GetAdvancesReport', val);
+  }
+
 
 }

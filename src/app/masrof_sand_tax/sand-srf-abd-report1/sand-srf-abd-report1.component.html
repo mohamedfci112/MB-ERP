@@ -1,16 +1,16 @@
 <div class="transfers">
         <div class="container">
-            <form [formGroup] = "formdata" (ngSubmit) = "salariesReport(formdata.value)" >
+            <form [formGroup] = "formdata" (ngSubmit) = "sandat(formdata.value)" >
                 <div class="row">
                     <div class="col-md-12">
                         <div class="title">
-                            <h2>اجمالى الجزاءات والاستقطاعات فى فترة</h2>
+                            <h2>اجمالى سندات الصرف فى فترة</h2>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="top">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">من</label>
                                         <div class="col-sm-10">
@@ -18,7 +18,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">الى</label>
                                         <div class="col-sm-10">
@@ -48,31 +48,54 @@
                                         <thead>
                                             <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">المسؤول</th>
-                                            <th scope="col">الموظف</th>
-                                            <th scope="col">تاريخ الخصم</th>
-                                            <th scope="col">تاريخ الاستحقاق</th>
+                                            <th scope="col">اسم المورد</th>
+                                            <th scope="col">اسم الشركة</th>
+                                            <th scope="col">رقم الشيك</th>
+                                            <th scope="col">تاريخ الشيك</th>
+                                            <th scope="col">اسم البنك</th>
                                             <th scope="col">المبلغ</th>
-                                            <th scope="col">السبب</th>
+                                            <th scope="col">نوع السند</th>
+                                            <th scope="col">تاريخ التحصيل</th>
+                                            <th scope="col">تاريخ الاستحقاق</th>
+                                            <th scope="col">المسئول</th>
+                                            <th scope="col">ملاحظات</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let item of SearchResult | paginate: config;let i=index;">
                                                 <th scope="row">{{i+1}}</th>
-                                                <td>{{item.admin_person}}</td>
-                                                <td>{{item.emp_name}}</td>
-                                                <td>{{item.deduct_date}}</td>
-                                                <td>{{item.due_date}}</td>
+                                                <td>{{item.sup_name}}</td>
+                                                <td>{{item.company_name}}</td>
+                                                <td>
+                                                    <span *ngIf="item.srf_type==1">نقدى</span>
+                                                    <span *ngIf="item.srf_type==0">{{item.check_no}}</span>
+                                                </td>
+                                                <td>
+                                                    <span *ngIf="item.srf_type==1">نقدى</span>
+                                                    <span *ngIf="item.srf_type==0">{{item.check_date}}</span>
+                                                </td>
+                                                <td>
+                                                    <span *ngIf="item.srf_type==1">نقدى</span>
+                                                    <span *ngIf="item.srf_type==0">{{item.bank_name}}</span>
+                                                </td>
                                                 <td>{{item.amount}}</td>
-                                                <td>{{item.reason}}</td>
+                                                <td>
+                                                    <span *ngIf="item.srf_type==1">نقدى</span>
+                                                    <span *ngIf="item.srf_type==0">شيكات</span>
+                                                </td>
+                                                <td>{{item.collect_date}}</td>
+                                                <td>{{item.due_date}}</td>
+                                                <td>{{item.admin}}</td>
+                                                <td>{{item.notes}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+    
                                     <div class="summary">
                                         <div class="row">
                                             <div class="col-md-4 border">
-                                                <b>اجمالى السلفيات: </b><span>{{total}}</span>
+                                                <b>اجمالى السندات: </b><span>{{total}}</span>
                                             </div>
                                         </div>
                                     </div>

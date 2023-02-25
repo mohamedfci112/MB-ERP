@@ -32,4 +32,14 @@ export class SnadatService {
     return this.http.post(this.APIUrl+'/Snadat/insertSndSrfCheck', val);
   }
 
+  //insert abd snd check
+  SnadatAbdReport(val:any){
+    return this.http.post(this.APIUrl+'/Snadat/SnadatAbdReport', val);
+  }
+
+  //insert abd snd check
+  SnadatSrfReport(val:any){
+    return this.http.post(this.APIUrl+'/Snadat/SnadatSrfReport', val);
+  }
+
 }

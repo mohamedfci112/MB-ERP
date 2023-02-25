@@ -44,4 +44,10 @@ export class EmployeeService {
     return this.http.get(this.APIUrl+'/Employeepenaltiesdeduction/GetLastID');
   }
 
+  
+  // insert employees penalties deduction
+  GetPenaltiesReport(val: any){
+    return this.http.post(this.APIUrl+'/Employeepenaltiesdeduction/GetPenaltiesReport',val);
+  }
+
 }

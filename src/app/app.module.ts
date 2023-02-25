@@ -123,6 +123,7 @@ import { UsersComponent } from './managment/users/users.component';
 import { AddUserComponent } from './managment/add-user/add-user.component';
 import { UsersService } from './services/users.service';
 import { PrivilegesComponent } from './managment/privileges/privileges.component';
+import { SandSrfAbdReport1Component } from './masrof_sand_tax/sand-srf-abd-report1/sand-srf-abd-report1.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -205,6 +206,7 @@ const routes: Routes = [
   {path: 'sand_srf_cash', component: SandSrfCashComponent},
   {path: 'tax_report', component: TaxReportComponent},
   {path: 'srf_abd_report', component: SandSrfAbdReportComponent},
+  {path: 'srf_abd_report1', component: SandSrfAbdReport1Component},
   {path: 'add_offer', component: AddOfferComponent},
   {path: 'offers', component: OffersComponent},
   {path: 'offer_details', component: OfferDetailsComponent},
@@ -307,7 +309,8 @@ const routes: Routes = [
     BarcodeComponent,
     UsersComponent,
     AddUserComponent,
-    PrivilegesComponent
+    PrivilegesComponent,
+    SandSrfAbdReport1Component
   ],
   imports: [
     BrowserModule,

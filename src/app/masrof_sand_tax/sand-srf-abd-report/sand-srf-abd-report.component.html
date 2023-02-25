@@ -1,31 +1,20 @@
 <div class="transfers">
-        <div class="container">
+    <div class="container">
+        <form [formGroup] = "formdata" (ngSubmit) = "sandat(formdata.value)" >
             <div class="row">
                 <div class="col-md-12">
                     <div class="title">
-                        <h2>اجمالى السندات فى فترة</h2>
+                        <h2>اجمالى سندات القبض فى فترة</h2>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="top">
                         <div class="row">
-                            <div class="col-md-2">
-                                <div class="form-group row border-left">
-                                    <label class="col-sm-3 col-form-label">قبض</label>
-                                    <div class="col-sm-3">
-                                        <input type="checkbox" class="form-check-input">
-                                    </div>
-                                    <label class="col-sm-3 col-form-label">صرف</label>
-                                    <div class="col-sm-3">
-                                        <input type="checkbox" class="form-check-input">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-3">
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">من</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control">
+                                        <input type="date" name="date1" formControlName="date1" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -33,7 +22,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">الى</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control">
+                                        <input type="date" name="date2" formControlName="date2" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +33,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="col-auto">
-                                    <button type="submit" class="btn btn-success btn-block">طباعة</button>
+                                    <button type="button" (click)="openPDF()" class="btn btn-success btn-block">طباعة</button>
                                 </div>
                             </div>
                         </div>
@@ -59,53 +48,54 @@
                                     <thead>
                                         <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">اسم المسؤل</th>
+                                        <th scope="col">اسم العميل</th>
+                                        <th scope="col">اسم الشركة</th>
+                                        <th scope="col">رقم الشيك</th>
+                                        <th scope="col">تاريخ الشيك</th>
+                                        <th scope="col">اسم البنك</th>
                                         <th scope="col">المبلغ</th>
-                                        <th scope="col">تاريخ العملية</th>
-                                        <th scope="col">تم الصرف ل</th>
-                                        <th scope="col">السبب</th>
+                                        <th scope="col">نوع السند</th>
+                                        <th scope="col">تاريخ التحصيل</th>
+                                        <th scope="col">تاريخ الاستحقاق</th>
+                                        <th scope="col">المسئول</th>
+                                        <th scope="col">ملاحظات</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>4454</td>
-                                            <td>منتج 1</td>
-                                            <td>المخزن الرئيسى</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>4454</td>
-                                            <td>منتج 1</td>
-                                            <td>المخزن الرئيسى</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>4454</td>
-                                            <td>منتج 1</td>
-                                            <td>المخزن الرئيسى</td>
-                                            <td>100</td>
-                                            <td>100</td>
+                                        <tr *ngFor="let item of SearchResult | paginate: config;let i=index;">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{item.cust_name}}</td>
+                                            <td>{{item.company_name}}</td>
+                                            <td>
+                                                <span *ngIf="item.abd_type==1">نقدى</span>
+                                                <span *ngIf="item.abd_type==0">{{item.check_no}}</span>
+                                            </td>
+                                            <td>
+                                                <span *ngIf="item.abd_type==1">نقدى</span>
+                                                <span *ngIf="item.abd_type==0">{{item.check_date}}</span>
+                                            </td>
+                                            <td>
+                                                <span *ngIf="item.abd_type==1">نقدى</span>
+                                                <span *ngIf="item.abd_type==0">{{item.bank_name}}</span>
+                                            </td>
+                                            <td>{{item.amount}}</td>
+                                            <td>
+                                                <span *ngIf="item.abd_type==1">نقدى</span>
+                                                <span *ngIf="item.abd_type==0">شيكات</span>
+                                            </td>
+                                            <td>{{item.collect_date}}</td>
+                                            <td>{{item.due_date}}</td>
+                                            <td>{{item.admin}}</td>
+                                            <td>{{item.notes}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                    </ul>
-                                </nav>
+                                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
                                 <div class="summary">
                                     <div class="row">
                                         <div class="col-md-4 border">
-                                            <b>اجمالى السندات: </b><span>52155</span>
+                                            <b>اجمالى السندات: </b><span>{{total}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -114,5 +104,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
+</div>
