@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/",
             "outputPath": "dist/mb",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -40,7 +41,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "10mb",
+                  "maximumWarning": "15mb",
                   "maximumError": "15mb"
                 },
                 {
@@ -70,6 +71,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "mb:build:production",
+            "proxyConfig": "src/proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "browserTarget": "mb:build:production"
@@ -78,6 +83,7 @@
               "browserTarget": "mb:build:development"
             }
           },
+          
           "defaultConfiguration": "development"
         },
         "extract-i18n": {

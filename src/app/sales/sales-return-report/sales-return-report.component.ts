@@ -76,7 +76,7 @@ export class SalesReturnReportComponent implements OnInit {
             this.totalSales += data[i].product_total_cost;
             this.totalTaxs += data[i].taxes;
 
-            this.tableList.push([data[i].product_total_cost,data[i].taxes,(data[i].product_total_cost-data[i].taxes),data[i].quantity,data[i].return_date,data[i].product_name,data[i].cust_name,data[i].inv_no]);
+            this.tableList.push([data[i].product_total_cost,data[i].taxes,(data[i].product_total_cost-data[i].taxes),data[i].product_quantity,data[i].return_date,data[i].product_name,data[i].cust_name,data[i].inv_no]);
           }
         });
     }

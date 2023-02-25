@@ -1,5 +1,6 @@
 <div class="transfers">
-        <div class="container">
+    <div class="container">
+        <form [formGroup] = "formdata" (ngSubmit) = "treasuryTrnsfersReport(formdata.value)" >
             <div class="row">
                 <div class="col-md-12">
                     <div class="title">
@@ -13,7 +14,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">من</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control">
+                                        <input type="date" name="date1" formControlName="date1" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -21,7 +22,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">الى</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control">
+                                        <input type="date" name="date2" formControlName="date2" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -32,7 +33,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="col-auto">
-                                    <button type="submit" class="btn btn-success btn-block">طباعة</button>
+                                    <button type="button" (click)="openPDF()" class="btn btn-success btn-block">طباعة</button>
                                 </div>
                             </div>
                         </div>
@@ -56,48 +57,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>4454</td>
-                                            <td>منتج 1</td>
-                                            <td>المخزن الرئيسى</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                            <td>120</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>4454</td>
-                                            <td>منتج 1</td>
-                                            <td>المخزن الرئيسى</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                            <td>120</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>4454</td>
-                                            <td>منتج 1</td>
-                                            <td>المخزن الرئيسى</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                            <td>120</td>
+                                        <tr *ngFor="let item of SearchResult | paginate: config;let i=index;">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{item.amount}}</td>
+                                            <td>{{item.trans_date}}</td>
+                                            <td>{{item.from_tr}}</td>
+                                            <td>{{item.to_tr}}</td>
+                                            <td>{{item.trans_admin}}</td>
+                                            <td>{{item.reason}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                    </ul>
-                                </nav>
+                                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
                                 <div class="summary">
                                     <div class="row">
                                         <div class="col-md-4 border">
-                                            <b>اجمالى المبلغ: </b><span>52155</span>
+                                            <b>اجمالى المبلغ: </b><span>{{total}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -106,5 +81,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
+</div>

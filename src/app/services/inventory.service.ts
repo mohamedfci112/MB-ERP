@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable } from '../../../node_modules/rxjs/dist/types/internal/Observable';
+import { environment } from '../../environments/environment.prod';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Observable } from '../../../node_modules/rxjs/dist/types/internal/Obser
 })
 export class InventoryService {
 
-  readonly APIUrl = "http://localhost:1195/api";
+  readonly APIUrl = environment.API_URL;
 
   constructor(private http:HttpClient) { }
 

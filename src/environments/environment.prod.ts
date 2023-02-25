@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  //API_URL: 'http://hpegy.ddns.net:1195/api'
+  API_URL: 'http://localhost:1195/api'
 };

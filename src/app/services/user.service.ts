@@ -1,6 +1,8 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,23 +10,28 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
   [x: string]: any;
 
-  baseUrl = 'http://localhost:8080/archiving_php/';
+  baseUrl = environment.API_URL;
   @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();
   constructor(private httpClient: HttpClient) { }
 
   // tslint:disable-next-line:typedef
-  userlogin(username: any, password: any) {
+  /*userlogin(val:any) {
     // tslint:disable-next-line:no-shadowed-variable
-    return this.httpClient.post(this.baseUrl + 'login.php', { username, password }).pipe(map((Users: any) => {
+    return this.httpClient.post(this.baseUrl + '/Users/login.php', val).pipe(map((Users: any) => {
     this.setToken(Users[0].id);
     this.getLoggedInName.emit(true);
     return Users;
     }));
+  }*/
+
+  userlogin(val:any) {
+    return this.httpClient.post(this.baseUrl + '/Users/login',val);
   }
 
 
+
   getToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem('user_id');
     }
   
   isLoggedIn() {

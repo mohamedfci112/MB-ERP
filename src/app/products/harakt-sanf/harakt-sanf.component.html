@@ -119,9 +119,7 @@
                                                 <div class="col-md-2 border-left">
                                                     <b>ضريبة: </b><br><span>{{sales_taxes | number : '1.2-2'}}</span>
                                                 </div>
-                                                <div class="col-md-2">
-                                                    <b>صافى مبيعات: </b><br><span>{{sales_net}}</span>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </fieldset>
@@ -180,9 +178,7 @@
                                                 <div class="col-md-2 border-left">
                                                     <b>ضريبة</b><br><span>{{purchases_taxes | number : '1.2-2'}}</span>
                                                 </div>
-                                                <div class="col-md-3">
-                                                    <b>صافى مشتريات</b><br><span>{{purchases_net}}</span>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </fieldset>
@@ -212,6 +208,7 @@
                                                         <td>{{item.cust_name}}</td>
                                                         <td>{{item.product_quantity}}</td>
                                                         <td>{{item.product_unit_price}}</td>
+                                                        <td>{{item.product_total_cost}}</td>
                                                         <td>
                                                             <span *ngIf="item.taxable==0">0</span>
                                                             <span *ngIf="item.taxable!=0">{{(item.product_total_cost * 0.14) | number : '1.2-2'}}</span>
@@ -240,9 +237,7 @@
                                                 <div class="col-md-2 border-left">
                                                     <b>ضريبة</b><br><span>{{sales_return_taxes | number : '1.2-2'}}</span>
                                                 </div>
-                                                <div class="col-md-3">
-                                                    <b>صافى المرتجعات</b><br><span>{{sales_return_net}}</span>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </fieldset>
@@ -272,6 +267,7 @@
                                                         <td>{{item.sup_name}}</td>
                                                         <td>{{item.quantity}}</td>
                                                         <td>{{item.product_unit_price}}</td>
+                                                        <td>{{item.product_total_cost}}</td>
                                                         <td>
                                                             <span *ngIf="item.taxable==0">0</span>
                                                             <span *ngIf="item.taxable!=0">{{(item.product_total_cost * 0.14) | number : '1.2-2'}}</span>
@@ -299,9 +295,6 @@
                                                 </div>
                                                 <div class="col-md-2 border-left">
                                                     <b>ضريبة</b><br><span>{{purchases_return_taxes | number : '1.2-2'}}</span>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <b>صافى المرتجعات</b><br><span>{{purchases_return_net}}</span>
                                                 </div>
                                             </div>
                                         </div>

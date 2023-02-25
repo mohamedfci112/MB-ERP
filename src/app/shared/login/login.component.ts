@@ -24,15 +24,13 @@ export class LoginComponent implements OnInit {
 
   postdata(angForm1: { value: { email: any; password: any; }; })
   {
-  this.userService.userlogin(angForm1.value.email, angForm1.value.password)
-  .pipe()
-  .subscribe(
+    var dta = {user_id:angForm1.value.email, password:angForm1.value.password};
+  this.userService.userlogin(dta).subscribe(
   (data: any) => {
       localStorage.setItem('user_id', data[0].id);
-      localStorage.setItem('archiving_name', data[0].name);
-      localStorage.setItem('archiving_email', data[0].email);
-      localStorage.setItem('archiving_depart', data[0].department);
-      localStorage.setItem('archiving_user', data[0].status);
+      localStorage.setItem('group_id', data[0].group_id);
+      localStorage.setItem('username', data[0].username);
+      localStorage.setItem('group_name', data[0].group_name);
       window.location.href = '/';
     },
   () => {

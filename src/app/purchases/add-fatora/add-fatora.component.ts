@@ -9,6 +9,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { PushNotificationService } from 'ng-push-notification';
 import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
 import { DatePipe } from '../../../../node_modules/@angular/common';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'app-add-fatora',
@@ -31,6 +33,9 @@ export class AddFatoraComponent implements OnInit {
   tableList = <any>[];
 
   searchTerm : FormControl = new FormControl();
+
+  asnaf_quantity:any=0;
+  total:any=0;
 
   formdata:any;
 
@@ -134,6 +139,37 @@ export class AddFatoraComponent implements OnInit {
     this.ngOnInit();
   }
 
+  //
+  calc(){
+
+    var total_cost = document.getElementById('product_total_cost');
+    for(let i=0; i < this.tableList.length; i++)
+    {
+      var product_quantity = document.getElementById('product_quantity'+[i]);
+      var product_unit_price = document.getElementById('product_unit_price'+[i]);
+      var product_total_cost = document.getElementById('product_total_cost'+[i]);
+      
+      var q:any = (product_quantity as HTMLInputElement).value ? (product_quantity as HTMLInputElement).value : 0;
+      var p:any = (product_unit_price as HTMLInputElement).value ? (product_unit_price as HTMLInputElement).value : 0;
+      (product_total_cost as HTMLInputElement).value = (q * p).toString();
+
+      this.checkTotal();
+    }
+
+  }
+
+  checkTotal()
+  {
+    this.total=0;
+    for(let i=0; i < this.tableList.length; i++)
+    {
+      var product_total_cost = document.getElementById('product_total_cost'+[i]);
+      this.total += parseInt((product_total_cost as HTMLInputElement).value);
+      console.log((product_total_cost as HTMLInputElement).value);
+    }
+    
+  }
+
   //search method
   searchProduct(prodId:any){
     
@@ -158,6 +194,7 @@ export class AddFatoraComponent implements OnInit {
           if(isPresent == false)
             {
               this.tableList.push(this.productSearchResult[0]);
+              this.asnaf_quantity = this.tableList.length;
               console.log(this.tableList);
             }
             else
@@ -187,7 +224,9 @@ export class AddFatoraComponent implements OnInit {
           });
 
           const x = this.tableList.splice(indexx, 1);
+          this.asnaf_quantity = this.tableList.length;
         }
+        this.checkTotal();
         
       }
       else{
@@ -195,7 +234,9 @@ export class AddFatoraComponent implements OnInit {
         this.router.navigated = false;
       }
     }
-    
+    setTimeout(()=>{
+      this.checkTotal();
+    },1000);
   }
 
 
@@ -219,7 +260,7 @@ export class AddFatoraComponent implements OnInit {
       this.pushNotification.show("اختر المخزن", {}, 6000, );
       this.router.navigated = false;
     }
-    else if(data.total_cost == "")
+    else if(this.total == "")
     {
       this.pushNotification.show("اجمالى الفاتورة فارغ", {}, 6000, );
       this.router.navigated = false;
@@ -239,7 +280,7 @@ export class AddFatoraComponent implements OnInit {
       this.pushNotification.show("ادخل تاريخ الاستحقاق", {}, 6000, );
       this.router.navigated = false;
     }
-    else if(data.total_cost > this.treasury_balance && data.payment_type == "pay_cash" && data.supplier_type == "sup_cash")
+    else if(this.total > this.treasury_balance && data.payment_type == "pay_cash" && data.supplier_type == "sup_cash")
     {
       this.pushNotification.show("الرصيد بالخزنة غير كافى", {}, 6000, );
       this.router.navigated = false;
@@ -265,8 +306,8 @@ export class AddFatoraComponent implements OnInit {
             supplier_id: this.supp_id,
             supplier_inv_no: data.supplier_inv_no,
             inventory_id: this.invent_id,
-            quantity: data.quantity,
-            total_cost: data.total_cost,
+            quantity: this.asnaf_quantity,
+            total_cost: this.total,
             taxable: data.taxable,
             payment_type: data.payment_type,
             supplier_type: data.supplier_type,
@@ -299,7 +340,7 @@ export class AddFatoraComponent implements OnInit {
 
       var aglSupData = {
         sup_no : this.supp_id,
-        amount : data.total_cost,
+        amount : this.total,
         inv_no : this.lastId,
         inv_date: this.myDate,
         due_date: data.due_date
@@ -315,7 +356,7 @@ export class AddFatoraComponent implements OnInit {
       //if payment cash will deposit in treasury and if check will deposit in treasury manauly
       if(data.payment_type == "pay_cash" && data.supplier_type == "sup_cash")
       {
-        if(data.total_cost > this.treasury_balance)
+        if(this.total > this.treasury_balance)
         {
           this.pushNotification.show("الرصيد بالخزنة غير كافى", {}, 6000, );
           this.router.navigated = false;
@@ -324,7 +365,7 @@ export class AddFatoraComponent implements OnInit {
         {
           var depositData = {
             treasury_id : this.treasury_id,
-            deposit_amount : (data.total_cost * -1),
+            deposit_amount : (this.total * -1),
             deposit_date : this.myDate,
             depositor : "system",
             deposit_reason : this.lastId,
@@ -337,11 +378,13 @@ export class AddFatoraComponent implements OnInit {
         }
         
       }
-      
+      this.tableList=[];
+      this.total=0;
       this.tableList=[];
       this.ngOnInit();
     }
     
   }
+
 
 }

@@ -1,0 +1,84 @@
+<div class="employee">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title">
+                        <h2>اعطاء صلاحيات المستخدمين</h2>
+                    </div>
+                </div>
+    
+                <div class="col-md-12">
+                    <div class="top">
+                        <div class="row">
+                            <label class="col-sm-1 col-form-label">المجموعة</label>
+                            <div class="col-sm-5">
+                                <select name="group_id" (change)="myGroup($event)" [(ngModel)]="group_id" class="form-control">
+                                    <option *ngFor="let g of groupList;" value="{{g.id}}">{{g.group_name}}</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+    
+                <div class="col-md-12">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="cartt">
+                                    <fieldset class="the-fieldset">
+                                        <legend class="the-legend">بيانات العملية</legend>
+                                        <div class="frm">
+                                            <div id="accordion">
+
+                                                <!--Start-->
+                                                <div *ngFor="let s of screensList" class="card">
+                                                  <div class="card-header" id="{{s.id}}">
+                                                    <h5 class="mb-0">
+                                                      <button class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#d'+ s.id" aria-expanded="false" [attr.aria-controls]="s.id">
+                                                        {{s.screen_name}}
+                                                      </button>
+                                                    </h5>
+                                                  </div>
+                                              
+                                                  <div [id]="'d' + s.id" class="collapse" [attr.aria-labelledby]="s.id" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        <div class="form-check form-check-inline">
+                                                        <input *ngIf="s.isShow==0" [formControl]="isShowVal" class="form-check-input" type="checkbox" id="salesShow" checked>
+                                                        <input *ngIf="s.isShow==1" [formControl]="isShowVal" class="form-check-input" type="checkbox" id="salesShow" checked>
+                                                        <label class="form-check-label" for="salesShow">عرض</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                        <input *ngIf="s.isAdd==0" [formControl]="isAddVal" class="form-check-input" type="checkbox" id="salesAdd" value="true">
+                                                        <input *ngIf="s.isAdd==1" [formControl]="isAddVal" class="form-check-input" type="checkbox" id="salesAdd" value="false" checked>
+                                                        <label class="form-check-label" for="salesAdd">اضافة</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                        <input *ngIf="s.isUpdate==0" [formControl]="isUpdateVal" class="form-check-input" type="checkbox" id="salesEdit" value="0">
+                                                        <input *ngIf="s.isUpdate==1" [formControl]="isUpdateVal" class="form-check-input" type="checkbox" id="salesEdit" value="1" checked>
+                                                        <label class="form-check-label" for="salesEdit">تعديل</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                        <input *ngIf="s.isUpdate==0" [formControl]="isDeleteVal" class="form-check-input" type="checkbox" id="salesDelete" value="0">
+                                                        <input *ngIf="s.isUpdate==1" [formControl]="isDeleteVal" class="form-check-input" type="checkbox" id="salesDelete" value="1" checked>
+                                                        <label class="form-check-label" for="salesDelete">حذف</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline" style="position: absolute;left: 5%;">
+                                                        <input class="btn btn-danger btn-sm" (click)="save(s.id)" type="submit" value="حفظ">
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <!--End-->
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 import { Observable } from '../../../node_modules/rxjs/dist/types/internal/Observable';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TreasurybankService {
 
-  readonly APIUrl = "http://localhost:1195/api";
+  readonly APIUrl = environment.API_URL;
 
   constructor(private http:HttpClient) { }
 
@@ -119,6 +120,37 @@ export class TreasurybankService {
   //retrive last deposit in bank
   getLastDepositsBank(val: any){
     return this.http.post<any>(this.APIUrl+'/Bank/getLastDepositsBank',val);
+  }
+
+  // get search details
+  getTreasuryDepositReport(val:any){
+    return this.http.post(this.APIUrl+'/Treasurybank/getTreasuryDepositReport', val);
+  }
+
+
+  // get search details
+  getBankDepositReport(val:any){
+    return this.http.post(this.APIUrl+'/Bank/getBankDepositReport', val);
+  }
+
+  // get search details
+  getTreasuryWithdrawReport(val:any){
+    return this.http.post(this.APIUrl+'/Treasurybank/getTreasuryWithdrawReport', val);
+  }
+
+  // get search details
+  getBankWithdrawReport(val:any){
+    return this.http.post(this.APIUrl+'/Bank/getBankWithdrawReport', val);
+  }
+
+  // get search details
+  getTreasuryTransfersReport(val:any){
+    return this.http.post(this.APIUrl+'/Treasurybank/getTreasuryTransfersReport', val);
+  }
+
+  // get search details
+  getTreasuryBankTransfersReport(val:any){
+    return this.http.post(this.APIUrl+'/Treasurybank/getTreasuryBankTransfersReport', val);
   }
 
 

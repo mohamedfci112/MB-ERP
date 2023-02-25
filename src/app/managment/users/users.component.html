@@ -1,0 +1,142 @@
+<div class="transfers">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title">
+                    <h2>شاشة المستخدمين</h2>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="top">
+                    <form novalidate  #form="ngForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="align-items-center">
+                                <div class="col-auto">
+                                <input type="text" class="form-control" name="username" [(ngModel)]="username" placeholder="ابحث باسم المستخدم">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <div class="col-auto">
+                                <button type="button" data-toggle="modal" data-target="#group" class="btn btn-warning btn-block">اضافة مجموعة</button>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="col-auto">
+                                <button type="button" data-toggle="modal" data-target="#addUser" class="btn btn-primary btn-block">اضافة مستخدم</button>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="col-auto">
+                                <button type="button" (click)="deleteUser()" class="btn btn-danger btn-block">حذف مستخدم</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                <hr>
+            </div>
+            <div class="col-md-12">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-dark">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">اسم المستخدم</th>
+                                    <th scope="col">كود المستخدم</th>
+                                    <th scope="col">المجموعة</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let u of usersList;">
+                                        <th scope="row">
+                                            <input type="checkbox" name="cb" value="{{u.id}}" class="form-check-input cb">
+                                            <input type="hidden" name="checkedValue" value="{{u.id}}">
+                                        </th>
+                                        <td>{{u.username}}</td>
+                                        <td>{{u.id}}</td>
+                                        <td>{{u.group_name}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Modals-->
+
+<!-- Group Modal -->
+<div class="modal fade" id="group" tabindex="-1" role="dialog" aria-labelledby="groupTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="groupTitle">اضافة مجموعة جديدة</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1">اسم المجموعة</label>
+                <input type="text" name="group_name" [(ngModel)]="group_name" class="form-control" placeholder="اسم المجموعة">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">اخفاء</button>
+          <button type="button" (click)="addGroup(group_name)" data-dismiss="modal" class="btn btn-primary">حفظ المجموعة</button>
+        </div>
+
+      </div>
+    </div>
+</div>
+
+
+<!-- User Modal -->
+<div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="addUserTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addUserTitle">اضافة مستخدم جديدة</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="exampleInputEmail1">اسم المستخدم</label>
+                <input type="text" name="user_name" [(ngModel)]="user_name" class="form-control" placeholder="اسم المستخدم">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">كود المستخدم</label>
+                <input type="text" name="user_id" [(ngModel)]="user_id" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">كلمة المرور</label>
+                <input type="text" name="user_pass" [(ngModel)]="user_pass" class="form-control" placeholder="كلمة المرور">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">المجموعة</label>
+                <select name="group_id" [(ngModel)]="group_id" class="form-control">
+                    <option *ngFor="let g of groupList;" value="{{g.id}}">{{g.group_name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">اخفاء</button>
+          <button type="button" (click)="addUser(user_name,user_id,user_pass,group_id)" data-dismiss="modal" class="btn btn-primary">حفظ المجموعة</button>
+        </div>
+
+      </div>
+    </div>
+</div>

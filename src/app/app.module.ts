@@ -119,9 +119,14 @@ import { OfferDetailsComponent } from './shourtcuts/offer-details/offer-details.
 import { SandAbdCashComponent } from './masrof_sand_tax/sand-abd-cash/sand-abd-cash.component';
 import { SandSrfCashComponent } from './masrof_sand_tax/sand-srf-cash/sand-srf-cash.component';
 import { BarcodeComponent } from './barcode/barcode.component';
+import { UsersComponent } from './managment/users/users.component';
+import { AddUserComponent } from './managment/add-user/add-user.component';
+import { UsersService } from './services/users.service';
+import { PrivilegesComponent } from './managment/privileges/privileges.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
+  {path: 'dashboard', component: DashboardComponent},
   {path: 'login', component: LoginComponent},
   {path: 'purchases', component: PurchasesComponent},
   {path: 'sales', component: SalesComponent},
@@ -204,6 +209,8 @@ const routes: Routes = [
   {path: 'offers', component: OffersComponent},
   {path: 'offer_details', component: OfferDetailsComponent},
   {path: 'generate_baecode', component: BarcodeComponent},
+  {path: 'users', component: UsersComponent},
+  {path: 'privileges', component: PrivilegesComponent},
 ];
 
 
@@ -297,7 +304,10 @@ const routes: Routes = [
     OfferDetailsComponent,
     SandAbdCashComponent,
     SandSrfCashComponent,
-    BarcodeComponent
+    BarcodeComponent,
+    UsersComponent,
+    AddUserComponent,
+    PrivilegesComponent
   ],
   imports: [
     BrowserModule,
@@ -331,7 +341,8 @@ const routes: Routes = [
     AgelCustomersService,
     SnadatService,
     MosdadSuppliersService,
-    MosdadCustomersService
+    MosdadCustomersService,
+    UsersService
   ],
   bootstrap: [AppComponent]
 })

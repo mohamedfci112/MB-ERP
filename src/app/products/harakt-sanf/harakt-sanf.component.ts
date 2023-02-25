@@ -127,7 +127,6 @@ export class HaraktSanfComponent implements OnInit {
             this.sales_taxes += result[i].product_total_cost * 0.14;
           }
         }
-        this.sales_net = this.sales_after_tax - this.sales_taxes;
       });
 
       this.prodService.purchasesOperations(dta).subscribe((result:any)=>{
@@ -148,7 +147,6 @@ export class HaraktSanfComponent implements OnInit {
             this.purchases_taxes += result[i].product_total_cost * 0.14;
           }
         }
-        this.purchases_net = this.purchases_after_tax - this.purchases_taxes;
       });
 
       this.prodService.salesReturnOperations(dta).subscribe((result:any)=>{
@@ -169,7 +167,6 @@ export class HaraktSanfComponent implements OnInit {
             this.sales_return_taxes += result[i].product_total_cost * 0.14;
           }
         }
-        this.sales_return_net = this.sales_return_after_tax - this.sales_return_taxes;
       });
 
       this.prodService.purchasesReturnOperations(dta).subscribe((result:any)=>{
@@ -190,7 +187,6 @@ export class HaraktSanfComponent implements OnInit {
             this.purchases_return_taxes += result[i].product_total_cost * 0.14;
           }
         }
-        this.purchases_return_net = this.sales_return_after_tax - this.sales_return_taxes;
       });
 
       this.prodService.inventoryBalance(dta).subscribe((result:any)=>{

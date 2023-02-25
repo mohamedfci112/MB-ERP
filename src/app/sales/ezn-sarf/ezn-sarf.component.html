@@ -13,9 +13,10 @@
                         <label>فاتورة رقم</label>
                         <input type="text" class="form-control" name="inv_no" value="{{this.lastId}}" readonly>
                         <label>عدد الاصناف</label>
-                        <input type="text" class="form-control" name="quantity" formControlName="quantity">
+                        <input type="text" class="form-control" name="quantity" formControlName="quantity" value="{{asnaf_quantity}}" readonly>
                         <label>اجمالى المطلوب</label>
-                        <input type="text" class="form-control" name="total_cost" formControlName="total_cost">
+                        <input type="text" class="form-control" name="total_cost" (click)="checkTotal()" value="{{total}}" readonly>
+                        <hr>
                         <label>العميل</label>
                         <mat-form-field>
                             <input type="text" [(ngModel)]="matValue1" style="background-color: cadetblue;"
@@ -30,7 +31,7 @@
                             </mat-autocomplete>
                         </mat-form-field>
                     </fieldset>
-                    <hr>
+                    
                     <fieldset>
                         <legend>بيانات الدفع</legend>
                         <select name="" id="" class="form-control" name="payment_type" formControlName="payment_type">
@@ -44,7 +45,7 @@
                         </select>
                         <label>تاريخ الاستحقاق</label>
                         <input type="date" class="form-control" name="due_date" formControlName="due_date"><br>
-                        <input type="submit" class="form-control btn btn-danger" value="حفظ الفاتورة">
+                        <input type="submit" class="form-control btn btn-danger" value="حفظ وطباعة">
                     </fieldset>
                 </div>
             </div>
@@ -70,7 +71,8 @@
                                                         <input type="text" [(ngModel)]="matValue" style="background-color: cadetblue;"
                                                         matInput 
                                                         [formControl]="searchTerm" 
-                                                        [matAutocomplete]="auto">
+                                                        [matAutocomplete]="auto"
+                                                        (keydown.enter)="searchProduct(searchTerm.value)">
                                                         <mat-placeholder class="placeholder">ابحث باسم المنتج</mat-placeholder>
                                                         <mat-autocomplete #auto="matAutocomplete">
                                                             <mat-option *ngFor="let prod of productList" [value]="prod.product_id">
@@ -114,15 +116,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let t of tableList;">
+                                    <tr *ngFor="let t of tableList;let i=index;">
                                         <th scope="row">
                                             <input type="checkbox" name="cb" value="{{t.product_id}}" class="form-check-input cb">
                                         </th>
                                         <td><input type="text" class="form-control" name="product_id" value="{{t.product_id}}" readonly></td>
                                         <td><input type="text" class="form-control" value="{{t.product_name}}" disabled></td>
-                                        <td><input type="text" class="form-control" name="product_quantity" formControlName="product_quantity"></td>
-                                        <td><input type="text" class="form-control" name="product_unit_price" formControlName="product_unit_price"></td>
-                                        <td><input type="text" class="form-control" name="product_total_cost" formControlName="product_total_cost"></td>
+                                        <td><input type="text" (keyup)="calc()" id="product_quantity{{i}}" class="form-control" name="product_quantity" formControlName="product_quantity"></td>
+                                        <td><input type="text" (keyup)="calc()" id="product_unit_price{{i}}" class="form-control" name="product_unit_price" formControlName="product_unit_price"></td>
+                                        <td><input type="text" class="form-control" name="product_total_cost" id="product_total_cost{{i}}" formControlName="product_total_cost" readonly></td>
                                         <input type="hidden" class="form-control" name="invent_id" value="{{t.invent_id}}">
                                     </tr>
                                 </tbody>
