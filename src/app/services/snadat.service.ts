@@ -42,4 +42,45 @@ export class SnadatService {
     return this.http.post(this.APIUrl+'/Snadat/SnadatSrfReport', val);
   }
 
+
+  //get all taxable sales invoices
+  salesInvoicesTaxable(val:any){
+    return this.http.post(this.APIUrl+'/Snadat/salesInvoicesTaxable', val);
+  }
+
+  //get all taxable sales taxes
+  salesInvoicesTaxes(val:any){
+    return this.http.post(this.APIUrl+'/Snadat/salesInvoicesTaxes', val);
+  }
+
+  //get all taxable sales return invoices
+  salesReturnInvoicesTaxable(val:any){
+    return this.http.post(this.APIUrl+'/Snadat/salesReturnInvoicesTaxable', val);
+  }
+
+  //get all taxable sales return taxes
+  salesReturnInvoicesTaxes(val:any){
+    return this.http.post(this.APIUrl+'/Snadat/salesReturnInvoicesTaxes', val);
+  }
+
+  //get all taxable purchases invoices
+  purchasesInvoicesTaxable(val:any){
+    return this.http.post(this.APIUrl+'/Snadat/purchasesInvoicesTaxable', val);
+  }
+
+  //get all taxable purchases taxes
+  purchasesInvoicesTaxes(val:any){
+    return this.http.post(this.APIUrl+'/Snadat/purchasesInvoicesTaxes', val);
+  }
+
+  //get all taxable purchases return invoices
+  purchasesReturnInvoicesTaxable(val:any){
+    return this.http.post(this.APIUrl+'/Snadat/purchasesReturnInvoicesTaxable', val);
+  }
+
+  //get all taxable purchases return taxes
+  purchasesReturnInvoicesTaxes(val:any){
+    return this.http.post(this.APIUrl+'/Snadat/purchasesReturnInvoicesTaxes', val);
+  }
+
 }

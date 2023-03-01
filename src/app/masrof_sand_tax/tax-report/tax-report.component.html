@@ -1,5 +1,6 @@
 <div class="transfers">
-        <div class="container">
+    <div class="container">
+        <form [formGroup] = "formdata" (ngSubmit) = "tax_report(formdata.value)" >
             <div class="row">
                 <div class="col-md-12">
                     <div class="title">
@@ -9,39 +10,20 @@
                 <div class="col-md-12">
                     <div class="top">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group row border-left">
-                                    <label class="col-sm-4 col-form-label">فواتير مبيعات</label>
-                                    <div class="col-sm-2">
-                                        <input type="checkbox" class="form-check-input">
-                                    </div>
-                                    <label class="col-sm-4 col-form-label">مرتجعات مبيعات</label>
-                                    <div class="col-sm-2">
-                                        <input type="checkbox" class="form-check-input">
-                                    </div>
-                                    <label class="col-sm-4 col-form-label">فواتير مشتريات</label>
-                                    <div class="col-sm-2">
-                                        <input type="checkbox" class="form-check-input">
-                                    </div>
-                                    <label class="col-sm-4 col-form-label">مرتجعات مشتريات</label>
-                                    <div class="col-sm-2">
-                                        <input type="checkbox" class="form-check-input">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
+                            
+                            <div class="col-md-3">
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">من</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control">
+                                        <input type="date" name="date1" formControlName="date1" class="form-control">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">الى</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control">
+                                        <input type="date" name="date2" formControlName="date2" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +34,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="col-auto">
-                                    <button type="submit" class="btn btn-success btn-block">طباعة</button>
+                                    <button type="button" (click)="openPDF()" class="btn btn-success btn-block">طباعة</button>
                                 </div>
                             </div>
                         </div>
@@ -69,73 +51,61 @@
                                         <th scope="col">#</th>
                                         <th scope="col">الفاتورة</th>
                                         <th scope="col">نوع العملية</th>
-                                        <th scope="col">نوع الضريبة</th>
-                                        <th scope="col">المورد</th>
-                                        <th scope="col">العميل</th>
                                         <th scope="col">اجمالى الفاتورة ق.ض</th>
                                         <th scope="col">اجمالى الضريبة</th>
                                         <th scope="col">اجمالى الفاتورة ب.ض</th>
-                                        <th scope="col">التاريخ</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>4454</td>
-                                            <td>منتج 1</td>
-                                            <td>المخزن الرئيسى</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                            <td>100</td>
+                                        <tr *ngFor="let item of SalesResult | paginate: config;let i=index;">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{item.inv_no}}</td>
+                                            <td>مبيعات</td>
+                                            <td>{{item.total_cost}}</td>
+                                            <td>{{item.taxes}}</td>
+                                            <td>{{item.total_cost + item.taxes}}</td>
                                         </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>4454</td>
-                                            <td>منتج 1</td>
-                                            <td>المخزن الرئيسى</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                            <td>100</td>
+                                        <hr>
+                                        <tr *ngFor="let item of SalesReturnResult | paginate: config;let i=index;">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{item.inv_no}}</td>
+                                            <td>مرتجعات مبيعات</td>
+                                            <td>{{item.total_cost}}</td>
+                                            <td>{{item.taxes}}</td>
+                                            <td>{{item.total_cost + item.taxes}}</td>
                                         </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>4454</td>
-                                            <td>منتج 1</td>
-                                            <td>المخزن الرئيسى</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                            <td>100</td>
-                                            <td>100</td>
+                                        <hr>
+                                        <tr *ngFor="let item of PurchasesResult | paginate: config;let i=index;">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{item.inv_no}}</td>
+                                            <td>مشتريات</td>
+                                            <td>{{item.total_cost}}</td>
+                                            <td>{{item.taxes}}</td>
+                                            <td>{{item.total_cost + item.taxes}}</td>
+                                        </tr>
+                                        <hr>
+                                        <tr *ngFor="let item of PurchasesReturnResult | paginate: config;let i=index;">
+                                            <th scope="row">{{i+1}}</th>
+                                            <td>{{item.inv_no}}</td>
+                                            <td>مرتجعات مشتريات</td>
+                                            <td>{{item.total_cost}}</td>
+                                            <td>{{item.taxes}}</td>
+                                            <td>{{item.total_cost + item.taxes}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                    </ul>
-                                </nav>
+                                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
                                 <div class="summary">
                                     <div class="row">
                                         <div class="col-md-4 border">
-                                            <b>اجمالى الفواتير: </b><span>52155</span>
+                                            <b>اجمالى الرصيد: </b><span>{{(totalSales + totalReturnPurchases) - (totalPurchases + totalReturnSales)}}</span>
                                         </div>
                                         <div class="col-md-4 border">
-                                            <b>اجمالى الضرائب: </b><span>52155</span>
+                                            <b>اجمالى الضرائب: </b><span>{{(salesTaxes + purchasesReturnTaxes) - (purchasesTaxes + salesReturnTaxes)}}</span>
                                         </div>
                                         <div class="col-md-4 border">
-                                            <b>اجمالى بعد الضرائب: </b><span>52155</span>
+                                            <b>اجمالى الرصيد بعد الضرائب: </b><span>{{((totalSales + totalReturnPurchases) - (totalPurchases + totalReturnSales)) + ((salesTaxes + purchasesReturnTaxes) - (purchasesTaxes + salesReturnTaxes))}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -144,5 +114,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
+</div>
