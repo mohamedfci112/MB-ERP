@@ -4,22 +4,22 @@
             <div class="col-md-12">
                 <h2>المبيعات</h2>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[1].isShow==1">
                 <a routerLink="/ezn_sarf" class="btn btn-default btn-sm">اذن صرف جديد</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[2].isShow==1">
                 <a routerLink="/invoice" class="btn btn-default btn-sm">فاتورة مبيعات</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[3].isShow==1">
                 <a routerLink="/sales_report" class="btn btn-default btn-sm">تقارير فواتير المبيعات</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[4].isShow==1">
                 <a routerLink="/sales_return" class="btn btn-default btn-sm">مرتجعات فواتير المبيعات</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[5].isShow==1">
                 <a routerLink="/sales_return_report" class="btn btn-default btn-sm">تقارير مرتجعات المبيعات</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[6].isShow==1">
                 <a routerLink="/sales_arbah_report" class="btn btn-default btn-sm">تقارير ارباح المبيعات</a>
             </div>
         </div>

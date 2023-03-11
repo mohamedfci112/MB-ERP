@@ -4,34 +4,34 @@
             <div class="col-md-12">
                 <h2>الخزينة والبنك</h2>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[32].isShow==1">
                 <a routerLink="/add_treasury" class="btn btn-default btn-sm">اضافة خزنة</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[33].isShow==1">
                 <a routerLink="/add_bank" class="btn btn-default btn-sm">اضافة بنك</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[34].isShow==1">
                 <a routerLink="/deposit_treasury" class="btn btn-default btn-sm">ايداع رصيد خزنة</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[35].isShow==1">
                 <a routerLink="/deposit_bank" class="btn btn-default btn-sm">ايداع رصيد بنك</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[36].isShow==1">
                 <a routerLink="/sahb_treasury" class="btn btn-default btn-sm">سحب رصيد خزنة</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[37].isShow==1">
                 <a routerLink="/sahb_bank" class="btn btn-default btn-sm">سحب رصيد بنك</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[38].isShow==1">
                 <a routerLink="/treasury_transfers" class="btn btn-default btn-sm">تحويل رصيد بين الخزن</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[39].isShow==1">
                 <a routerLink="/treasury_bank_transfers" class="btn btn-default btn-sm">تحويل رصيد من الخزنة للبنك والعكس</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[40].isShow==1">
                 <a routerLink="/treasury_bank_credit" class="btn btn-default btn-sm">رصيد الخزنة والبنك الحالى</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[41].isShow==1">
                 <div class="dropdown show dropright">
                     <a class="btn btn-default btn-sm dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         التقارير

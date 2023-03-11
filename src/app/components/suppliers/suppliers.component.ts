@@ -5,6 +5,7 @@ import { PushNotificationService } from 'ng-push-notification';
 import { SupplierService } from 'src/app/services/supplier.service';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-suppliers',
@@ -31,7 +32,10 @@ export class SuppliersComponent implements OnInit {
 
   header = [['دائن','مدين','التاريخ','المبلغ','المورد','م']];
 
-  constructor(private pushNotification: PushNotificationService, public supService:SupplierService, private route: ActivatedRoute, private router: Router) {
+  groupScreensList = <any>[];
+  groupId:any;
+
+  constructor(public userService:UsersService,private pushNotification: PushNotificationService, public supService:SupplierService, private route: ActivatedRoute, private router: Router) {
     this.config = {
       itemsPerPage: 50,
       currentPage: 1,
@@ -40,6 +44,14 @@ export class SuppliersComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.groupId = localStorage.getItem('group_id');
+    
+    var dta={group_id: this.groupId};
+
+    this.userService.GetGroupScreens(dta).subscribe((data : any) => {
+      this.groupScreensList = data;
+    });
+    
     this.searchTerm.valueChanges.subscribe(
       (term:any) => {
         term = {sup_name : this.searchTerm.value};

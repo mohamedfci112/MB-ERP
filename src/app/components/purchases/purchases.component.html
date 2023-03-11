@@ -4,16 +4,16 @@
             <div class="col-md-12">
                 <h2>المشتريات</h2>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[8].isShow==1">
                 <a routerLink="/add_purchase_invoice" class="btn btn-default btn-sm">اضافة فاتورة شراء</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[9].isShow==1">
                 <a routerLink="/purchase_report" class="btn btn-default btn-sm">فواتير الشراء</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[10].isShow==1">
                 <a routerLink="/purchase_return" class="btn btn-default btn-sm">اضافة مرتجعات الشراء</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[11].isShow==1">
                 <a routerLink="/purchase_return_report" class="btn btn-default btn-sm">مرتجعات فواتير الشراء</a>
             </div>
         </div>

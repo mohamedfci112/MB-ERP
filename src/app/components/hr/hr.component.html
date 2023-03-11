@@ -4,19 +4,19 @@
             <div class="col-md-12">
                 <h2>شئون الموظفين</h2>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[43].isShow==1">
                 <a routerLink="/add_employee" class="btn btn-default btn-sm">موظف جديد</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[44].isShow==1">
                 <a routerLink="/employee_salary" class="btn btn-default btn-sm">صرف مرتبات الموضفين</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[45].isShow==1">
                 <a routerLink="/add_solfa" class="btn btn-default btn-sm">تسجيل سلفة</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[46].isShow==1">
                 <a routerLink="/penalties" class="btn btn-default btn-sm">الجزاءات والاستقطاعات</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[42].isShow==1">
                 <div class="dropdown show dropright">
                     <a class="btn btn-default btn-sm dropdown-toggle"  role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         التقارير

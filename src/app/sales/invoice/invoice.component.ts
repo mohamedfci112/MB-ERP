@@ -66,6 +66,12 @@ export class InvoiceComponent implements OnInit {
   isEznSrf:any=false;
   isInvoice:any=false;
 
+  groupScreensList = <any>[];
+
+  tableListDetails = <any>[];
+
+  invoicDte:any='';
+
   constructor(public cusAglService:AgelCustomersService, public salesService:SalesService, public purchService: PurchasesService, public offerService:OffersService, public custService:CustomerService, public inventService:InventoryService, public prodService:ProductsService, private pushNotification: PushNotificationService,private route: ActivatedRoute, private router: Router) { 
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -83,9 +89,7 @@ export class InvoiceComponent implements OnInit {
   }
 
 
-
   ngOnInit(): void {
-
     this.isOffer=false;
     this.isEznSrf=false;
     this.isInvoice=true;
@@ -320,7 +324,8 @@ export class InvoiceComponent implements OnInit {
   // add fatora
   addFatora(data:any)
   {
-    this.openPDF();
+    this.invoicDte=data.invoice_date;
+    
     if(this.tableList.length == 0)
     {
       this.pushNotification.show("الفاتورة فارغة", {}, 6000, );
@@ -360,11 +365,13 @@ export class InvoiceComponent implements OnInit {
 
       var fatoraData;
 
-      this.taxesCal = (parseFloat(data.total_cost) * 0.14);
+      this.taxesCal = (parseFloat(this.total) * 0.14);
 
       for(let i=0; i < this.tableList.length; i++)
       {
-        
+        //invoice lines
+        this.tableListDetails.push([i+1,this.tableList[i].product_name,(product_quantity[i] as HTMLInputElement).value,(product_unit_price[i] as HTMLInputElement).value,(product_total_cost[i] as HTMLInputElement).value,""]);
+
         fatoraData = 
         {
           inv_no: this.lastId ,
@@ -443,7 +450,7 @@ export class InvoiceComponent implements OnInit {
           this.pushNotification.show(res.toString(), {}, 6000, );
         });
       }
-      //this.openPDF();
+      this.openPDF();
       this.tableList=[];
       this.total=0;
       this.searchTermCustomer.setValue("");
@@ -483,7 +490,7 @@ export class InvoiceComponent implements OnInit {
       body: [
         [
           {
-            content:'\n\n\nInvoice '+' 100000011',
+            content:'\n\n\nInvoice '+' '+this.lastId,
             styles:{
               halign:'center',
               fontSize:20,
@@ -505,7 +512,7 @@ export class InvoiceComponent implements OnInit {
           {
             content: 'Name: ' + 'الشركة المتحدة لخدمات البترول'
             +'\n\nAddress: ' + 'المنطقة الحرة بالعامرية الاسكندرية'
-            +'\n\nInv Date: ' + '20-12-2022',
+            +'\n\nInv Date: ' + this.invoicDte.toDateString(),
             styles: {
               halign: 'center'
             }
@@ -536,10 +543,7 @@ export class InvoiceComponent implements OnInit {
     //
     autoTable(pdf,{
       head: [['#', 'Item', 'QTY', 'Unit Price', 'Total Amount', 'Notes']],
-      body: [
-        ['1', 'Product or service name', '2', '$450', '$900', ''],
-        ['2', 'Product or service name', '2', '$450', '$900', ''],
-      ],
+      body: this.tableListDetails,
       styles: {
         halign: 'center'
       },
@@ -558,7 +562,7 @@ export class InvoiceComponent implements OnInit {
             }
           },
           {
-            content: '$3600',
+            content: this.total+' LE',
             styles:{
               halign:'right'
             }
@@ -566,13 +570,13 @@ export class InvoiceComponent implements OnInit {
         ],
         [
           {
-            content: 'Sales Tax:',
+            content: '14% Sales Tax:',
             styles:{
               halign:'right'
             }
           },
           {
-            content: '$600',
+            content: Math.round(this.taxesCal)+' LE',
             styles:{
               halign:'right'
             }
@@ -587,7 +591,7 @@ export class InvoiceComponent implements OnInit {
             }
           },
           {
-            content: '$4200',
+            content: (this.total+this.taxesCal)+' LE',
             styles:{
               halign:'right',
               fontSize: 14,

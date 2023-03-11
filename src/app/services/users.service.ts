@@ -10,6 +10,7 @@ export class UsersService {
 
   readonly APIUrl = environment.API_URL;
 
+  ScreensList = <any>[];
   constructor(private http:HttpClient) { }
 
   //get all groups
@@ -60,6 +61,19 @@ export class UsersService {
   // Get Group Screens 
   GetGroupScreens(val: any){
     return this.http.post(this.APIUrl+'/Users/GetGroupScreens',val);
+  }
+
+  // Get Group Screens 
+  givePriv(val: any){
+    return this.http.post(this.APIUrl+'/Users/givePriv',val);
+  }
+
+  setScreens(data:any){
+    this.ScreensList=data;
+  }
+
+  getScreens(){
+    return this.ScreensList;
   }
 
 }

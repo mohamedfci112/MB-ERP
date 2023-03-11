@@ -1,6 +1,6 @@
 {
     "/api/*": {
-    "target": "http://hpegy.ddns.net:1195",
+    "target": "http://hpegy.tplinkdns.com:1195",
     "secure": false, 
     "logLevel": "debug",
     "changeOrigin": true,

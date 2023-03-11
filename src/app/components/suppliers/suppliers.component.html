@@ -1,16 +1,16 @@
 <div class="container">
     <div class="links">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="groupScreensList[13].isShow==1">
                 <a routerLink="/add_supplier" class="btn btn-default btn-sm">مورد جديد</a>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="groupScreensList[14].isShow==1">
                 <a routerLink="/suppliers_report" class="btn btn-default btn-sm">بيانات الموردين</a>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="groupScreensList[15].isShow==1">
                 <a routerLink="/suppliers_agel_remain" class="btn btn-default btn-sm">حسابات الموردين-أجل</a>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="groupScreensList[16].isShow==1">
                 <a routerLink="/suppliers_mosdad" class="btn btn-default btn-sm">تقرير الموردين-المسدد لهم</a>
             </div>
         </div>

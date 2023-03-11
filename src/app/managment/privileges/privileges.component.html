@@ -45,23 +45,19 @@
                                                   <div [id]="'d' + s.id" class="collapse" [attr.aria-labelledby]="s.id" data-parent="#accordion">
                                                     <div class="card-body">
                                                         <div class="form-check form-check-inline">
-                                                        <input *ngIf="s.isShow==0" [formControl]="isShowVal" class="form-check-input" type="checkbox" id="salesShow" checked>
-                                                        <input *ngIf="s.isShow==1" [formControl]="isShowVal" class="form-check-input" type="checkbox" id="salesShow" checked>
+                                                        <input  class="form-check-input" type="checkbox" [id]="'salesShow' + s.id" [checked]="s.isShow" [value]="s.isShow" (change)="s.isShow = !s.isShow">
                                                         <label class="form-check-label" for="salesShow">عرض</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                        <input *ngIf="s.isAdd==0" [formControl]="isAddVal" class="form-check-input" type="checkbox" id="salesAdd" value="true">
-                                                        <input *ngIf="s.isAdd==1" [formControl]="isAddVal" class="form-check-input" type="checkbox" id="salesAdd" value="false" checked>
+                                                        <input class="form-check-input" type="checkbox" [id]="'salesAdd' + s.id" [checked]="s.isAdd"  [value]="s.isAdd" (change)="s.isAdd = !s.isAdd">
                                                         <label class="form-check-label" for="salesAdd">اضافة</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                        <input *ngIf="s.isUpdate==0" [formControl]="isUpdateVal" class="form-check-input" type="checkbox" id="salesEdit" value="0">
-                                                        <input *ngIf="s.isUpdate==1" [formControl]="isUpdateVal" class="form-check-input" type="checkbox" id="salesEdit" value="1" checked>
+                                                        <input class="form-check-input" type="checkbox" [id]="'salesEdit' + s.id" [checked]="s.isUpdate"  [value]="s.isUpdate" (change)="s.isUpdate = !s.isUpdate">
                                                         <label class="form-check-label" for="salesEdit">تعديل</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                        <input *ngIf="s.isUpdate==0" [formControl]="isDeleteVal" class="form-check-input" type="checkbox" id="salesDelete" value="0">
-                                                        <input *ngIf="s.isUpdate==1" [formControl]="isDeleteVal" class="form-check-input" type="checkbox" id="salesDelete" value="1" checked>
+                                                        <input class="form-check-input" type="checkbox" [id]="'salesDelete' + s.id" [checked]="s.isDelete"  [value]="s.isDelete" (change)="s.isDelete = !s.isDelete">
                                                         <label class="form-check-label" for="salesDelete">حذف</label>
                                                         </div>
                                                         <div class="form-check form-check-inline" style="position: absolute;left: 5%;">

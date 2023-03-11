@@ -54,6 +54,10 @@ export class EznSarfComponent implements OnInit {
 
   config: any;
 
+  groupScreensList = <any>[];
+
+  tableListDetails = <any>[];
+
   constructor(public cusAglService:AgelCustomersService, public salesService:SalesService, public purchService: PurchasesService, public offerService:OffersService, public custService:CustomerService, public inventService:InventoryService, public prodService:ProductsService, private pushNotification: PushNotificationService,private route: ActivatedRoute, private router: Router) { 
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -72,7 +76,7 @@ export class EznSarfComponent implements OnInit {
 
 
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.offerService.GetAll().subscribe((data : any) => {
       this.offersDetailsList = data;
       console.log(this.offersDetailsList);
@@ -310,6 +314,9 @@ export class EznSarfComponent implements OnInit {
 
       for(let i=0; i < this.tableList.length; i++)
       {
+        //invoice lines
+        this.tableListDetails.push(["",(product_total_cost[i] as HTMLInputElement).value,(product_unit_price[i] as HTMLInputElement).value,(product_quantity[i] as HTMLInputElement).value,this.tableList[i].product_name,i+1]);
+
         fatoraData = 
         {
           inv_no: this.lastId ,
@@ -402,7 +409,7 @@ export class EznSarfComponent implements OnInit {
         [
           {
             content:'اذن استلام'
-            +'\n\n100000011',
+            +'\n\n'+this.lastId,
             styles:{
               halign:'center',
               fontSize:20,
@@ -469,12 +476,7 @@ export class EznSarfComponent implements OnInit {
     //
     autoTable(pdf,{
       head: [['ملاحظات', 'الاجمالى', 'سعر الوحدة', 'العدد', 'الصنف', 'م']],
-      body: [
-        ['Product or service name', '$900', '$450', '2', 'Product or service name', '1'],
-        ['Product or service name', '$900', '$450', '2', 'Product or service name', '2'],
-        ['Product or service name', '$900', '$450', '2', 'Product or service name', '3'],
-        ['Product or service name', '$900', '$450', '2', 'Product or service name', '4'],
-      ],
+      body: this.tableListDetails,
       styles: {
         halign: 'center'
       },
@@ -487,27 +489,13 @@ export class EznSarfComponent implements OnInit {
       body:[
         [
           {
-            content: 'Subtotal:',
-            styles:{
-              halign:'right'
-            }
-          },
-          {
-            content: '$3600',
-            styles:{
-              halign:'right'
-            }
-          },
-        ],
-        [
-          {
             content: 'Total amount:',
             styles:{
               halign:'right'
             }
           },
           {
-            content: '$4000',
+            content: this.total+' LE',
             styles:{
               halign:'right'
             }

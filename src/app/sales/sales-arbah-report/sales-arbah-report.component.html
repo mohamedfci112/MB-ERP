@@ -11,19 +11,6 @@
             <div class="col-md-12">
                 <div class="top">
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="row border-left">
-                                <div class="col-md-2"><input type="radio" class="form-check-input" id="exampleCheck1"></div>
-                                <div class="col-md-10"><label class="form-check-label" for="exampleCheck1">كل المستخدمين</label></div>
-                                <div class="col-md-2"><input type="radio" class="form-check-input" id="exampleCheck1"></div>
-                                <div class="col-md-4">
-                                    <label class="form-check-label" for="exampleCheck1">مستخدم محدد</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-md-3">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -32,13 +19,17 @@
                                             <input type="date" class="form-control" name="dateFrom" formControlName="dateFrom">
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="input-group">
-                                            <label class="input-group-text" for="inputGroupSelect01">الى</label>
-                                            <input type="date" class="form-control" name="dateTo" formControlName="dateTo">
-                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="inputGroupSelect01">الى</label>
+                                        <input type="date" class="form-control" name="dateTo" formControlName="dateTo">
                                     </div>
                                 </div>
+                            </div>
                         </div>
                         <div class="col-md-2">
                             <button type="submit" class="btn btn-secondary btn-block">بحث</button>
@@ -55,7 +46,7 @@
                                     <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">الارباح مفصلة</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link btn btn-primary btn-sm mr-3" id="contact-tab" type="button">طباعة التقرير</button>
+                                    <button (click)="openPDF()" class="nav-link btn btn-primary btn-sm mr-3" id="contact-tab" type="button">طباعة التقرير</button>
                                 </li>
                             </ul>
                     
@@ -66,7 +57,7 @@
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                <th scope="col">الكود</th>
+                                                <th scope="col">#</th>
                                                 <th scope="col">المنتج</th>
                                                 <th scope="col">الكمية</th>
                                                 <th scope="col">س.شراء</th>

@@ -4,28 +4,28 @@
             <div class="col-md-12">
                 <h2>المخازن</h2>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[48].isShow==1">
                 <a routerLink="/add_inventory" class="btn btn-default btn-sm">اضافة مخزن جديد</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[49].isShow==1">
                 <a routerLink="/inventory_gard" class="btn btn-default btn-sm">جرد المخزون</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[50].isShow==1">
                 <a routerLink="/inventory_transfers" class="btn btn-default btn-sm">التحويل بين المخازن</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[51].isShow==1">
                 <a routerLink="/inventory_transfers_report" class="btn btn-default btn-sm">تقرير تحويل المنتجات</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[52].isShow==1">
                 <a routerLink="/inventory_cost_edit" class="btn btn-default btn-sm">تعديل تكلفة</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[53].isShow==1">
                 <a routerLink="/inventory_quantity_edit" class="btn btn-default btn-sm">تعديل كمية</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[54].isShow==1">
                 <a routerLink="/inventory_talf" class="btn btn-default btn-sm">اخراج التوالف</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="groupScreensList[55].isShow==1">
                 <a routerLink="/inventory_talf_report" class="btn btn-default btn-sm">تقرير التوالف</a>
             </div>
             

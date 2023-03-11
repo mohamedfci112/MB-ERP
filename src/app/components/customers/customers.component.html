@@ -1,16 +1,16 @@
 <div class="container">
     <div class="links">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="groupScreensList[18].isShow==1">
                 <a routerLink="/add_customer" class="btn btn-primary btn-sm">عميل جديد</a>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="groupScreensList[19].isShow==1">
                 <a routerLink="/customer_report" class="btn btn-default btn-sm">بيانات العملاء</a>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="groupScreensList[20].isShow==1">
                 <a routerLink="/customers_agel_remain" class="btn btn-default btn-sm">حسابات العملاء-أجل</a>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="groupScreensList[21].isShow==1">
                 <a routerLink="/customers_mosdad" class="btn btn-default btn-sm">حسابات العملاء-المسدد لهم</a>
             </div>
         </div>

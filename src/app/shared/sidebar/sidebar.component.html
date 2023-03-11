@@ -12,21 +12,21 @@
         </a>
       </li>
 
-      <li>
+      <li *ngIf="groupScreensList[0].isShow==1">
         <a routerLink="/sales">
           <span class="icon"><i class="fas fa-sack-dollar"></i></span>
           <span class="title">المبيعات</span>
         </a>
       </li>
 
-      <li>
+      <li *ngIf="groupScreensList[7].isShow==1">
         <a routerLink="/purchases">
           <span class="icon"><i class="fas fa-shopping-cart"></i></span>
           <span class="title">المشتريات</span>
         </a>
       </li>
 
-      <li>
+      <li *ngIf="groupScreensList[12].isShow==1">
         <a routerLink="/suppliers">
           <span class="icon"><i class="fab fa-supple"></i></span>
           <span class="title">الموردين</span>
@@ -34,21 +34,21 @@
       </li>
       
       
-      <li>
+      <li *ngIf="groupScreensList[17].isShow==1">
         <a routerLink="/customers">
           <span class="icon"><i class="fas fa-people-arrows"></i></span>
           <span class="title">العملاء</span>
         </a>
       </li>
 
-      <li>
+      <li *ngIf="groupScreensList[22].isShow==1">
         <a routerLink="/products">
           <span class="icon"><i class="fab fa-product-hunt"></i></span>
           <span class="title">المنتجات</span>
         </a>
       </li>
 
-      <li>
+      <li *ngIf="groupScreensList[31].isShow==1">
         <a routerLink="/treasury_bank">
           <span class="icon"><i class="fa-solid fa-vault"></i></span>
           <span class="title">الخزنة والبنك</span>
@@ -56,21 +56,21 @@
       </li>
 
       
-      <li>
+      <li *ngIf="groupScreensList[42].isShow==1">
         <a routerLink="/hr">
           <span class="icon"><i class="fa-solid fa-people-carry-box"></i></span>
           <span class="title">شئون الموظفين</span>
         </a>
       </li>
 
-      <li>
+      <li *ngIf="groupScreensList[47].isShow==1">
         <a routerLink="/inventory">
           <span class="icon"><i class="fas fa-warehouse"></i></span>
           <span class="title">المخازن</span>
         </a>
       </li>
 
-      <li>
+      <li *ngIf="groupScreensList[56].isShow==1">
         <a routerLink="/masrof_sand_taxt">
           <span class="icon"><i class="fa-solid fa-money-bill-trend-up"></i></span>
           <span class="title">المصروفات و الضرائب و السندات</span>
@@ -91,7 +91,7 @@
         </a>
       </li>
 -->
-      <li>
+      <li *ngIf="groupScreensList[68].isShow==1">
         <a routerLink="/manage">
           <span class="icon"><i class="fas fa-user-cog"></i></span>
           <span class="title">الادارة</span>
