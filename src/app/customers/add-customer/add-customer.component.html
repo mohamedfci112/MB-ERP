@@ -51,7 +51,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="fname">رقم العميل</label>
-                                        <input type="text" class="form-control" name="customerId" formControlName="customerId" value="{{ lastId + 1 }}" readonly>
+                                        <input type="text" class="form-control" name="customerId" value="{{ lastId + 1 }}" readonly>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="lname">اسم العميل</label>
@@ -72,6 +72,10 @@
                                     <div class="col-md-4">
                                         <label for="email">ملاحظات</label>
                                         <input type="text" class="form-control" (input)="onCustomerNotes($event)" name="customerNotes" formControlName="customerNotes" value="{{custNotes}}">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="email">رصيد اول فترة</label>
+                                        <input type="text" class="form-control" (input)="onFirstBalance($event)" name="firstBalance" formControlName="firstBalance" value="{{first_balance}}">
                                     </div>
                                 </div>
                         </fieldset>

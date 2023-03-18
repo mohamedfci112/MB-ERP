@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
+import { AgelCustomersService } from '../../services/agel-customers.service';
 import { FormGroup, FormControl, FormControlName } from '@angular/forms';
 import { PushNotificationService } from 'ng-push-notification';
 import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
@@ -12,6 +13,7 @@ import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router
 export class AddCustomerComponent implements OnInit {
 
   lastId:any;
+  lastIdAgel:any;
 
   customerList = <any>[];
 
@@ -27,12 +29,17 @@ export class AddCustomerComponent implements OnInit {
   custPhone:any = "";
   custAddress:any = "";
   custNotes:any = "";
+  first_balance:any = "";
+
+  first_balance_id:any = "";
 
   customerSearchResult = <any>[];
 
   searchTerm : FormControl = new FormControl();
 
-  constructor(public custService:CustomerService, private pushNotification: PushNotificationService,private route: ActivatedRoute, private router: Router) {
+  myDate = new Date();
+
+  constructor(public agelCustService:AgelCustomersService,public custService:CustomerService, private pushNotification: PushNotificationService,private route: ActivatedRoute, private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     }
@@ -47,13 +54,18 @@ export class AddCustomerComponent implements OnInit {
       this.lastId = data[0].Column1;
     });
 
+    this.agelCustService.getAgelCustomerLastId().subscribe((data : any) => {
+      this.lastIdAgel = data[0].Column1;
+    });
+
     this.formdata = new FormGroup({
       customerId: new FormControl(""),
       customerName: new FormControl(""),
       customerAdmin: new FormControl(""),
       customerPhone: new FormControl(""),
       customerAddress: new FormControl(""),
-      customerNotes: new FormControl("")
+      customerNotes: new FormControl(""),
+      firstBalance: new FormControl("")
     });
 
     ///////////////
@@ -80,11 +92,22 @@ export class AddCustomerComponent implements OnInit {
       admin_name : data.customerAdmin,
       cust_phone : data.customerPhone,
       cust_address : data.customerAddress,
-      notes : data.customerNotes
+      notes : data.customerNotes,
+      first_balance_id : this.lastIdAgel
     };
-    //console.log(supData);
+    
+    var aglCustData = {
+      cust_no : this.lastId + 1,
+      remainder : data.firstBalance,
+      inv_no : "رصيد اول فترة",
+      inv_date: this.myDate,
+      due_date: this.myDate
+    }
 
     if(data.customerName != ""){
+      this.agelCustService.addAgelCustomerAcc(aglCustData).subscribe((res:any)=>{
+        this.pushNotification.show(res.toString(), {}, 1000, );
+      });
       this.custService.addCustomer(custData).subscribe((res:any)=>{
         this.pushNotification.show(res.toString(), {}, 6000, );
         this.disabledNew = true;
@@ -107,17 +130,19 @@ export class AddCustomerComponent implements OnInit {
 
     var custData = {cust_no : custId};
 
-    this.custService.GetCustomerSearch(custData).subscribe(
+    this.custService.GetCustomerData(custData).subscribe(
       (data:any) => {
         this.customerSearchResult = data as any[];
-        
+
         var cust_id = data[0].cust_no;
-        this.lastId = (cust_id -1) + 1;
+        this.lastId = ((cust_id -1)+1)-1;
         this.custName = data[0].cust_name;
         this.custAdmin = data[0].admin_name;
         this.custPhone = data[0].cust_phone;
         this.custAddress = data[0].cust_address;
         this.custNotes = data[0].notes;
+        this.first_balance = data[0].remainder;
+        this.first_balance_id = data[0].first_balance_id;
 
         this.disabledNew = false;
         this.disabledEdit = false;
@@ -134,6 +159,7 @@ export class AddCustomerComponent implements OnInit {
     this.custPhone = "";
     this.custAddress = "";
     this.custNotes = "";
+    this.first_balance = "";
 
     this.searchTerm.setValue("");
 
@@ -141,6 +167,7 @@ export class AddCustomerComponent implements OnInit {
     this.disabledEdit = true;
     this.disabledDelete = true;
     this.disabledAdd = false;
+    this.ngOnInit();
   }
 
   //
@@ -165,16 +192,23 @@ export class AddCustomerComponent implements OnInit {
     this.custNotes = element.value;
   }
 
+  onFirstBalance(searchValue: any){
+    const element = searchValue.currentTarget as HTMLInputElement;
+    this.first_balance = element.value;
+  }
+
   //update Supplier data
   update(data:any){
 
     var custData = {
-      cust_no : this.lastId,
+      cust_no : this.lastId+1,
       cust_name : this.custName,
       admin_name : this.custAdmin,
       cust_phone : this.custPhone,
       cust_address : this.custAddress,
       notes : this.custNotes,
+      remainder : this.first_balance,
+      id : this.first_balance_id
     };
 
     if(this.custName != ''){

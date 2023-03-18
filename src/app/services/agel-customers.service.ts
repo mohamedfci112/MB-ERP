@@ -18,4 +18,10 @@ export class AgelCustomersService {
     return this.http.post(this.APIUrl+'/AgelCustomer',val);
   }
 
+  //get last treasury id
+  getAgelCustomerLastId(){
+    return this.http.get(this.APIUrl+'/AgelCustomer/GetAgelCustomerLastID');
+  }
+
+
 }

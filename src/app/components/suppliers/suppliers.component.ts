@@ -119,12 +119,12 @@ export class SuppliersComponent implements OnInit {
             if(data[i].typee == "1")
             {
               this.remainTotal += data[i].amount;
-              this.tableList.push([data[i].amount,0,data[i].datee,data[i].sup_name,i+1]);
+              this.tableList.push([data[i].amount,0,data[i].datee,data[i].amount,data[i].sup_name,i+1]);
             }
             else
             {
               this.paidTotal += data[i].amount;
-              this.tableList.push([0,data[i].amount,data[i].datee,data[i].sup_name,i+1]);
+              this.tableList.push([0,data[i].amount,data[i].datee,data[i].amount,data[i].sup_name,i+1]);
             }
 
             

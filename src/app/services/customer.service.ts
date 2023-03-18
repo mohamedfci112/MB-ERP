@@ -52,6 +52,12 @@ export class CustomerService {
     return listOfCustomers;
   }
 
+  // get customer details
+  GetCustomerData(val:any){
+    var listOfCustomers = this.http.post(this.APIUrl+'/Customer/GetCustomerData', val);
+    return listOfCustomers;
+  }
+
 
   // get search details
   GetAgelCustomersSearch(val:any){

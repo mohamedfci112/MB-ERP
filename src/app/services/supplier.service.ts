@@ -51,6 +51,12 @@ export class SupplierService {
     return listOfSuppliers;
   }
 
+  // get supplier data details
+  GetSuppliersData(val:any){
+    var listOfSuppliers = this.http.post(this.APIUrl+'/Supplier/GetSuppliersData', val);
+    return listOfSuppliers;
+  }
+
   //insert customer mosdad
   insertMosdadSupplier(val:any){
     return this.http.post(this.APIUrl+'/Supplier/insertMosdadSupplier', val);
