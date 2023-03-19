@@ -28,7 +28,7 @@ export class AllProductsComponent implements OnInit {
     };
 
     this.config = {
-      itemsPerPage: 10,
+      itemsPerPage: 100,
       currentPage: 1,
       totalItems: this.productDetailsList.count
     };

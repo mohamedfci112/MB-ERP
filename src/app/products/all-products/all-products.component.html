@@ -45,6 +45,7 @@
                                     <th scope="col">الحد الادنى</th>
                                     <th scope="col">خاضع للضريبة</th>
                                     <th scope="col">المجموعة</th>
+                                    <th scope="col">عمليات</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,6 +60,9 @@
                                         <td>{{item.product_limit}}</td>
                                         <td>{{item.taxes}}</td>
                                         <td>{{item.group_name}}</td>
+                                        <td>
+                                            <a [routerLink]="['/edit_product',item.product_id]" class="btn btn-warning btn-sm">تعديل</a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

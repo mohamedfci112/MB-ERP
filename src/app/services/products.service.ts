@@ -43,6 +43,11 @@ export class ProductsService {
   }
 
   // 
+  getProductData(val: any){
+    return this.http.post(this.APIUrl+'/Products/getProductData',val);
+  }
+
+  // 
   salesReturnOperations(val: any){
     return this.http.post(this.APIUrl+'/Products/salesReturnOperations',val);
   }
@@ -55,6 +60,16 @@ export class ProductsService {
   // 
   inventoryBalance(val: any){
     return this.http.post(this.APIUrl+'/Products/inventoryBalance',val);
+  }
+
+  // 
+  editProductData(val: any){
+    return this.http.post(this.APIUrl+'/Products/editProductData',val);
+  }
+
+  // 
+  editProductDataInventory(val: any){
+    return this.http.post(this.APIUrl+'/Products/editProductDataInventory',val);
   }
 
 }

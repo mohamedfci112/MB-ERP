@@ -1,0 +1,20 @@
+.add_product
+{
+    direction: rtl;
+    background-color: aliceblue;
+    min-height: 100vh;
+}
+.add_product .title
+{
+    text-align: center;
+    border-bottom: 1px solid;
+}
+.add_product .content
+{
+    padding: 5px;
+    text-align: right
+}
+.add_product .frm
+{
+    padding: 10px;
+}

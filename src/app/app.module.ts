@@ -124,6 +124,7 @@ import { AddUserComponent } from './managment/add-user/add-user.component';
 import { UsersService } from './services/users.service';
 import { PrivilegesComponent } from './managment/privileges/privileges.component';
 import { SandSrfAbdReport1Component } from './masrof_sand_tax/sand-srf-abd-report1/sand-srf-abd-report1.component';
+import { EditProductComponent } from './products/edit-product/edit-product.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -213,6 +214,7 @@ const routes: Routes = [
   {path: 'generate_baecode', component: BarcodeComponent},
   {path: 'users', component: UsersComponent},
   {path: 'privileges', component: PrivilegesComponent},
+  {path: 'edit_product/:id', component: EditProductComponent},
 ];
 
 
@@ -310,7 +312,8 @@ const routes: Routes = [
     UsersComponent,
     AddUserComponent,
     PrivilegesComponent,
-    SandSrfAbdReport1Component
+    SandSrfAbdReport1Component,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,

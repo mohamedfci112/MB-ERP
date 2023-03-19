@@ -1,0 +1,132 @@
+<div class="add_product">
+    <form [formGroup] = "formdata" (ngSubmit) = "editProduct(formdata.value)" >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title">
+                        <h2>تعديل منتج</h2>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="frm border">
+                                    <div class="form-group">
+                                        <label for="fname">رقم المنتج</label>
+                                        <input type="text" class="form-control" value="{{ lastId }}" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fname">اسم المنتج</label>
+                                        <input type="text" class="form-control" name="product_name" formControlName="product_name" [(ngModel)]="product_name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fname">المجموعة</label>
+                                        <select class="form-control" name="group_id" formControlName="group_id" [(ngModel)]="group_id">
+                                            <option value=""></option>
+                                            <option *ngFor="let g of groupList" [selected]="group_id === g.group_id" value="{{g.group_id}}">{{g.group_name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fname">الوحدة</label>
+                                        <select class="form-control" name="unit_id" formControlName="unit_id" [(ngModel)]="unit_id">
+                                            <option value=""></option>
+                                            <option *ngFor="let u of unitList" [selected]="unit_id === u.unit_id" value="{{u.unit_id}}">{{u.unit_name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fname">القسم</label>
+                                        <select class="form-control" name="depart_id" formControlName="depart_id" [(ngModel)]="depart_id">
+                                            <option value=""></option>
+                                            <option *ngFor="let d of departList" [selected]="depart_id === d.depart_id" value="{{d.depart_id}}">{{d.depart_name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fname">حد الطلب</label>
+                                        <input type="text" class="form-control" name="product_limit" formControlName="product_limit" [(ngModel)]="product_limit">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="frm border">
+                                    <div class="form-group">
+                                        <label for="fname">بارت نمبر</label>
+                                        <input type="text" class="form-control" name="part_no" formControlName="part_no" [(ngModel)]="part_no">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fname">سعر الشراء</label>
+                                        <input type="text" class="form-control" name="purchase_price" formControlName="purchase_price" [(ngModel)]="purchase_price">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fname">سعر البيع</label>
+                                        <input type="text" class="form-control" name="sell_price" formControlName="sell_price" [(ngModel)]="sell_price">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fname">الوصف</label>
+                                        <input type="text" class="form-control" name="product_description" formControlName="product_description" [(ngModel)]="product_description">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fname">ملاحظات</label>
+                                        <input type="text" class="form-control" name="notes" formControlName="notes" [(ngModel)]="notes">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-4 border-left">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label for="fname">خاضع للضريبة</label>
+                                                        <input type="checkbox" class="form-check-input mr-3" (change)="taxCheck($event)" name="taxable" formControlName="taxable" [(ngModel)]="taxableCheck">
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control" name="taxes" formControlName="taxes" [readonly]="this.isEditable" [(ngModel)]="taxes">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="fname">اصلى</label><br>
+                                                <input type="checkbox" class="form-check-input" (change)="originalCheck($event)" name="original" formControlName="original" [(ngModel)]="origCheck">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="fname">كوبى</label><br>
+                                                <input type="checkbox" class="form-check-input" (change)="copyCheck($event)" name="coppy" formControlName="coppy" [(ngModel)]="copCheck">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="fname">هاى كوبى</label><br>
+                                                <input type="checkbox" class="form-check-input" (change)="hightcopyCheck($event)" name="highcoppy" formControlName="highcoppy" [(ngModel)]="hcopCheck">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="fname">متوافق</label><br>
+                                                <input type="checkbox" class="form-check-input" (change)="compatableCheck($event)" name="compatable" formControlName="compatable" [(ngModel)]="compCheck">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="frm border-top">
+                                    <div class="subtitle">
+                                        <h4>الكميات الموجودة بالمخازن-رصيد اول فترة</h4>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fname">المخزن</label>
+                                        <select class="form-control" name="invent_id" formControlName="invent_id" [(ngModel)]="invent_id">
+                                            <option value=""></option>
+                                            <option *ngFor="let i of invintoryList" [selected]="invent_id === i.invent_id" value="{{i.invent_id}}">{{i.invent_name}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fname">الكمية</label>
+                                        <input type="text" class="form-control" name="invent_quantity" formControlName="invent_quantity" [(ngModel)]="invent_quantity">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="submit" class="btn btn-warning btn-block" value="تعديل المنتج">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
